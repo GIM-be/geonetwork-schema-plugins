@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:dct="http://purl.org/dc/terms/"
+        xmlns:dcat="http://www.w3.org/ns/dcat#"
+        xsi:noNamespaceSchemaLocation="../../../../../../config-editor.xsd">
+
+  <!-- Define form field types per metadata element. -->
+  <fields>
+	<for name="dct:title" use="textarea"/>
+    <for name="dct:description" use="textarea"/>
+    <for name="dcat:accessURL" use="textarea"/>
+    <for name="dcat:contactPoint" use="data-gn-directory-entry-picker"/>
+    <for name="dct:publisher" use="data-gn-directory-entry-picker"/>
+    <for name="dct:issued" use="data-gn-date-picker"/>  
+    <for name="dct:license" use="textarea"/>
+    <for name="dcat:theme" use="data-gn-keyword-picker"/>
+    <for name="dcat:keyword" use="data-gn-keyword-picker"/>
+    <for name="dct:language" use="data-gn-language-picker"/>    
+    <for name="dcat:landingPage" use="textarea"/>
+    <for name="dcat:downloadURL" use="textarea"/>
+    <for name="dct:format" use="textarea"/>
+    <for name="dct:type" use="textarea"/>    
+    <for name="dct:accrualPeriodicity" use="data-gn-keyword-picker"/>
+  </fields>
+  
+  <!-- Complex fields. -->
+  <fieldsWithFieldset>
+  	<name>dcat:Dataset</name>
+  	<name>dcat:Distribution</name>
+  </fieldsWithFieldset>
+
+
+  <!-- View configuration -->
+  <views>
+    <view name="default" upAndDownControlHidden="true" >
+      <tab id="dataset" default="true" mode="flat">
+        <section name="dataset">
+        	<field name="title"
+		       xpath="/dcat:Dataset/dct:title"
+		       or="title"
+		       in="/dcat:Dataset/*"
+		       del="."/>
+        	<field name="description"
+		       xpath="/dcat:Dataset/dct:description"
+		       or="description"
+		       in="/dcat:Dataset/*"
+		       del="."/>
+        	<field name="landingePage"
+		       xpath="/dcat:Dataset/dcat:landingPage"
+		       or="landingPage"
+		       in="/dcat:Dataset/*"
+		       del="."/>	       
+        	<field name="contactPoint"
+		       xpath="/dcat:Dataset/dcat:contactPoint"
+		       or="contactPoint"
+		       in="/dcat:Dataset/*"
+		       del="."/>		             
+        	<field name="publisher"
+		       xpath="/dcat:Dataset/dct:publisher"
+		       or="publisher"
+		       in="/dcat:Dataset/*"
+		       del="."/>
+        	<field name="issued"
+		       xpath="/dcat:Dataset/dct:issued"
+		       or="issued"
+		       in="/dcat:Dataset/*"
+		       del="."/>
+        	<field name="theme"
+		       xpath="/dcat:Dataset/dcat:theme"
+		       or="theme"
+		       in="/dcat:Dataset/*"
+		       del="."/>
+        	<field name="keyword"
+		       xpath="/dcat:Dataset/dcat:keyword"
+		       or="keyword"
+		       in="/dcat:Dataset/*"
+		       del="."/>	
+        	<field name="language"
+		       xpath="/dcat:Dataset/dct:language"
+		       or="language"
+		       in="/dcat:Dataset/*"
+		       del="."/>			       
+        	<field name="spatial"
+		       xpath="/dcat:Dataset/dct:spatial"
+		       or="spatial"
+		       in="/dcat:Dataset/*"
+		       del="."/>     	       		       			       
+		</section>      
+
+      </tab>
+      <tab id="distribution" mode="flat">
+      	<section name="distribution">
+        	<field name="distributionaccessURL"
+		       xpath="/dcat:Dataset/dcat:Distribution/dcat:accessURL"
+		       or="accessURL"
+		       in="/dcat:Dataset/dcat:Distribution/*"
+		       del="."/>  
+        	<field name="distributiondownloadURL"
+		       xpath="/dcat:Dataset/dcat:Distribution/dcat:downloadURL"
+		       or="downloadURL"
+		       in="/dcat:Dataset/dcat:Distribution/*"
+		       del="."/>  		       
+        	<field name="distributiontitle"
+		       xpath="/dcat:Dataset/dcat:Distribution/dct:title"
+		       or="distributiontitle"
+		       in="/dcat:Dataset/dcat:Distribution/*"
+		       del="."/>      
+        	<field name="distributiondescription"
+		       xpath="/dcat:Dataset/dcat:Distribution/dct:description"
+		       or="distributiondescription"
+		       in="/dcat:Dataset/dcat:Distribution/*"
+		       del="."/>  
+        	<field name="distributionFormat"
+		       xpath="/dcat:Dataset/dcat:Distribution/dct:format"
+		       or="distributionformat"
+		       in="/dcat:Dataset/dcat:Distribution/*"
+		       del="."/>  		     
+        	<field name="distributionlicense"
+		       xpath="/dcat:Dataset/dcat:Distribution/dct:license"
+		       or="distributionlicense"
+		       in="/dcat:Dataset/dcat:Distribution/*"
+		       del="."/>  		         		       
+        </section> 
+      	<section xpath="/dcat:Dataset/dcat:Distribution">    	
+      	</section>        		   
+      </tab>
+     
+      <flatModeExceptions>
+        <for name="dcat:theme"/>
+        <for name="dcat:keyword"/>
+        <for name="dcat:Distribution"/>
+      </flatModeExceptions>
+
+      <thesaurusList>
+		  <thesaurus key="theme.data-theme-skos"
+		             maxtags="5"
+		             transformations=""/>
+		  <thesaurus key="temporal.frequencies-skos"
+		             maxtags="5"
+		             transformations=""/>		             
+	  </thesaurusList>
+      
+    </view>
+    <view name="xml">
+      <tab id="xml" default="true"/>
+    </view>
+  </views>
+  <batchEditing>
+    <section name="identification">
+      <field name="title" xpath="dct:title"></field>
+    </section>
+  </batchEditing>
+</editor>

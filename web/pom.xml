@@ -497,7 +497,11 @@
       <artifactId>wfsfeature-harvester</artifactId>
       <version>${project.version}</version>
     </dependency>
-
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>schema-dcat-ap</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
   </dependencies>
 
@@ -591,6 +595,11 @@
                   <directory>${project.basedir}/../docs/manuals/target/doc</directory>
                   <targetPath>${basedir}/src/main/webapp/doc</targetPath>
                 </resource>
+                <resource>
+                  <directory>${project.basedir}/../schemas/dcat-ap/src/main/plugin</directory>
+                  <targetPath>${basedir}/src/main/webapp/WEB-INF/data/config/schema_plugins
+                  </targetPath>
+                </resource>				
               </resources>
             </configuration>
           </execution>

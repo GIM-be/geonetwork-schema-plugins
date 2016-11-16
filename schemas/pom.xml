@@ -48,6 +48,7 @@
     <module>dublin-core</module>
     <module>iso19110</module>
     <module>iso19139</module>
+	<module>dcat-ap</module>
   </modules>
   <properties>
     <rootProjectDir>../..</rootProjectDir>

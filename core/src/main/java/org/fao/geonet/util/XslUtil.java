@@ -379,6 +379,12 @@ public final class XslUtil {
             if (iso3LangCode.equalsIgnoreCase("FRA")) {
                 return "FR";
             }
+            if (iso3LangCode.equalsIgnoreCase("ENG")) {
+                return "EN";
+            }
+            if (iso3LangCode.equalsIgnoreCase("NLD")) {
+                return "NL";
+            }            
 
             if (iso3LangCode.equalsIgnoreCase("DEU")) {
                 return "DE";
