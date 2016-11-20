@@ -6,38 +6,40 @@
       XML Schema for http://www.w3.org/ns/dcat# namespace
 
       Created 2016-05-31
+      Modified 2016-11-30
 
-      Created by 
+      Author
       Stijn Goedertier (stijn.goedertier@gim.be)
 
     </xs:documentation>
 	</xs:annotation>
 	<xs:import namespace="http://purl.org/dc/terms/" schemaLocation="dcterms.xsd"/>
 	<xs:import namespace="http://purl.org/dc/elements/1.1/" schemaLocation="dc.xsd"/>
-	<xs:group name="elementsGroup">
-		<xs:annotation>
-			<xs:documentation xml:lang="en">
-    	    This group is included as a convenience for schema authors
-            who need to refer to all the elements in DCAT.
-    	</xs:documentation>
-		</xs:annotation>
+	<!-- dcat:Catalog-->
+	<xs:complexType name="CatalogType">
 		<xs:sequence>
-			<xs:choice minOccurs="0" maxOccurs="unbounded">
-				<xs:element name="theme" type="dc:SimpleLiteral"/>
-				<xs:element name="contactPoint" type="dc:SimpleLiteral"/>
-				<xs:element name="landingPage" type="dc:SimpleLiteral"/>
-				<xs:element name="accessURL" type="dc:SimpleLiteral"/>
-				<xs:element name="downloadURL" type="dc:SimpleLiteral"/>
-				<xs:element ref="dc:any"/>
-				<xs:element ref="dct:any"/>
-			</xs:choice>
+			<!-- mandatory properties for dcat:Catalog-->
+			<xs:element ref="dct:title" minOccurs="1"/>
+			<xs:element ref="dct:description" minOccurs="1"/>			
+			<xs:element name="accessURL" type="dc:SimpleLiteral" minOccurs="1"/>
+			<!-- recommended properties for dcat:Catalog-->
+			<xs:element name="uri" type="xs:anyURI" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="downloadURL" type="dc:SimpleLiteral" minOccurs="0"/>
+			<xs:element ref="dct:identifier" minOccurs="0"/>
+			<xs:element ref="dct:title" minOccurs="0"/>
+			<xs:element ref="dct:description" minOccurs="0"/>
+			<xs:element ref="dct:format" minOccurs="0"/>
+			<xs:element ref="dct:license" minOccurs="0"/>
+			<xs:element name="byteSize" type="dc:SimpleLiteral" minOccurs="0"/>
 		</xs:sequence>
-	</xs:group>
+	</xs:complexType>	
+	<!-- dcat:Distribution-->
 	<xs:complexType name="DistributionType">
 		<xs:sequence>
 			<!-- mandatory properties for dcat:Distribution-->
 			<xs:element name="accessURL" type="dc:SimpleLiteral" minOccurs="1"/>
 			<!-- recommended properties for dcat:Distribution-->
+			<xs:element name="uri" type="xs:anyURI" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="downloadURL" type="dc:SimpleLiteral" minOccurs="0"/>
 			<xs:element ref="dct:identifier" minOccurs="0"/>
 			<xs:element ref="dct:title" minOccurs="0"/>
@@ -47,6 +49,7 @@
 			<xs:element name="byteSize" type="dc:SimpleLiteral" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
+	<!-- dcat:Dataset-->
 	<xs:complexType name="DatasetType">
 		<xs:annotation>
 			<xs:documentation xml:lang="en">
@@ -55,11 +58,14 @@
 		</xs:annotation>
 		<xs:sequence>
 			<!-- mandatory properties for dcat:Dataset-->
-			<xs:element ref="dct:identifier" minOccurs="1"/>
+			<xs:element ref="dct:identifier" minOccurs="1">
+				<xs:attribute name="lang" type="xs:string" ></xs:attribute>
+			</xs:element>
 			<xs:element ref="dct:title" minOccurs="1"/>
 			<xs:element ref="dct:description" minOccurs="1"/>
 			<xs:element name="landingPage" type="dc:SimpleLiteral" minOccurs="0"/>
 			<!-- recommended properties for dcat:Dataset-->
+			<xs:element name="uri" type="xs:anyURI" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="contactPoint" type="dc:SimpleLiteral" minOccurs="0"/>
 			<xs:element ref="dct:publisher" minOccurs="0"/>
 			<xs:element ref="dct:issued" minOccurs="0"/>
