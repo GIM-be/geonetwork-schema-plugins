@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:locn="http://www.w3.org/ns/locn#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dcat="http://www.w3.org/ns/dcat#"
+  xmlns:dct="http://purl.org/dc/terms/"
+  xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+>
+  <dcat:Dataset rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a">
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/66523260-5700-4294-9e01-bf42ac852b5a">
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/fasen/wms</dcat:accessURL>
+        <dct:description>WMS-endpoint Fasen</dct:description>
+        <dct:title>fasen</dct:title>
+        <dct:format>WMS</dct:format>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:keyword>PROFIELONTWIKKELING</dcat:keyword>
+    <dcat:keyword>DRAINAGE</dcat:keyword>
+    <dcat:keyword>MORFOGENETISCH</dcat:keyword>
+    <dcat:keyword>Vlaams Gewest</dcat:keyword>
+    <dct:description>Digitale vectoriële dataset van de analoge Bodemkaart van België voor het grondgebied van Vlaanderen.
+Alle kaartelementen van de analoge kaarten (gepubliceerd op kaartschaal 1: 20 000) zijn zorgvuldig manueel gedigitaliseerd en voorzien van een code, overeenkomstig het gebruikte klassificatiesysteem: morfogenetisch voor binnen-Vlaanderen (substraat, textuurklasse, drainageklasse, profielontwikkelingsgroep, fase en variante) en geomorfologisch voor de Kuststreek (substraat, serie, subserie, type, subtype en variante).
+De digitale versie van de bodemkaart is vrijwel systematisch gecontroleerd t.o.v. de analoge bodemkaarten. De polygonen werden ingekleurd zoals op de analoge bodemkaart. Waar beschikbaar zijn voor elk bodemtype de algemene kenmerken  (Van Ranst E. en Sys C., 2000) en foto's van een representatief bodemprofiel en representatieve omgevingen weergegeven. Tenslotte bestaat voor elke polygoon de mogelijkheid om de scan van het analoge bodemkaartblad, het toelichtingsboekje en de basiskaarten op schaal 1:5000 op te roepen.
+Deze dataset is omwille van de visualisatie onderverdeeld in 5 kaartlagen bij publicatie in de bodemverkenner: bodemtypes, substraten, fasen, varianten van het moedermateriaal en de profielontwikkeling.</dct:description>
+    <dcat:keyword>Toegevoegd GDI-Vl</dcat:keyword>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/55690a2a-3434-4236-86f6-5e9cb9e7b12f">
+        <dct:format>WMS</dct:format>
+        <dct:description>WMS-endpoint Substraten</dct:description>
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/substraten/wms</dcat:accessURL>
+        <dct:title>substraten</dct:title>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:keyword>Metadata GDI-Vl-conform</dcat:keyword>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/ae205649-df0f-4da4-8c63-93a36c18229b">
+        <dct:title>bodemkaart:var_moedermateriaal</dct:title>
+        <dct:format>WFS</dct:format>
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/var_moedermateriaal/wfs</dcat:accessURL>
+        <dct:description>WFS-endpoint Varianten moedermateriaal</dct:description>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:keyword>Metadata INSPIRE-conform</dcat:keyword>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/0ef0f286-3989-4e67-ac11-40cfb616b129">
+        <dct:title>bodemkaart:fasen</dct:title>
+        <dct:format>KML</dct:format>
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/wms/kml?layers=bodemkaart:fasen</dcat:accessURL>
+        <dct:description>KML Fasen</dct:description>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:keyword>bodemkaart</dcat:keyword>
+    <dct:title>Bodemkaart: bodemtypes, substraten, fasen en varianten van het moedermateriaal en de profielontwikkeling</dct:title>
+    <dcat:keyword>Kosteloos</dcat:keyword>
+    <dcat:keyword>Lijst M&amp;R INSPIRE</dcat:keyword>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/9cf26f7b-d40b-4b47-9b06-2b8a9be80cbd">
+        <dct:format>WFS</dct:format>
+        <dct:title>bodemkaart:substraten</dct:title>
+        <dct:description>WFS-endpoint Substraten</dct:description>
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/substraten/wfs</dcat:accessURL>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dct:spatial>
+      <dct:Location rdf:nodeID="Nf8bd51a64acf46b897ee5f320dae20fa">
+        <locn:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral">POLYGON ((2.5579 50.6746, 5.9200 50.6746, 5.9200 51.4960, 2.5579 51.4960, 2.5579 50.6746))</locn:geometry>
+        <locn:geometry rdf:datatype="https://www.iana.org/assignments/media-types/application/vnd.geo+json">{"type": "Polygon", "coordinates": [[[2.55791, 50.6746], [5.92, 50.6746], [5.92, 51.496], [2.55791, 51.496], [2.55791, 50.6746]]]}</locn:geometry>
+      </dct:Location>
+    </dct:spatial>
+    <dcat:keyword>Vlaamse Open data</dcat:keyword>
+    <dcat:keyword>LANDBOUWSTREEK</dcat:keyword>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/71dcc75d-8f36-4b3a-895d-b53bcc9978a8">
+        <dct:title>var_moedermateriaal</dct:title>
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/var_moedermateriaal/wms</dcat:accessURL>
+        <dct:format>WMS</dct:format>
+        <dct:description>WMS-endpoint Varianten moedermateriaal</dct:description>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:keyword>bodemprofiel</dcat:keyword>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/bcdf6b94-8f6b-4cc8-9979-f0ed8a6c2239">
+        <dct:format>KML</dct:format>
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/wms/kml?layers=bodemkaart:bodemtypes</dcat:accessURL>
+        <dct:title>bodemkaart:bodemtypes</dct:title>
+        <dct:description>KML Bodemtypes</dct:description>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:keyword>bodemtextuur</dcat:keyword>
+    <dcat:keyword>bodem</dcat:keyword>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/f35b06f9-e33a-421f-aa23-8ea6f1f1c23e">
+        <dct:format>KML</dct:format>
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/wms/kml?layers=bodemkaart:var_moedermateriaal</dcat:accessURL>
+        <dct:description>KML Varianten moedermateriaal</dct:description>
+        <dct:title>bodemkaart:var_moedermateriaal</dct:title>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dct:publisher>
+      <foaf:Organization rdf:about="http://data.opendataforum.info/organization/add3bba1-b9ff-49d6-928f-5a7aba501e35">
+        <foaf:name>Geopunt</foaf:name>
+      </foaf:Organization>
+    </dct:publisher>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/fd9b9853-0052-4904-ac7a-ca7ec4d24717">
+        <dct:format>WFS</dct:format>
+        <dct:description>WFS-endpoint Varianten profielontwikkeling</dct:description>
+        <dct:title>bodemkaart:var_profielontwikkeling</dct:title>
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/var_profielontwikkeling/wfs</dcat:accessURL>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/8f2b3046-034d-4905-be15-cdd523711ac6">
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/bodemtypes/wfs</dcat:accessURL>
+        <dct:description>WFS-endpoint Bodemtypes</dct:description>
+        <dct:title>bodemkaart:bodemtypes</dct:title>
+        <dct:format>WFS</dct:format>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:keyword>KUSTSTREEK</dcat:keyword>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/6bc71091-8655-490e-8d82-7d268af3863a">
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/var_profielontwikkeling/wms</dcat:accessURL>
+        <dct:title>var_profielontwikkeling</dct:title>
+        <dct:description>WMS-endpoint Varianten profielontwikkeling</dct:description>
+        <dct:format>WMS</dct:format>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:keyword>Herbruikbaar</dcat:keyword>
+    <dcat:keyword>Bodem</dcat:keyword>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/3a029a70-b8e7-4bdf-9c37-a45ef0bab1ab">
+        <dct:title>bodemtypes</dct:title>
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/bodemtypes/wms</dcat:accessURL>
+        <dct:description>WMS-endpoint Bodemtypes</dct:description>
+        <dct:format>WMS</dct:format>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/dbc86489-c4c4-4608-9825-b6c483e7d55b">
+        <dct:title>bodemkaart:var_profielontwikkeling</dct:title>
+        <dct:description>KML Varianten profielontwikkeling</dct:description>
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/wms/kml?layers=bodemkaart:var_profielontwikkeling</dcat:accessURL>
+        <dct:format>KML</dct:format>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/3ee3e035-596b-47d9-b510-544f81982415">
+        <dct:title>Download Bodemkaart</dct:title>
+        <dcat:accessURL>https://www.milieuinfo.be/dms/d/a/workspace/SpacesStore/26cc5794-d671-489b-a760-bd4d812c10aa/20141212_Bodemkaart_download.zip</dcat:accessURL>
+        <dct:description>Link naar download Bodemkaart</dct:description>
+        <dct:format>ZIP</dct:format>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/776e2314-ac92-4dc7-adce-e6e285878917">
+        <dct:title>bodemkaart:fasen</dct:title>
+        <dct:description>WFS-endpoint Fasen</dct:description>
+        <dct:format>WFS</dct:format>
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/fasen/wfs</dcat:accessURL>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:keyword>VARIANTE VAN DE PROFIELONTWIKKELING</dcat:keyword>
+    <dcat:keyword>TEXTUUR</dcat:keyword>
+    <dcat:keyword>FASE</dcat:keyword>
+    <dct:identifier>5c129f2d-4498-4bc3-8860-01cb2d513f8f</dct:identifier>
+    <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-06T16:48:08.882588</dct:issued>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-08-14T20:54:14.823604</dct:modified>
+    <dcat:keyword>SUBSTRAAT</dcat:keyword>
+    <dcat:keyword>GEOMORFOLOGISCHE</dcat:keyword>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/465e57f4-0a01-4ac7-88a9-727ff1cdfefa">
+        <dct:format>HTML</dct:format>
+        <dct:description>Link naar downloadbare bestanden op overzichtspagina van DOV-website</dct:description>
+        <dct:title>Downloaden via DOV-website</dct:title>
+        <dcat:accessURL>https://dov.vlaanderen.be/dovweb/html/services.html</dcat:accessURL>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:contactPoint>
+      <vcard:Organization rdf:nodeID="Ne8717facf54a4b7381c7aee16861c90f">
+        <vcard:hasEmail>land@lne.vlaanderen.be</vcard:hasEmail>
+        <vcard:fn>Afdeling Land en Bodembescherming, Ondergrond, Natuurlijke Rijkdommen (ALBON) - Dienst Land en Bodembescherming</vcard:fn>
+      </vcard:Organization>
+    </dcat:contactPoint>
+    <dcat:keyword>STREEK</dcat:keyword>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/7436b2af-952f-4b3c-abe8-5ac7aa061d7b">
+        <dct:format>KML</dct:format>
+        <dct:title>bodemkaart:substraten</dct:title>
+        <dct:description>KML Substraten</dct:description>
+        <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/wms/kml?layers=bodemkaart:substraten</dcat:accessURL>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:distribution>
+      <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/617f207d-0188-4310-8b1c-47a3ded7b60b">
+        <dct:title>DOV bodemverkenner</dct:title>
+        <dcat:accessURL>https://www.dov.vlaanderen.be/bodemverkenner</dcat:accessURL>
+        <dct:description>Link naar DOV bodemverkenner applicatie</dct:description>
+      </dcat:Distribution>
+    </dcat:distribution>
+    <dcat:keyword>VARIANTE VAN HET MOEDERMATERIAAL</dcat:keyword>
+  </dcat:Dataset>
+</rdf:RDF>
