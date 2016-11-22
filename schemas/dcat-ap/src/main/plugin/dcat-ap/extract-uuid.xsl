@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
   ~ Copyright (C) 2001-2016 Food and Agriculture Organization of the
   ~ United Nations (FAO-UN), United Nations World Food Programme (WFP)
@@ -22,14 +21,16 @@
   ~ Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
-
 <xsl:stylesheet version="1.0"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:dcat="http://www.w3.org/ns/dcat#">
-
-	<xsl:template match="dcat:Dataset">
-		 <uuid><xsl:value-of select="dct:identifier"/></uuid>
-	</xsl:template>
+	
+  <xsl:template match="rdf:RDF">
+    <uuid>
+      <xsl:value-of select="dcat:Dataset/dct:identifier"/>
+    </uuid>
+  </xsl:template>
 
 </xsl:stylesheet>
