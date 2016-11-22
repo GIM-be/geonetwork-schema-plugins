@@ -1,19 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" targetNamespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#" elementFormDefault="qualified" attributeFormDefault="qualified">
-	<xs:annotation>
-		<xs:documentation xml:lang="en">
-      DCAT-AP 1.1 XML Schema
-      XML Schema for http://www.w3.org/ns/dcat# namespace
-      
-      Description: This is an XML Schema for the DCAT-AP specification. The schema is used by GeoNetwork for storing GeoNetwork data internally. 
-
-      Created 2016-05-31
-      Modified 2016-11-30
-
-      Author
-      Stijn Goedertier (stijn.goedertier@gim.be)
-
-    </xs:documentation>
-	</xs:annotation>
 	<xs:include schemaLocation="schema/rdf.xsd"/>
 </xs:schema>
