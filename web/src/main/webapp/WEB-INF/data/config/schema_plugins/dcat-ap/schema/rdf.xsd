@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcat="http://www.w3.org/ns/dcat#" targetNamespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#" elementFormDefault="qualified" attributeFormDefault="qualified">
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
-      RDF XML Schema (relevant parts for DCAT-AP)
+      RDF XML Schema
       XML Schema for http://www.w3.org/1999/02/22-rdf-syntax-ns# namespace
     </xs:documentation>
 	</xs:annotation>
@@ -38,17 +38,17 @@ Date in
 		</xs:annotation>
 		<xs:simpleContent>
 			<xs:extension base="xs:dateTime">
-				<xs:attribute name="datatype" type="xs:anyURI" fixed="http://www.w3.org/2001/XMLSchema#dateTime"/>
+				<xs:attribute name="datatype" type="xs:anyURI" fixed="xs:dateTime"/>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
-	<!-- CatalogRoot -->
-	<xs:complexType name="CatalogRoot">
-		<xs:choice>
-			<xs:element ref="dcat:Catalog"/>
-		</xs:choice>
+	<!-- RDF TODO: remove-->
+	<xs:complexType name="RDF">
+		<xs:sequence>
+			<xs:any/>
+		</xs:sequence>
 	</xs:complexType>
 	<!-- individual elements -->
 	<xs:attribute name="about" type="xs:anyURI"/>
-	<xs:element name="RDF" type="rdf:CatalogRoot"/>
+	<xs:element name="RDF" type="dcat:Dataset"/>
 </xs:schema>

@@ -31,7 +31,7 @@
   <gns:standardUrl>http://dublincore.org/documents/dces/</gns:standardUrl>
 	<gns:schemaLocation/>
 	<gns:autodetect xmlns:dcat="http://www.w3.org/ns/dcat#">
-		<gns:elements type="root">
+		<gns:elements type="search">
 			<dcat:Dataset/>
 		</gns:elements>
 	</gns:autodetect>

@@ -12,18 +12,17 @@
 	<xs:import namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#" schemaLocation="rdf.xsd"/>
 	<xs:import namespace="http://www.w3.org/2004/02/skos/core#" schemaLocation="skos.xsd"/>
 	<!-- vcard:Kind-->
-	<xs:complexType name="Organization">
+	<xs:complexType name="Kind">
 		<xs:sequence>
-			<xs:element name="Organization">
+			<xs:element name="Kind">
 				<xs:complexType>
 					<xs:sequence>
 						<!-- optional properties-->
-						<xs:element name="fn" type="xs:string" minOccurs="0" maxOccurs="1"/>
-						<xs:element name="organization-name" type="xs:string" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="vcard:hasAddress" minOccurs="0" maxOccurs="1"/>
-						<xs:element name="hasEmail" type="xs:anyURI" minOccurs="0" maxOccurs="1"/>
-						<xs:element name="hasURL" type="xs:anyURI" minOccurs="0" maxOccurs="1"/>
-						<xs:element name="hasTelephone" type="xs:anyURI" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="organization-name" type="xs:string" maxOccurs="1"/>
+						<xs:element ref="vcard:hasAddress" maxOccurs="1"/>
+						<xs:element name="hasEmail" type="xs:anyURI" maxOccurs="1"/>
+						<xs:element name="hasURL" type="xs:anyURI" maxOccurs="1"/>
+						<xs:element name="hasTelephone" type="xs:anyURI" maxOccurs="1"/>
 					</xs:sequence>
 					<xs:attribute ref="rdf:about"/>
 				</xs:complexType>
