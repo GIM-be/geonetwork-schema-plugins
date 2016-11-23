@@ -23,12 +23,13 @@
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
 
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dcat="http://www.w3.org/ns/dcat#">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 
 	<!-- ================================================================= -->
 	
-	<xsl:template match="/root">
-		 <xsl:apply-templates select="dcat:Dataset"/>
+	<xsl:template match="/">
+		 <xsl:apply-templates select="rdf:RDF"/>
 	</xsl:template>
 
 	<!-- ================================================================= -->

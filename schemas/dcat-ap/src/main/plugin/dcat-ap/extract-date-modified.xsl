@@ -24,13 +24,13 @@
   -->
 
 <xsl:stylesheet version="1.0"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:dcat="http://www.w3.org/ns/dcat#">
 
-	<xsl:template match="dcat:Dataset">
-		 <dateStamp><xsl:value-of select="dct:modified"/></dateStamp>
+    <xsl:template match="/">
+		 <dateStamp><xsl:value-of select="rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset/dct:modified"/></dateStamp>
 	</xsl:template>
 
 </xsl:stylesheet>

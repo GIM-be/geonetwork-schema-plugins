@@ -269,7 +269,6 @@
     add a hidden add action in case the element is removed. If removed,
     the client app take care of displaying this control. -->
     
-    <!--  DISABLED: TODO fix this @Stijn, @Gustaaf 
     <xsl:if test="$service = 'md.edit' and $parentEditInfo and $parentEditInfo/@min = 0 and $parentEditInfo/@max = 1">
       <xsl:variable name="directive" select="gn-fn-metadata:getFieldAddDirective($editorConfig, name())"/>
 
@@ -284,7 +283,6 @@
         <xsl:with-param name="name" select="name()"/>
       </xsl:call-template>
     </xsl:if>
-    -->
   </xsl:template> 
 
 
@@ -878,7 +876,12 @@
     <!-- Get variable from attribute (eg. codelist) or node (eg. gco:CharacterString).-->
     <xsl:variable name="valueToEdit"
                   select="if ($value/*) then $value/text() else $value"/>
-
+	<xsl:message>====================</xsl:message>
+	<xsl:message><xsl:value-of select="$name"/></xsl:message>
+	<xsl:message><xsl:value-of select="$value"/></xsl:message>
+	<xsl:message><xsl:value-of select="$type"/></xsl:message>
+	<xsl:message><xsl:value-of select="$name"/></xsl:message>
+	<xsl:message>====================</xsl:message>
     <!-- If a form field has suggestion list in helper
     then the element is hidden and the helper directive is added.
     ListOfValues could be a codelist (with entry children) or

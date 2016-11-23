@@ -483,7 +483,13 @@ public final class Xml {
                         t.setParameter(param.getKey(), param.getValue());
                     }
                 }
-                t.transform(srcXml, result);
+                try {
+                	t.transform(srcXml, result);
+                } catch(Exception e) {
+                	/* Added by Gustaaf Vandeboel for info about the xslt transform error */
+                	Log.error(Log.ENGINE, e.getMessage());
+                	throw e;
+                }
             }
         }
     }

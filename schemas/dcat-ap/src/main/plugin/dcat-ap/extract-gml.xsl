@@ -22,15 +22,17 @@
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"  
-xmlns:dc="http://purl.org/dc/elements/1.1/" 
-xmlns:dct="http://purl.org/dc/terms/"
-xmlns:dcat="http://www.w3.org/ns/dcat#"
-xmlns:gml="http://www.opengis.net/gml" >
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"
+	xmlns:gml="http://www.opengis.net/gml"  
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:dcat="http://www.w3.org/ns/dcat#">
     <xsl:output method="xml" indent="yes"/>
-    <xsl:template match="/" priority="2">
+    <xsl:template match="/">
+   		<gml:GeometryCollection/>
+<!--    		
    		<gml:GeometryCollection>
-	      		<xsl:variable name="coverage" select="/dataset/dct:spatial"/>
+	      		<xsl:variable name="coverage" select="rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset/dct:spatial"/>
 				<xsl:variable name="n" select="substring-after($coverage,'North ')"/>
 				<xsl:variable name="north" select="substring-before($n,',')"/>
 				<xsl:variable name="s" select="substring-after($coverage,'South ')"/>
@@ -49,5 +51,6 @@ xmlns:gml="http://www.opengis.net/gml" >
 	        </gml:Polygon>
 				</xsl:if>
 			</gml:GeometryCollection>
-    </xsl:template>
+ -->
+     </xsl:template>
 </xsl:stylesheet>

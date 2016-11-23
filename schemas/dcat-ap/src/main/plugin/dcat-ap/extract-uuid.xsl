@@ -27,10 +27,10 @@
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:dcat="http://www.w3.org/ns/dcat#">
 	
-  <xsl:template match="rdf:RDF">
-    <uuid>
-      <xsl:value-of select="dcat:Dataset/dct:identifier"/>
-    </uuid>
-  </xsl:template>
+    <xsl:template match="/">
+	    <uuid>
+	      <xsl:value-of select="rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset/dct:identifier"/>
+	    </uuid>
+	</xsl:template>
 
 </xsl:stylesheet>

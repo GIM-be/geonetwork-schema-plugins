@@ -24,10 +24,11 @@
   -->
 
 <xsl:stylesheet version="1.0" xmlns:gmd="http://www.isotc211.org/2005/gmd"
-										xmlns:gco="http://www.isotc211.org/2005/gco"
-										xmlns:gml="http://www.opengis.net/gml"
-										xmlns:srv="http://www.isotc211.org/2005/srv"
-										xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:gco="http://www.isotc211.org/2005/gco"
+	xmlns:gml="http://www.opengis.net/gml"
+	xmlns:srv="http://www.isotc211.org/2005/srv"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<!-- This file defines what parts of the metadata are indexed by Lucene
 	     Searches can be conducted on indexes defined here. 

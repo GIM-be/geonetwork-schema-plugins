@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" targetNamespace="http://purl.org/dc/terms/" elementFormDefault="qualified" attributeFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:locn="http://www.w3.org/ns/locn#" xmlns:schema="http://schema.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" targetNamespace="http://purl.org/dc/terms/" elementFormDefault="qualified" attributeFormDefault="qualified">
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
-      DCterms XML Schema
+      DCterms XML Schema  (relevant parts for DCAT-AP)
       XML Schema for http://purl.org/dc/terms/ namespace
     </xs:documentation>
 	</xs:annotation>
-	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
 	<xs:import namespace="http://xmlns.com/foaf/0.1/" schemaLocation="foaf.xsd"/>
 	<xs:import namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#" schemaLocation="rdf.xsd"/>
 	<xs:import namespace="http://www.w3.org/2004/02/skos/core#" schemaLocation="skos.xsd"/>
+	<xs:import namespace="http://schema.org/" schemaLocation="schema.org.xsd"/>
+	<xs:import namespace="http://www.w3.org/ns/locn#" schemaLocation="locn.xsd"/>
 	<!-- individual elements -->
 	<xs:element name="alternative" type="rdf:PlainLiteral"/>
 	<xs:element name="title" type="rdf:PlainLiteral"/>
@@ -76,8 +77,8 @@
 				<xs:complexType>
 					<xs:sequence>
 						<!-- optional properties for dct:PeriodOfTime-->
-						<xs:element name="startDate" type="rdf:DateTimeLiteral" maxOccurs="1"/>
-						<xs:element name="endDate" type="rdf:DateTimeLiteral" maxOccurs="1"/>
+						<xs:element ref="schema:startDate" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="schema:endDate" minOccurs="0" maxOccurs="1"/>
 					</xs:sequence>
 					<xs:attribute ref="rdf:about"/>
 				</xs:complexType>
@@ -87,13 +88,12 @@
 	<!-- dct:Location-->
 	<xs:complexType name="Location">
 		<xs:sequence>
-			<xs:element name="Location">
+			<xs:element name="Location" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
 						<!-- optional properties for dct:Location-->
-						<!-- TODO: move this to a schema for W3 LOCN-->
-						<xs:element name="geometry" type="rdf:TypedLiteral" maxOccurs="1"/>
-						<xs:element ref="skos:prefLabel" maxOccurs="1"/>
+						<xs:element ref="locn:geometry" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element ref="skos:prefLabel" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:sequence>
 					<xs:attribute ref="rdf:about"/>
 				</xs:complexType>

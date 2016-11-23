@@ -24,22 +24,22 @@
   -->
 
 <xsl:stylesheet version="1.0"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-					 xmlns:dc ="http://purl.org/dc/elements/1.1/"
-  					 xmlns:dct="http://purl.org/dc/terms/"
-					 xmlns:dcat="http://www.w3.org/ns/dcat#">
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:dcat="http://www.w3.org/ns/dcat#">
 
 	<!-- ================================================================= -->
 	
 	<xsl:template match="/root">
-		 <xsl:apply-templates select="dcat:Dataset"/>
+		 <xsl:apply-templates select="rdf:RDF"/>
 	</xsl:template>
 
 	<!-- ================================================================= -->
 	
 	<xsl:template match="dcat:Dataset">
 		<xsl:copy>
-			<!--  <dct:identifier><xsl:value-of select="/root/env/uuid"/></dct:identifier>  -->
+			<dct:identifier><xsl:value-of select="/root/env/uuid"/></dct:identifier>
 			<xsl:apply-templates select="dct:title"/>
 			<xsl:apply-templates select="dct:description"/>
 			<xsl:apply-templates select="dcat:accessURL"/>			

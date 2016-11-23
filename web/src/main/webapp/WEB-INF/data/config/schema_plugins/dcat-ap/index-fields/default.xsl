@@ -23,11 +23,13 @@
   -->
 
 <xsl:stylesheet version="2.0"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:dc = "http://purl.org/dc/elements/1.1/"
-				xmlns:dcat="http://www.w3.org/ns/dcat#"
-                xmlns:java="java:org.fao.geonet.util.XslUtil"
-                xmlns:dct="http://purl.org/dc/terms/">
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:dc = "http://purl.org/dc/elements/1.1/"
+	xmlns:dcat="http://www.w3.org/ns/dcat#"
+	xmlns:java="java:org.fao.geonet.util.XslUtil"
+	xmlns:dct="http://purl.org/dc/terms/">
 
   <!-- This file defines what parts of the metadata are indexed by Lucene
     Searches can be conducted on indexes defined here.
@@ -43,10 +45,14 @@
   <!-- ========================================================================================= -->
 
   <xsl:template match="/">
+	 <xsl:apply-templates select="rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset"/>
+  </xsl:template>
+  
+  <xsl:template match="dcat:Dataset">
 
     <xsl:variable name="langCode"
-                  select="if (normalize-space(/dcat:Dataset/dc:language) != '')
-                          then string(/dcat:Dataset/dc:language) else 'eng'"/>
+                  select="if (normalize-space(dc:language) != '')
+                          then string(dc:language) else 'eng'"/>
 
     <Document locale="{$langCode}">
 
@@ -55,69 +61,69 @@
       <Field name="_docLocale" string="{$langCode}" store="true" index="true"/>
 
       <!-- For multilingual docs it is good to have a title in the default locale.  In this type of metadata we don't have one but in the general case we do so we need to add it to all -->
-      <Field name="_defaultTitle" string="{string(/dcat:Dataset/dct:title)}" store="true" index="true"/>
+      <Field name="_defaultTitle" string="{string(dct:title)}" store="true" index="true"/>
 
-      <xsl:for-each select="/dcat:Dataset/dct:language">
+      <xsl:for-each select="dct:language">
         <Field name="mdLanguage" string="{string(.)}" store="true" index="true"/>
       </xsl:for-each>
 
-      <xsl:for-each select="/dcat:Dataset/dct:identifier">
+      <xsl:for-each select="dct:identifier">
         <Field name="identifier" string="{string(.)}" store="false" index="true"/>
       </xsl:for-each>
 
-      <xsl:for-each select="/dcat:Dataset/dct:description">
+      <xsl:for-each select="dct:description">
         <Field name="abstract" string="{string(.)}" store="true" index="true"/>
       </xsl:for-each>
 
-      <xsl:for-each select="/dcat:Dataset/dct:issued">
+      <xsl:for-each select="dct:issued">
         <Field name="createDate" string="{string(.)}" store="true" index="true"/>
-        <Field name="createDateYear" string="{substring(., 0, 5)}" store="true" index="true"/>
+        <Field name="createDateYear" string="{substring(string(.), 0, 5)}" store="true" index="true"/>
       </xsl:for-each>
 
 
-      <xsl:for-each select="/dcat:Dataset/dct:modified">
+      <xsl:for-each select="dct:modified">
         <Field name="changeDate" string="{string(.)}" store="true" index="true"/>
         <!--<Field name="createDateYear" string="{substring(., 0, 5)}" store="true" index="true"/>-->
       </xsl:for-each>
 
-      <xsl:for-each select="/dcat:Dataset/dct:format">
+      <xsl:for-each select="dct:format">
         <Field name="format" string="{string(.)}" store="true" index="true"/>
       </xsl:for-each>
 
-      <xsl:for-each select="/dcat:Dataset/dct:type">
+      <xsl:for-each select="dct:type">
         <Field name="type" string="{string(.)}" store="true" index="true"/>
       </xsl:for-each>
 
-      <xsl:for-each select="/dcat:Dataset/dc:source">
+      <xsl:for-each select="dc:source">
         <Field name="lineage" string="{string(.)}" store="true" index="true"/>
       </xsl:for-each>
 
-      <xsl:for-each select="/dcat:Dataset/dc:relation">
+      <xsl:for-each select="dc:relation">
         <Field name="relation" string="{string(.)}" store="false" index="true"/>
       </xsl:for-each>
 
-      <xsl:for-each select="/dcat:Dataset/dct:accessRights">
+      <xsl:for-each select="dct:accessRights">
         <Field name="MD_ConstraintsUseLimitation" string="{string(.)}" store="true" index="true"/>
       </xsl:for-each>
-      <xsl:for-each select="/dcat:Dataset/dc:rights">
+      <xsl:for-each select="dc:rights">
         <Field name="MD_LegalConstraintsUseLimitation" string="{string(.)}" store="true" index="true"/>
       </xsl:for-each>
 
-      <xsl:for-each select="/dcat:Dataset/dct:spatial">
+      <xsl:for-each select="dct:spatial">
         <Field name="spatial" string="{string(.)}" store="false" index="true"/>
       </xsl:for-each>
 
       <!-- This is needed by the CITE test script to look for strings like 'a b*'
           strings that contain spaces -->
 
-      <xsl:for-each select="/dcat:Dataset/dct:title">
+      <xsl:for-each select="dct:title">
         <Field name="title" string="{string(.)}" store="true" index="true"/>
         <!-- not tokenized title for sorting -->
         <Field name="_title" string="{string(.)}" store="false" index="true"/>
       </xsl:for-each>
 
 
-      <xsl:for-each select="/dcat:Dataset/(dcat:landingPage|dcat:downloadURL|dcat:accessURL)[normalize-space(.) != '']">
+      <xsl:for-each select="(dcat:landingPage|dcat:downloadURL|dcat:accessURL)[normalize-space(.) != '']">
         <xsl:variable name="name" select="tokenize(., '/')[last()]"/>
         <!-- Index link where last token after the last / is the link name. -->
         <Field name="link"
@@ -125,7 +131,7 @@
                store="true"
                index="false"/>
       </xsl:for-each>
-      <xsl:for-each select="/dcat:Dataset/(dcat:landingPage|dcat:downloadURL|dcat:accessURL)[normalize-space(.) != ''
+      <xsl:for-each select="(dcat:landingPage|dcat:downloadURL|dcat:accessURL)[normalize-space(.) != ''
                               and matches(., '.*(.gif|.png.|.jpeg|.jpg)$', 'i')]">
         <xsl:variable name="thumbnailType"
                       select="if (position() = 1) then 'thumbnail' else 'overview'"/>
@@ -139,10 +145,11 @@
       <!-- This index for "coverage" requires significant expansion to
          work well for spatial searches. It now only works for very
          strictly formatted content -->
-      <xsl:for-each select="/dcat:Dataset/dct:spatial">
+<!-- TODO parse wkt string polygon with java  -->
+<!--
+      <xsl:for-each select="dct:spatial">
         <xsl:variable name="coverage" select="."/>
 
-        <!-- North 46.3, South 42.51, East 3.88, West -1.84 -->
         <xsl:choose>
           <xsl:when test="starts-with(., 'North')">
             <xsl:variable name="n" select="substring-after($coverage,'North ')"/>
@@ -173,39 +180,40 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:for-each>
+-->
 
 
-
-      <xsl:apply-templates select="/dcat:Dataset/dc:subject">
+      <xsl:apply-templates select="dc:subject">
         <xsl:with-param name="name" select="'keyword'"/>
         <xsl:with-param name="store" select="'true'"/>
       </xsl:apply-templates>
       
-      <xsl:apply-templates select="/dcat:Dataset/dcat:keyword">
+      <xsl:apply-templates select="dcat:keyword">
         <xsl:with-param name="name" select="'keyword'"/>
         <xsl:with-param name="store" select="'true'"/>
       </xsl:apply-templates>      
 
-      <xsl:for-each select="/dcat:Dataset/dct:isPartOf">
+      <xsl:for-each select="dct:isPartOf">
         <Field name="parentUuid" string="{string(.)}" store="true" index="true"/>
       </xsl:for-each>
 
+<!-- TODO when using this we get an error about the concat first parameter
       <Field name="any" store="false" index="true">
         <xsl:attribute name="string">
-          <xsl:value-of select="normalize-space(string(/dcat:Dataset))"/>
+          <xsl:value-of select="normalize-space(string(dcat:Dataset))"/>
           <xsl:text> </xsl:text>
           <xsl:for-each select="//*/@*">
             <xsl:value-of select="concat(., ' ')"/>
           </xsl:for-each>
         </xsl:attribute>
       </Field>
-
+-->
       <!-- locally searchable fields -->
 
       <!-- defaults to true -->
       <Field name="digital" string="true" store="false" index="true"/>
 
-      <xsl:for-each select="/dcat:Dataset/dcat:contactPerson">
+      <xsl:for-each select="dcat:contactPerson">
         <xsl:variable name="role"
                       select="java:getCodelistTranslation('gmd:CI_RoleCode',
                                                  'pointOfContact',
@@ -214,7 +222,7 @@
                string="{concat($role, '|resource|', ., '|')}" store="true" index="false"/>
       </xsl:for-each>
 
-      <xsl:for-each select="/dcat:Dataset/dct:publisher">
+      <xsl:for-each select="dct:publisher/foaf:Agent/foaf:name">
         <xsl:variable name="role"
                       select="java:getCodelistTranslation('gmd:CI_RoleCode',
                                                  'author',
@@ -224,8 +232,8 @@
       </xsl:for-each>
 
       <xsl:choose>
-        <xsl:when test="/dcat:Dataset/dct:accrualPeriodicity">
-          <xsl:for-each select="/dcat:Dataset/dct:accrualPeriodicity">
+        <xsl:when test="dct:accrualPeriodicity">
+          <xsl:for-each select="dct:accrualPeriodicity">
             <Field name="updateFrequency" string="{string(.)}" store="true" index="true"/>
             <Field name="cl_maintenanceAndUpdateFrequency_text"
                    string="{java:getCodelistTranslation('gmd:MD_MaintenanceFrequencyCode',

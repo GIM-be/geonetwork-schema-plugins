@@ -24,16 +24,16 @@
   -->
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:dcat="http://www.w3.org/ns/dcat#">
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:dcat="http://www.w3.org/ns/dcat#">
 
   <!-- =================================================================   -->
 
   <xsl:template match="/root">
-    <xsl:apply-templates select="dcat:Dataset"/>
+    <xsl:apply-templates select="rdf:RDF"/>
   </xsl:template>
   
-
-
   <!-- ================================================================= -->
 
   <xsl:template match="@*|node()">
@@ -44,13 +44,23 @@
 
   <!-- ================================================================= -->
 
+  <xsl:template match="dcat:Catalog/dct:title">
+		<dct:title>Catalog name must be used here</dct:title>
+  </xsl:template>
+
+  <xsl:template match="dcat:Catalog/dct:description">
+		<dct:description>Catalog description must be used here with organization name and catalog site id?</dct:description>
+  </xsl:template>
+
+  <!-- ================================================================= -->
   <xsl:template match="dcat:Dataset">
     <dcat:Dataset xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:dcat="http://www.w3.org/ns/dcat#">
       <dct:identifier>
         <xsl:value-of select="/root/env/uuid"/>
       </dct:identifier>
-      <xsl:apply-templates select="dct:*[name(.)!= 'dct:modified' and name(.)!= 'dct:identifer']"/>
+      <xsl:apply-templates select="dct:*[name(.)!= 'dct:modified' and name(.)!= 'dct:identifier']"/>
       <xsl:apply-templates select="dcat:*"/>
     </dcat:Dataset>
   </xsl:template>
 </xsl:stylesheet>
+  
