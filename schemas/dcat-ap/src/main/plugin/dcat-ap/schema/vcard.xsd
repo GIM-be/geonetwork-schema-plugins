@@ -6,7 +6,6 @@
       http://www.w3.org/ns/adms# 
     </xs:documentation>
 	</xs:annotation>
-	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
 	<xs:import namespace="http://purl.org/dc/terms/" schemaLocation="dcterms.xsd"/>
 	<xs:import namespace="http://xmlns.com/foaf/0.1/" schemaLocation="foaf.xsd"/>
 	<xs:import namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#" schemaLocation="rdf.xsd"/>
