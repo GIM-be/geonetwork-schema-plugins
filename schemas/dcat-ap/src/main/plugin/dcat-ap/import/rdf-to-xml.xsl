@@ -2,6 +2,8 @@
 <xsl:stylesheet xmlns:sr="http://www.w3.org/2005/sparql-results#" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:adms="http://www.w3.org/ns/adms#" xmlns:dct="http://purl.org/dc/terms/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:locn="http://www.w3.org/ns/locn#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:schema="http://schema.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:spdx="http://spdx.org/rdf/terms#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:saxon="http://saxon.sf.net/" xmlns:fn-rdf="http://geonetwork-opensource.org/xsl/functions/rdf" version="2.0" extension-element-prefixes="saxon">
 	<!-- Tell the XSL processor to output XML. -->
 	<xsl:output method="xml" indent="yes"/>
+	<!-- Default language for plain literals. -->
+	<xsl:variable name="defaultLang">nl</xsl:variable>
 	<!-- dcat:Catalog -->
 	<xsl:template match="/">
 		<xsl:variable name="results" select="/sr:sparql/sr:results/sr:result"/>
@@ -594,19 +596,37 @@
 		<xsl:for-each select="$results[sr:binding[@name='subject']/* = $subject and
 											sr:binding[@name='predicate']/sr:uri = $predicateString]/sr:binding[@name='object']">
 			<xsl:choose>
+				<!-- plain literals -->
 				<xsl:when test="./sr:literal">
 					<xsl:element name="{$predicate}">
+						<!-- rdf:datatype attribute -->
 						<xsl:if test="fn:exists(./sr:literal/@datatype)">
 							<xsl:attribute name="rdf:datatype" select="./sr:literal/@datatype"/>
 						</xsl:if>
+						<!-- language tag attriburte -->
+						<xsl:choose>
+							<xsl:when test="fn:exists(./sr:literal/@lang)">
+								<xsl:attribute name="xml:lang" select="./sr:literal/@lang"/>
+							</xsl:when>
+							<xsl:when test="fn:local-name-from-QName($predicate) = ('description', 'title', 'keyword', 'name')">
+								<xsl:attribute name="xml:lang" select="$defaultLang"/>
+							</xsl:when>
+						</xsl:choose>
 						<xsl:value-of select="./sr:literal"/>
 					</xsl:element>
 				</xsl:when>
+				<!-- URIs -->
 				<xsl:when test="./sr:uri">
 					<xsl:element name="{$predicate}">
 						<xsl:attribute name="rdf:resource" select="./sr:uri"/>
 					</xsl:element>
 				</xsl:when>
+				<!-- blank nodes -->
+				<xsl:when test="./sr:bnode">
+					<xsl:element name="{$predicate}">
+						<xsl:attribute name="rdf:resource" select="./sr:bnode"/>
+					</xsl:element>
+				</xsl:when>				
 			</xsl:choose>
 		</xsl:for-each>
 	</xsl:template>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:sr="http://www.w3.org/2005/sparql-results#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:adms="http://www.w3.org/ns/adms#" xmlns:dct="http://purl.org/dc/terms/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:locn="http://www.w3.org/ns/locn#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:schema="http://schema.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:spdx="http://spdx.org/rdf/terms#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:fn-rdf="http://geonetwork-opensource.org/xsl/functions/rdf" xsi:schemaLocation="http://www.w3.org/1999/02/22-rdf-syntax-ns# ../schema/rdf.xsd">
+	<dcat:Catalog>
+		<dct:title>Put here the catalog title</dct:title>
+		<dct:description>Put here the catalog description</dct:description>
+		<dct:publisher>
+			<foaf:Agent rdf:about="http://purl.org/mydomain/myidentifer">
+				<foaf:name>Put here the publisher name</foaf:name>
+			</foaf:Agent>
+		</dct:publisher>
+		<dcat:dataset>
+			<dcat:Dataset rdf:about="http://data.opendataforum.info/dataset/605240ec-3121-424f-988e-bdd5f0eab218">
+				<dct:title xml:lang="nl">DATEX2 feed Verkeerscentrum Vlaanderen</dct:title>
+				<dct:description xml:lang="nl">(English description below) De DATEX2 feed bevat de volgende door het Verkeerscentrum Vlaanderen gekende verkeersinformatie op de autosnelwegen in Vlaanderen: verkeersafwikkeling, incidenten, actuele wegenwerken en speciale evenementen die het verkeer beïnvloeden.
+(Nederlandstalige omschrijving hierboven) The DATEX2 feed contains the following traffic information, known by the Flemish traffic centre, on the highways in Flanders: traffic flow, incidents, current road works and special events that effect traffic.</dct:description>
+				<dcat:contactPoint>
+					<vcard:Organization rdf:about="b0">
+						<vcard:fn>Nele Dedene</vcard:fn>
+						<vcard:hasEmail>nele.dedene@mow.vlaanderen.be</vcard:hasEmail>
+					</vcard:Organization>
+				</dcat:contactPoint>
+				<dcat:distribution>
+					<dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/605240ec-3121-424f-988e-bdd5f0eab218/resource/da243d7b-9918-4512-a90f-c83c85cc9a81">
+						<dcat:accessURL>http://www.verkeerscentrum.be/uitwisseling/datex2</dcat:accessURL>
+						<dct:description xml:lang="nl">(English description below)
+De DATEX2 feed bevat de volgende door het Verkeerscentrum Vlaanderen gekende verkeersinformatie op de autosnelwegen in Vlaanderen: verkeersafwikkeling, incidenten, actuele wegenwerken en speciale evenementen die het verkeer beïnvloeden. 
+De DATEX2 feed wordt cyclisch geüpdate en gepubliceerd.
+De DATEX2 feed werd oorspronkelijk gecreëerd voor interne doeleinden In het Verkeerscentrum Vlaanderen en het Verkeerscentrum geeft geen enkele garantie dat deze DATEX2 feed geschikt is voor andere doeleinden.
+Het verkeerscentrum Vlaanderen publiceert de DATEX2 gecodeerde verkeersinformatie in http pagina’s die gedownload kunnen worden door de (her)gebruiker.
+De DATEX2 feed zal in principe 7 dagen per week, 24 uur per dag beschikbaar zijn en geüpdate worden. Het verkeerscentrum geeft echter geen garanties over de kwaliteit, de continuïteit en de beschikbaarheid van de DATEX2 feed.
+DATEX2 is de Europese standaard voor het vastleggen en uitwisselen van verkeersgegevens gebaseerd op een goed gekend informatiemodel gebruik makend van het formaat Extensible Markup Language (XML). DATEX2 kan worden gebruikt voor de grensoverschrijdende uitwisseling van gegevens tussen nationale of regionale verkeersinformatie centra (TIC) en voor de uitwisseling tussen de TIC's en dienstverleners, verkeersoperatoren en mediapartners. DATEX2 dekt veel van de prioritaire gebieden en diensten die in de Europese ITS-richtlijn genoemd worden. In dit opzicht is DATEX2 een van de fundamentele stappen in de harmonisatie die gemaakt moet worden om de ambitieuze doelstellingen van de ITS richtlijn te bereiken. DATEX2 zal een sterke rol spelen in de implementatie van geïntegreerde ITS in Europa. Meer informatie over DATEX2 kan gevonden worden op: www.datex2.eu.
+DATEX 2 is een meerdelige standaard, onderhouden door CEN Technical Committee 278 (Road Transport and Traffic Telematics).
+
+(Nederlandstalige beschrijving hierboven)
+The DATEX2 feed contains the following traffic information, known by the Flemish traffic centre, on the highways in Flanders: traffic flow, incidents, current road works and special events that effect traffic.
+The DATEX2 feed will be updated and published cyclically.
+The DATEX2 feed was originally created for internal purposes of the Traffic Centre Flanders and the Traffic centre does not give any guarantee that this DATEX2 feed is suited for other purposes.
+The Traffic Centre Flanders will publish the DATEX2 coded traffic information in http pages that have to be downloaded by (re)user.
+In principle, the DATEX2 feed will be available and updated 7 days a week, 24 hours a day. The Traffic Centre does however not guarantee anything with regard to the quality, the continuity and the availability of the DATEXII feed.
+DATEX2 is the European standard for capturing and exchanging traffic data based on a well- known information model using the format of Extensible Markup Language (XML). DATEX2 can be used for the cross-border exchange of information between national or regional traffic information centers (TIC) and for the exchange between the TICs and service providers, transport operators and media partners. DATEX2 covers many of the priority areas and services mentioned in the European ITS Directive. In this regard, DATEX2 is one of the fundamental steps in the harmonization that has to be made in order to achieve the ambitious objectives of the ITS Directive. DATEX2 will play a strong role in the implementation of integrated ITS in Europe. More information on DATEX 2 can be found at: www.datex2.eu.
+DATEX 2 is a multi-part Standard, maintained by CEN Technical Committee 278 (Road Transport and Traffic Telematics).</dct:description>
+						<dct:format>XML</dct:format>
+						<dct:title xml:lang="nl">DATEX2 feed Verkeerscentrum Vlaanderen</dct:title>
+					</dcat:Distribution>
+				</dcat:distribution>
+				<dcat:keyword xml:lang="nl">real-time verkeersinformatie</dcat:keyword>
+				<dcat:keyword xml:lang="nl">mobiliteit</dcat:keyword>
+				<dcat:keyword xml:lang="nl">informatie</dcat:keyword>
+				<dcat:keyword xml:lang="nl">verkeer</dcat:keyword>
+				<dcat:keyword xml:lang="nl">verkeerscentrum</dcat:keyword>
+				<dcat:keyword xml:lang="nl">files</dcat:keyword>
+				<dcat:keyword xml:lang="nl">datex2</dcat:keyword>
+				<dcat:keyword xml:lang="nl">ongeval</dcat:keyword>
+				<dcat:keyword xml:lang="nl">otap</dcat:keyword>
+				<dcat:keyword xml:lang="nl">autosnelwegen</dcat:keyword>
+				<dct:publisher>
+					<foaf:Agent rdf:about="http://data.opendataforum.info/organization/62925076-4eca-4c3f-9a81-28c38cbb9baf">
+						<foaf:name xml:lang="nl">DMOW</foaf:name>
+					</foaf:Agent>
+				</dct:publisher>
+				<dct:identifier>605240ec-3121-424f-988e-bdd5f0eab218</dct:identifier>
+				<dcat:landingPage>Departement MOW, Afdeling Verkeerscentrum</dcat:landingPage>
+				<dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-05-18T09:24:35.917369</dct:issued>
+				<dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T12:58:55.637002</dct:modified>
+				<owl:versionInfo>20150518.1</owl:versionInfo>
+			</dcat:Dataset>
+		</dcat:dataset>
+	</dcat:Catalog>
+</rdf:RDF>
