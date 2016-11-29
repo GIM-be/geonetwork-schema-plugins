@@ -30,14 +30,22 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:gmx="http://www.isotc211.org/2005/gmx"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
-                xmlns:util="java:org.fao.geonet.util.XslUtil"
+                xmlns:util="java:org.fao.geonet.util.XslUtil?path=file:///C:/git/aiv-geonetwork-gim/core/target/classes/"
                 xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 version="2.0"
                 exclude-result-prefixes="#all">
 
   <xsl:include href="../convert/functions.xsl"/>
-  <xsl:include href="../../../xsl/utils-fn.xsl"/>
+  <xsl:include href="../../../../../../../web/target/geonetwork/xsl/utils-fn.xsl" />	
+	
+	<!-- TODO: remove this comment <xsl:include href="../../../../../../../web/target/geonetwork/xsl/utils-fn.xsl" /> 
+	xmlns:java="java:org.fao.geonet.util.XslUtil?path=file:///C:/git/aiv-geonetwork-gim/core/target/classes/"
+
+<xsl:include href="../../../xsl/utils-fn.xsl"/>
+
+xmlns:java="java:org.fao.geonet.util.XslUtil"
+	 -->  
   <xsl:include href="index-subtemplate-fields.xsl"/>
 
   <!-- This file defines what parts of the metadata are indexed by Lucene

@@ -24,6 +24,9 @@
 <xsl:stylesheet xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:date="http://exslt.org/dates-and-times"
+                xmlns:java="java:org.fao.geonet.util.XslUtil?path=file:///C:/git/aiv-geonetwork-gim/core/target/classes/"
+                xmlns:joda="java:org.fao.geonet.domain.ISODate?path=file:///C:/git/aiv-geonetwork-gim/domain/target/classes/"
+                xmlns:mime="java:org.fao.geonet.util.MimeTypeFinder?path=file:///C:/git/aiv-geonetwork-gim/core/target/classes/"                
                 xmlns:java="java:org.fao.geonet.util.XslUtil"
                 xmlns:joda="java:org.fao.geonet.domain.ISODate"
                 xmlns:mime="java:org.fao.geonet.util.MimeTypeFinder"
@@ -34,6 +37,10 @@
                 xmlns:java="java:org.fao.geonet.util.XslUtil?path=file:///C:/git/aiv-geonetwork-gim/core/target/classes/"
                 xmlns:joda="java:org.fao.geonet.domain.ISODate?path=file:///C:/git/aiv-geonetwork-gim/domain/target/classes/"
                 xmlns:mime="java:org.fao.geonet.util.MimeTypeFinder?path=file:///C:/git/aiv-geonetwork-gim/core/target/classes/"
+
+                xmlns:java="java:org.fao.geonet.util.XslUtil"
+                xmlns:joda="java:org.fao.geonet.domain.ISODate"
+                xmlns:mime="java:org.fao.geonet.util.MimeTypeFinder"
 -->
 
   <!-- ========================================================================================= -->
