@@ -15,15 +15,16 @@
 <xsl:stylesheet version="2.0" xmlns:foaf="http://xmlns.com/foaf/0.1/"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:dcat="http://www.w3.org/ns/dcat#"
-	
-	xmlns:java="java:org.fao.geonet.util.XslUtil?path=file:///C:/git/aiv-geonetwork-gim/core/target/classes/"
+	xmlns:util="java:org.fao.geonet.util.XslUtil"
 	xmlns:geonet="http://www.fao.org/geonetwork" xmlns:dct="http://purl.org/dc/terms/">
 	<xsl:include href="../convert/functions.xsl" />
-	<xsl:include href="../../../../../../../web/target/geonetwork/xsl/utils-fn.xsl" />	
+	<xsl:include href="../../../xsl/utils-fn.xsl"/>
 	
-	<!-- TODO: remove this comment <xsl:include href="../../../../../../../web/target/geonetwork/xsl/utils-fn.xsl" /> 
-	xmlns:java="java:org.fao.geonet.util.XslUtil?path=file:///C:/git/aiv-geonetwork-gim/core/target/classes/"
+	<!-- TODO: remove this comment 
+	<xsl:include href="../../../../../../../web/target/geonetwork/xsl/utils-fn.xsl" /> 
+	xmlns:util="java:org.fao.geonet.util.XslUtil?path=file:///C:/git/aiv-geonetwork-gim/core/target/classes/"
 
+<xsl:include href="../../../../../../../web/target/geonetwork/xsl/utils-fn.xsl" />	
 <xsl:include href="../../../xsl/utils-fn.xsl"/>
 
 xmlns:java="java:org.fao.geonet.util.XslUtil"

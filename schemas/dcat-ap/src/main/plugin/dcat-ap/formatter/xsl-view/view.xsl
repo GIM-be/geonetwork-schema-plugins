@@ -28,10 +28,17 @@
                 xmlns:dct="http://purl.org/dc/terms/"
 				xmlns:dcat="http://www.w3.org/ns/dcat#"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:tr="java:org.fao.geonet.services.metadata.format.SchemaLocalizations"
+                xmlns:tr="java:org.fao.geonet.api.records.formatters.SchemaLocalizations"
                 xmlns:gn-fn-render="http://geonetwork-opensource.org/xsl/functions/render"
                 xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
                 exclude-result-prefixes="#all">
+   
+  <!--  TODO: remove this comment 
+  @Gustaaf: de klasse SchemaLocations is blijkbaar verplaatst naar een nieuwe package. 
+  Er stond vroeger:
+  xmlns:tr="java:org.fao.geonet.services.metadata.format.SchemaLocalizations"
+  Nu is het:
+  xmlns:tr="java:org.fao.geonet.api.records.formatters.SchemaLocalizations"  -->
 
   <!-- Load the editor configuration to be able
   to render the different views -->
