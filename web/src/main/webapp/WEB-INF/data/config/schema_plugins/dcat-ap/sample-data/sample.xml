@@ -75,11 +75,15 @@
 						</dct:type>
 					</foaf:Agent>
 				</dct:publisher>
-				<dcat:theme>
-					<skos:Concept rdf:about="http://www.altova.com/">
-						<skos:prefLabel xml:lang="en-us">String</skos:prefLabel>
-					</skos:Concept>
-				</dcat:theme>
+<dcat:theme>
+	<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/ECON">
+		<skos:prefLabel xml:lang="nl">Economie en financiën</skos:prefLabel>
+		<skos:prefLabel xml:lang="fr">Économie et finances</skos:prefLabel>
+		<skos:prefLabel xml:lang="de">Wirtschaft und Finanzen</skos:prefLabel>
+		<skos:prefLabel xml:lang="en">Economy and finance</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+	</skos:Concept>
+</dcat:theme>
 				<dct:accessRights>http://www.altova.com/</dct:accessRights>
 				<dct:conformsTo>http://www.altova.com/</dct:conformsTo>
 				<foaf:page>

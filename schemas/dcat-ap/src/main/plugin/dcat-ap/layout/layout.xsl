@@ -31,55 +31,57 @@
   exclude-result-prefixes="#all">
 
   <xsl:include href="utility-fn.xsl"/>
+  <xsl:include href="utility-tpl.xsl"/>
+  <xsl:include href="layout-custom-fields.xsl"/>
+  <xsl:include href="layout-custom-fields-date.xsl"/>
+  <xsl:include href="layout-custom-tpl.xsl"/>
 
-  <!-- Get the main metadata languages -->
-  <xsl:template name="get-dcat-ap-language">
-    <xsl:value-of select="$metadata/descendant::node()/dct:language[1]"/>
-  </xsl:template>
-  
-  <!-- No multilingual support in Dublin core -->
-  <xsl:template name="get-dcat-ap-other-languages-as-json"/>
-  
-  <!-- Get the list of other languages -->
-  <xsl:template name="get-dcat-ap-other-languages"/>
-
-  <xsl:template name="get-dcat-ap-online-source-config"/>
-
-  <xsl:template name="get-dcat-ap-extents-as-json">[]</xsl:template>
-
-  <!-- Visit all tree -->
-  <xsl:template mode="mode-dcat-ap" match="dct:*|dcat:*">
-    <xsl:apply-templates mode="mode-dcat-ap" select="*|@*"/>
-  </xsl:template>
-
-
-  <!-- Forget those DC elements -->
+  <!-- Ignore all gn element -->
   <xsl:template mode="mode-dcat-ap"
-    match="dc:*[
-    starts-with(name(), 'dc:elementContainer') or
-    starts-with(name(), 'dc:any')
-    ]"
-    priority="300">
-    <xsl:apply-templates mode="mode-dcat-ap" select="*|@*"/>
+                match="gn:*|@gn:*|@*"
+                priority="1000"/>
+
+  <!-- Template to display non existing element ie. geonet:child element
+  of the metadocument. Display in editing mode only and if
+  the editor mode is not flat mode. -->
+  <xsl:template mode="mode-dcat-ap" match="gn:child" priority="2000">
+    <xsl:param name="schema" select="$schema" required="no"/>
+    <xsl:param name="labels" select="$labels" required="no"/>
+
+
+    <xsl:variable name="name" select="concat(@prefix, ':', @name)"/>
+    <xsl:variable name="flatModeException"
+                  select="gn-fn-metadata:isFieldFlatModeException($viewConfig, $name)"/>
+
+    <!-- TODO: this should be common to all schemas -->
+    <xsl:if test="$isEditing and
+      (not($isFlatMode) or $flatModeException)">
+
+      <xsl:variable name="directive"
+                    select="gn-fn-metadata:getFieldAddDirective($editorConfig, $name)"/>
+
+      <xsl:call-template name="render-element-to-add">
+        <!-- TODO: add xpath and isoType to get label ? -->
+        <xsl:with-param name="label"
+                        select="gn-fn-metadata:getLabel($schema, $name, $labels, name(..), '', '')/label"/>
+        <xsl:with-param name="directive" select="$directive"/>
+        <xsl:with-param name="childEditInfo" select="."/>
+        <xsl:with-param name="parentEditInfo" select="../gn:element"/>
+        <xsl:with-param name="isFirst" select="count(preceding-sibling::*[name() = $name]) = 0"/>
+      </xsl:call-template>
+    </xsl:if>
   </xsl:template>
 
+  <!-- Visit all XML tree recursively -->
+  <xsl:template mode="mode-dcat-ap" match="dct:*|dcat:*">
+    <xsl:param name="schema" select="$schema" required="no"/>
+    <xsl:param name="labels" select="$labels" required="no"/>
 
-  <!-- Boxed the root element -->
-  <xsl:template mode="mode-dcat-ap" priority="200" match="dcat:Dataset">
-    <xsl:call-template name="render-boxed-element">
-      <xsl:with-param name="label" select="gn-fn-metadata:getLabel($schema, name(.), $labels)/label"/>
-      <xsl:with-param name="cls" select="local-name()"/>
-      <xsl:with-param name="xpath" select="gn-fn-metadata:getXPath(.)"/>
-      <xsl:with-param name="subTreeSnippet">
-        <xsl:apply-templates mode="mode-dcat-ap" select="*"/>
-      </xsl:with-param>
-      <xsl:with-param name="editInfo" select="gn:element"/>
-    </xsl:call-template>
+    <xsl:apply-templates mode="mode-dcat-ap" select="*|@*">
+      <xsl:with-param name="schema" select="$schema"/>
+      <xsl:with-param name="labels" select="$labels"/>
+    </xsl:apply-templates>
   </xsl:template>
-
-
-  <!-- Forget all elements ... -->
-  <xsl:template mode="mode-dcat-ap" match="gn:*|@*"/>
 
   <!-- 
     ... but not the one proposing the list of elements to add in DC schema
@@ -88,7 +90,7 @@
     of the metadocument. Display in editing mode only and if 
   the editor mode is not flat mode. -->
   <xsl:template mode="mode-dcat-ap" match="gn:child[contains(@name, 'CHOICE_ELEMENT')]"
-    priority="2000">
+    priority="3000">
     <xsl:if test="$isEditing and 
       not($isFlatMode)">
 
@@ -242,5 +244,28 @@
     </xsl:call-template>
   </xsl:template>
   
+  <!-- Forget those DC elements -->
+  <xsl:template mode="mode-dcat-ap"
+    match="dc:*[
+    starts-with(name(), 'dc:elementContainer') or
+    starts-with(name(), 'dc:any')
+    ]"
+    priority="300">
+    <xsl:apply-templates mode="mode-dcat-ap" select="*|@*"/>
+  </xsl:template>
+
+
+  <!-- Boxed the root element -->
+  <xsl:template mode="mode-dcat-ap" priority="200" match="dcat:Dataset">
+    <xsl:call-template name="render-boxed-element">
+      <xsl:with-param name="label" select="gn-fn-metadata:getLabel($schema, name(.), $labels)/label"/>
+      <xsl:with-param name="cls" select="local-name()"/>
+      <xsl:with-param name="xpath" select="gn-fn-metadata:getXPath(.)"/>
+      <xsl:with-param name="subTreeSnippet">
+        <xsl:apply-templates mode="mode-dcat-ap" select="*"/>
+      </xsl:with-param>
+      <xsl:with-param name="editInfo" select="gn:element"/>
+    </xsl:call-template>
+  </xsl:template>
 
 </xsl:stylesheet>

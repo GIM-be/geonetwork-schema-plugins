@@ -119,6 +119,7 @@
 
       <xsl:choose>
         <xsl:when test="$service != 'md.element.add' and $tabConfig/section">
+      	  <xsl:message>Using the section part of config-editor.xml of schema <xsl:value-of select="$schema"/></xsl:message>
           <xsl:apply-templates mode="form-builder" select="$tabConfig/section">
             <xsl:with-param name="base" select="$metadata"/>
           </xsl:apply-templates>

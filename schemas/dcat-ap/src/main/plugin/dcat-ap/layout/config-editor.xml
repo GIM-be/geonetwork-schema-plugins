@@ -48,6 +48,7 @@
 		       or="description"
 		       in="/rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset/*"
 		       del="."/>
+<!-- 
         	<field name="landingePage"
 		       xpath="/rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset/dcat:landingPage"
 		       or="landingPage"
@@ -88,18 +89,19 @@
 		       or="spatial"
 		       in="/rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset/*"
 		       del="."/>     	       		       			       
-		</section>      
+ -->
+ 		</section>      
 
       </tab>
       <tab id="distribution" mode="flat">
       	<section name="distribution">
         	<field name="distributionaccessURL"
-		       xpath="/rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset/dcat:Distribution/dcat:accessURL"
+		       xpath="//dcat:Dataset/dcat:Distribution/dcat:accessURL"
 		       or="accessURL"
-		       in="/rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset/dcat:Distribution/*"
+		       in="//dcat:Dataset/dcat:Distribution/*"
 		       del="."/>  
         	<field name="distributiondownloadURL"
-		       xpath="/rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset/dcat:Distribution/dcat:downloadURL"
+		       xpath="//dcat:Dataset/dcat:Distribution/dcat:downloadURL"
 		       or="downloadURL"
 		       in="/rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset/dcat:Distribution/*"
 		       del="."/>  		       
