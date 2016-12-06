@@ -24,10 +24,12 @@
   -->
 
 <labels xmlns:dc = "http://purl.org/dc/elements/1.1/" 
+		xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+		xmlns:foaf="http://xmlns.com/foaf/0.1/" 
 		xmlns:dct = "http://purl.org/dc/terms/"
 		xmlns:dcat = "http://www.w3.org/ns/dcat#">
 	<!-- ==================================================== -->
-	<element name="dataset">
+	<element name="dcat:dataset">
 		<label>Metadata</label>
 		<description/>
 	</element>
@@ -52,7 +54,7 @@
 		<label>Subject and Keywords</label>
 		<description>A topic of the content of the resource. Typically, Subject will be expressed as keywords, key phrases, or classification codes that describe a topic of the resource.</description>
 		<example>Recommended best practice is to select a value from a controlled vocabulary or formal classification scheme.</example>
-	</element>µ
+	</element>
 	<!-- ==================================================== -->
 	<element name="dcat:theme">
 		<label>Theme</label>
@@ -334,4 +336,25 @@
     <description>Date (often a range) of validity of a resource.</description>
   </element>
   <!-- ==================================================== -->
+  <element name="vcard:Organization">
+    <label>Organization</label>
+    <description>Organization</description>
+  </element>
+  <!-- ==================================================== -->
+  <element name="vcard:fn">
+    <label>Name</label>
+    <description>Name of organization.</description>
+  </element>
+  <!-- ==================================================== -->
+  <element name="vcard:hasEmail">
+    <label>Email</label>
+    <description>Email of organization.</description>
+  </element>
+  <!-- ==================================================== -->
+  <element name="dcat:keyword">
+    <label>Keyword</label>
+    <description>Commonly used word(s) or formalised word(s) or phrase(s) used to describe the
+      subject
+    </description>
+  </element>
 </labels>
