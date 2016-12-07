@@ -41,6 +41,7 @@
     <xsl:param name="base" as="node()"/>
 
     <xsl:variable name="sectionName" select="@name"/>
+	<xsl:message><xsl:value-of select="concat('Processing section ',$sectionName)"/></xsl:message>
 
     <xsl:choose>
       <xsl:when test="$sectionName">
@@ -169,6 +170,7 @@
     <!-- The XML document to edit -->
     <xsl:param name="base" as="node()"/>
 
+	<xsl:message><xsl:value-of select="concat('Processing field ',@name)"/></xsl:message>
     <xsl:if test="@xpath">
       <!-- Seach any nodes in the metadata matching the XPath.
 
@@ -181,6 +183,7 @@
       profile's namespaces used in XPath expression.
 
       That's why each schema should define its evaluate-<schemaid> template. -->
+	  <xsl:message>Attribute xpath exists</xsl:message>
       <xsl:variable name="nodes">
         <saxon:call-template name="{concat('evaluate-', $schema)}">
           <xsl:with-param name="base" select="$base"/>
@@ -240,6 +243,7 @@
       <xsl:choose>
         <xsl:when test="$isDisplayed and not(@templateModeOnly)">
           <xsl:variable name="configName" select="@name"/>
+		<xsl:message><xsl:value-of select="concat('Field ',$configName,' is displayed and templateModeOnly is false')"/></xsl:message>
 
 
           <!-- Display the matching node using standard editor mode
@@ -254,6 +258,7 @@
 
             <xsl:choose>
               <xsl:when test="count($nodes/*) = 1">
+				<xsl:message><xsl:value-of select="concat('Field ',$configName,' has one child')"/></xsl:message>
                 <xsl:variable name="originalNode"
                               select="gn-fn-metadata:getOriginalNode($metadata, $nodes/node())"/>
 
@@ -276,6 +281,7 @@
                 </saxon:call-template>
               </xsl:when>
               <xsl:otherwise>
+				<xsl:message><xsl:value-of select="concat('Field ',$configName,' has more than one child')"/></xsl:message>
                 <xsl:for-each select="$nodes/*">
                   <xsl:variable name="originalNode"
                                 select="gn-fn-metadata:getOriginalNode($metadata, .)"/>
@@ -342,6 +348,7 @@
             metadocument. This mode will probably take precedence over the others
             if defined in a view.
             -->
+		<xsl:message>Field <xsl:value-of select="@name"/> is displayed and templateModeOnly is true or template is true</xsl:message>
           <xsl:variable name="name" select="@name"/>
           <xsl:variable name="del" select="@del"/>
           <xsl:variable name="template" select="template"/>
@@ -478,6 +485,8 @@
             </xsl:call-template>
           </xsl:if>
         </xsl:when>
+        <xsl:otherwise><xsl:message>Field {name} is ignored</xsl:message>
+        </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
   </xsl:template>

@@ -41,6 +41,31 @@
   <xsl:template name="evaluate-dcat-ap">
     <xsl:param name="base" as="node()"/>
     <xsl:param name="in"/>
-    <xsl:copy-of select="saxon:evaluate(concat('$p1', $in), $base)"/>
+    <!-- <xsl:message>in xml <xsl:copy-of select="$base"></xsl:copy-of></xsl:message>
+     <xsl:message>search for <xsl:copy-of select="$in"></xsl:copy-of></xsl:message>-->
+    <xsl:variable name="nodeOrAttribute" select="saxon:evaluate(concat('$p1', $in), $base)"/>
+
+    <xsl:choose>
+      <xsl:when test="$nodeOrAttribute instance of text()+">
+        <xsl:value-of select="$nodeOrAttribute"/>
+      </xsl:when>
+      <xsl:when test="$nodeOrAttribute instance of element()+">
+        <xsl:copy-of select="$nodeOrAttribute"/>
+      </xsl:when>
+      <xsl:when test="$nodeOrAttribute instance of attribute()+">
+        <xsl:value-of select="$nodeOrAttribute"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$nodeOrAttribute"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <!-- Evaluate XPath returning a boolean value. -->
+  <xsl:template name="evaluate-dcat-ap-boolean">
+    <xsl:param name="base" as="node()"/>
+    <xsl:param name="in"/>
+
+    <xsl:value-of select="saxon:evaluate(concat('$p1', $in), $base)"/>
   </xsl:template>
 </xsl:stylesheet>

@@ -12,4 +12,5 @@
   <dataset>Dataset</dataset>
   <metadata-on-metadata>Metadata on metadata</metadata-on-metadata>
   <distribution>Distribution</distribution>
+  <vcardFn>Name</vcardFn>
 </strings>

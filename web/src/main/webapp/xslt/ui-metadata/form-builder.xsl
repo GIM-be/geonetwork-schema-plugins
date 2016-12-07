@@ -413,14 +413,6 @@
 
     <xsl:variable name="tagId" select="generate-id()"/>
 
-    <!-- <xsl:message>!render-element-template-field <xsl:copy-of select="$keyValues"/>
-        <xsl:value-of select="$name"/>/tpl:
-        <xsl:copy-of select="$template"/>/
-        <xsl:value-of select="$id"/>/
-        <xsl:value-of select="$isExisting"/>/
-        <xsl:value-of select="$id"/>
-      </xsl:message>-->
-
     <xsl:variable name="firstFieldKey"
                   select="$template/values/key[position() = 1]/@label"/>
 
@@ -876,12 +868,6 @@
     <!-- Get variable from attribute (eg. codelist) or node (eg. gco:CharacterString).-->
     <xsl:variable name="valueToEdit"
                   select="if ($value/*) then $value/text() else $value"/>
-	<xsl:message>====================</xsl:message>
-	<xsl:message><xsl:value-of select="$name"/></xsl:message>
-	<xsl:message><xsl:value-of select="$value"/></xsl:message>
-	<xsl:message><xsl:value-of select="$type"/></xsl:message>
-	<xsl:message><xsl:value-of select="$name"/></xsl:message>
-	<xsl:message>====================</xsl:message>
     <!-- If a form field has suggestion list in helper
     then the element is hidden and the helper directive is added.
     ListOfValues could be a codelist (with entry children) or

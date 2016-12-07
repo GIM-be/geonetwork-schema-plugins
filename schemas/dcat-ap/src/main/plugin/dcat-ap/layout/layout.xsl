@@ -23,8 +23,11 @@
   -->
 
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:dct="http://purl.org/dc/terms/"
   xmlns:dcat="http://www.w3.org/ns/dcat#"
+  xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/" 
   xmlns:gn="http://www.fao.org/geonetwork"
   xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
   xmlns:gn-fn-dcat-ap="http://geonetwork-opensource.org/xsl/functions/profiles/dcat-ap"
@@ -73,7 +76,7 @@
   </xsl:template>
 
   <!-- Visit all XML tree recursively -->
-  <xsl:template mode="mode-dcat-ap" match="dct:*|dcat:*">
+  <xsl:template mode="mode-dcat-ap" match="dct:*|dcat:*|vcard:*|foaf:*">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
 
@@ -126,7 +129,7 @@
 
 
   <!-- the other elements in DC. -->
-  <xsl:template mode="mode-dcat-ap" priority="100" match="dc:*|dct:*|dcat:*">
+  <xsl:template mode="mode-dcat-ap" priority="100" match="dc:*|dct:*|dcat:*|vcard:*|foaf:*">
     <xsl:variable name="name" select="name(.)"/>
     <xsl:variable name="ref" select="gn:element/@ref"/>
     <xsl:variable name="labelConfig" select="gn-fn-metadata:getLabel($schema, $name, $labels)"/>
@@ -209,11 +212,12 @@
     
   </xsl:template>
   
-    <xsl:template mode="mode-dcat-ap" match="dct:spatial" priority="2000">
+  <xsl:template mode="mode-dcat-ap" match="dct:spatial" priority="2000">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
     
     <xsl:variable name="coverage" select="."/>
+<!--
     <xsl:variable name="n" select="substring-after($coverage,'North ')"/>
     <xsl:variable name="north" select="substring-before($n,',')"/>
     <xsl:variable name="s" select="substring-after($coverage,'South ')"/>
@@ -223,6 +227,11 @@
     <xsl:variable name="w" select="substring-after($coverage,'West ')"/>
     <xsl:variable name="west" select="if (contains($w, '. '))
                                       then substring-before($w,'. ') else $w"/>
+-->
+    <xsl:variable name="north" select="'51.4960'"/>
+    <xsl:variable name="south" select="'50.6746'"/>
+    <xsl:variable name="east" select="'5.9200'"/>
+    <xsl:variable name="west" select="'2.5579'"/>
     <xsl:variable name="place" select="substring-after($coverage,'. ')"/>
 
     <xsl:call-template name="render-boxed-element">

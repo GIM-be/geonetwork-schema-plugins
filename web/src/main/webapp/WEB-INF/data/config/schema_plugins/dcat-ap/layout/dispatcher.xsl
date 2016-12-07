@@ -24,6 +24,7 @@
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+				xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:dc="http://purl.org/dc/elements/1.1/"
                 xmlns:dct="http://purl.org/dc/terms/"
                 xmlns:dcat="http://www.w3.org/ns/dcat#"
@@ -48,7 +49,18 @@
   <!-- Dispatching to the profile mode  -->
   <xsl:template name="dispatch-dcat-ap">
     <xsl:param name="base" as="node()"/>
-    <xsl:apply-templates mode="mode-dcat-ap" select="$base"/>
+    <xsl:param name="overrideLabel" as="xs:string" required="no" select="''"/>
+    <xsl:param name="refToDelete" as="node()?" required="no"/>
+
+    <xsl:message select="concat('Base content is ',$base)"/>
+    <xsl:message select="concat('Local name of Base is ',local-name($base))"/>
+    <xsl:message select="concat('Name of Base is ',name($base))"/>
+    <xsl:message select="concat('OverrideLabel is ',$overrideLabel)"/>
+    <xsl:message select="concat('refToDelete is ',$refToDelete)"/>
+    <xsl:apply-templates mode="mode-dcat-ap" select="$base">
+      <xsl:with-param name="overrideLabel" select="$overrideLabel"/>
+      <xsl:with-param name="refToDelete" select="$refToDelete"/>
+    </xsl:apply-templates>
   </xsl:template>
 
 </xsl:stylesheet>

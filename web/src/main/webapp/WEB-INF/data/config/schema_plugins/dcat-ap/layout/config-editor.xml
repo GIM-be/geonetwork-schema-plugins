@@ -13,7 +13,6 @@
   <fields>
 	<for name="dct:title" use="textarea"/>
     <for name="dct:description" use="textarea"/>
-    <for name="vcard:fn" use="textarea"/>  
     <for name="vcard:hasEmail" use="email"/>
     <for name="dct:issued" use="data-gn-date-picker"/>  
     <for name="dcat:theme" use="data-gn-keyword-picker"/>
@@ -32,110 +31,90 @@
   <views>
     <view name="default">
       <tab id="default" default="true" mode="flat">
-        <section name="dcat:dataset">
-        	<field name="datasetTitle"
+        <section name="dcat:Dataset">
+			<field xpath="/dcat:Dataset/dct:identifier"/>
+        	<field name="dct:title"
 		       xpath="/dcat:Dataset/dct:title"
 		       or="title"
 		       in="/dcat:Dataset/*"
 		       del="."/>
-        	<field name="datasetDescription"
+        	<field name="dct:description"
 		       xpath="/dcat:Dataset/dct:description"
 		       or="description"
 		       in="/dcat:Dataset/*"
 		       del="."/>
-        	<field name="landingePage"
+        	<field name="dcat:landingPage"
 		       xpath="/dcat:Dataset/dcat:landingPage"
 		       or="landingPage"
 		       in="/dcat:Dataset/*"
 		       del="."/>
-		</section>	       
-        <section name="vcard:Organization">
-        	<field name="organisationFn"
-		       xpath="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:fn"
-		       or="fn"
-		       in="/dcat:Dataset/dcat:contactPoint/vcard:Organization/*"
-		       del="."/>		             
-        	<field name="organisationHasEmail"
-		       xpath="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:hasEmail"
-		       or="hasEmail"
-		       in="/dcat:Dataset/dcat:contactPoint/vcard:Organization/*"
-		       del="."/>		             
-		</section>	       
-        <section name="dc:publisher">
-        	<field name="publisherName"
-		       xpath="/dcat:Dataset/dct:publisher/foaf:Agent/foaf:name"
-		       or="name"
-		       in="/dcat:Dataset/dct:publisher/foaf:Agent/*"
-		       del="."/>
-        	<field name="issued"
-		       xpath="/dcat:Dataset/dct:issued"
-		       or="issued"
-		       in="/dcat:Dataset/*"
-		       del="."/>
-        	<field name="theme"
+	        <section name="dcat:contactPoint">
+	        	<field name="vcardFn"
+			       xpath="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:fn"
+			       or="fn"
+			       in="/dcat:Dataset/dcat:contactPoint/vcard:Organization/*"
+			       del="."/>		             
+	        	<field name="vcard:hasEmail"
+			       xpath="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:hasEmail"
+			       or="hasEmail"
+			       in="/dcat:Dataset/dcat:contactPoint/vcard:Organization/*"
+			       del="."/>		             
+        	</section>
+        	<field name="dcat:theme"
 		       xpath="/dcat:Dataset/dcat:theme"
 		       or="theme"
 		       in="/dcat:Dataset/*"
 		       del="."/>
-        	<field name="keyword"
+        	<field name="dcat:keyword"
 		       xpath="/dcat:Dataset/dcat:keyword"
 		       or="keyword"
 		       in="/dcat:Dataset/*"
 		       del="."/>	
-        	<field name="language"
-		       xpath="/dcat:Dataset/dct:language"
-		       or="language"
+        	<section name="dct:publisher">
+	        	<field name="foaf:name"
+			       xpath="/dcat:Dataset/dct:publisher/foaf:Agent/foaf:name"
+			       or="name"
+			       in="/dcat:Dataset/dct:publisher/foaf:Agent/*"
+			       del="."/>
+		    </section>
+        	<field name="dct:issued"
+		       xpath="/dcat:Dataset/dct:issued"
+		       or="issued"
 		       in="/dcat:Dataset/*"
-		       del="."/>			       
-        	<field name="spatial"
+		       del="."/>
+        	<field name="dct:spatial"
 		       xpath="/dcat:Dataset/dct:spatial"
 		       or="spatial"
 		       in="/dcat:Dataset/*"
 		       del="."/>     	       		       			       
 		</section>      
-
-      </tab>
-      <tab id="distribution" mode="flat">
-      	<section name="distribution">
-        	<field name="distributionaccessURL"
-		       xpath="/dcat:Dataset/dcat:Distribution/dcat:accessURL"
-		       or="accessURL"
-		       in="/dcat:Dataset/dcat:Distribution/*"
-		       del="."/>  
-        	<field name="distributiondownloadURL"
-		       xpath="/dcat:Dataset/dcat:Distribution/dcat:downloadURL"
-		       or="downloadURL"
-		       in="/dcat:Dataset/dcat:Distribution/*"
-		       del="."/>  		       
-        	<field name="distributiontitle"
-		       xpath="/dcat:Dataset/dcat:Distribution/dct:title"
-		       or="distributiontitle"
-		       in="/dcat:Dataset/dcat:Distribution/*"
-		       del="."/>      
-        	<field name="distributiondescription"
-		       xpath="/dcat:Dataset/dcat:Distribution/dct:description"
-		       or="distributiondescription"
-		       in="/dcat:Dataset/dcat:Distribution/*"
-		       del="."/>  
-        	<field name="distributionFormat"
-		       xpath="/dcat:Dataset/dcat:Distribution/dct:format"
-		       or="distributionformat"
-		       in="/dcat:Dataset/dcat:Distribution/*"
-		       del="."/>  		     
-        	<field name="distributionlicense"
-		       xpath="/dcat:Dataset/dcat:Distribution/dct:license"
-		       or="distributionlicense"
-		       in="/dcat:Dataset/dcat:Distribution/*"
-		       del="."/>  		         		       
+      	<section name="dcat:Distribution">
+	        <field name="dcat:Distribution" templateModeOnly="true" notDisplayedIfMissing="true"
+	               xpath="/dcat:Distribution"
+	               del="..">
+	          <template>
+	            <values>
+	              <key label="dcat:accessURL" xpath="dcat:accessURL"/>
+	              <key label="dct:description" xpath="dct:description"/>
+	              <key label="dct:format" xpath="dct:format"/>
+	              <key label="dct:title" xpath="dct:title"/>
+	            </values>
+	            <snippet>
+	              <dcat:Distribution>
+						<dcat:accessURL>{{dcat:accessURL}}</dcat:accessURL>
+						<dct:description xml:lang="nl">{{dct:description}}</dct:description>
+						<dct:format>{{dct:format}}</dct:format>
+						<dct:title xml:lang="nl">{{dct:title}}</dct:title>
+	              </dcat:Distribution>
+	            </snippet>
+	          </template>
+	        </field>
         </section> 
-      	<section xpath="/dcat:Dataset/dcat:Distribution">    	
-      	</section>        		   
       </tab>
      
       <flatModeExceptions>
         <for name="dcat:theme"/>
         <for name="dcat:keyword"/>
-        <for name="dcat:Distribution"/>
       </flatModeExceptions>
 
       <thesaurusList>

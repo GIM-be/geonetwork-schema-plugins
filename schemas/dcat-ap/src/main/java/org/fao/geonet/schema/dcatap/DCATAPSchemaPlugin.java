@@ -50,11 +50,14 @@ public class DCATAPSchemaPlugin
         allNamespaces = ImmutableSet.<Namespace>builder()
                 .add(DCATAPNamespaces.DC)
                 .add(DCATAPNamespaces.DCT)
+                .add(DCATAPNamespaces.DCAT)
+                .add(DCATAPNamespaces.VCARD)
+                .add(DCATAPNamespaces.FOAF)
                 .build();
 
         allTypenames = ImmutableMap.<String, Namespace>builder()
                 .put("csw:Record", Namespace.getNamespace("csw", "http://www.opengis.net/cat/csw/2.0.2"))
-                .put("dcat", Namespace.getNamespace("dcat", "http://www.w3.org/ns/dcat#"))
+                .put("dcat", DCATAPNamespaces.DCAT)
                 .build();
     }
 
