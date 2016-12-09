@@ -23,7 +23,7 @@
   <!-- Complex fields. -->
   <fieldsWithFieldset>
   	<name>dcat:Dataset</name>
-  	<name>dcat:Distribution</name>
+  	<name>dcat:distribution</name>
   </fieldsWithFieldset>
 
 
@@ -88,6 +88,29 @@
 		       in="/dcat:Dataset/*"
 		       del="."/>     	       		       			       
 		</section>      
+<!--
+		<section name="distribution">
+			<field xpath="/dcat:distribution" />
+	        	<action type="add"
+	        		forceLabel="true" 
+	        		name="sds-addOperation" 
+	        		or="distribution" 
+	        		in="/dcat:Dataset/*"
+					if="count(/dcat:Dataset/dcat:distribution/dcat:Distribution) > 0">
+				<template>
+					<snippet>
+						<dcat:distribution>
+							<dcat:Distribution>
+								<dcat:accessURL></dcat:accessURL>
+								<dct:description xml:lang="nl"></dct:description>
+								<dct:format></dct:format>
+								<dct:title xml:lang="nl"></dct:title>
+							</dcat:Distribution>
+						</dcat:distribution>
+					</snippet>
+				</template>
+			</action>
+		</section>
       	<section name="dcat:Distribution">
 	        <field name="dcat:Distribution" templateModeOnly="true" notDisplayedIfMissing="true"
 	               xpath="/dcat:Distribution"
@@ -110,9 +133,11 @@
 	          </template>
 	        </field>
         </section> 
+-->
       </tab>
      
       <flatModeExceptions>
+        <for name="dcat:distribution"/>
         <for name="dcat:theme"/>
         <for name="dcat:keyword"/>
       </flatModeExceptions>

@@ -28,9 +28,15 @@
 		xmlns:dct="http://purl.org/dc/terms/"
 		xmlns:dcat="http://www.w3.org/ns/dcat#">
 	<!-- ==================================================== -->
-	<element name="dcat:dataset">
+	<element name="dcat:Dataset">
 		<label>Metadata</label>
 		<description/>
+	</element>
+	<!-- ==================================================== -->
+	<element name="dct:identifier">
+		<label>Resource Identifier</label>
+		<description>An unambiguous reference to the resource within a given context.</description>
+		<example>Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN).</example>
 	</element>
 	<!-- ==================================================== -->
 	<element name="dct:title">
@@ -49,6 +55,10 @@
 		<description>An account of the content of the resource.</description>
 		<example>Examples of Description include, but are not limited to, an abstract, table of contents, reference to a graphical representation of content, or free-text account of the content.</example>
 	</element>	
+	<element name="dcat:contactPoint" id="29.0">
+    <label>Point of contact</label>
+		<description>Identification of, and means of communication with, person(s) and organizations(s) associated with the resource(s)</description>
+	</element>
 	<!-- ==================================================== -->
 	<element name="dct:publisher">
 		<label>Publisher</label>
@@ -283,6 +293,13 @@
     <description>URL</description>
   </element>
   <!-- ==================================================== -->
+  <element name="dcat:Distribution">
+    <label>Distribution</label>
+    <description>Information about the distributor of and options for obtaining the
+      resource
+    </description>
+  </element>
+  <!-- ==================================================== -->
   <element name="dct:description" context="dcat:Distribution">
     <label>Description</label>
     <description>Detailed text description of what the online resource is/does</description>
@@ -290,13 +307,7 @@
   <!-- ==================================================== -->
   <element name="dct:format">
     <label>Format</label>
-    <description>The physical or digital manifestation of the resource. Typically, Format will
-      include the media-type or dimensions of the resource. Format may be used to identify the
-      software, hardware, or other equipment needed to display or operate the resource.
-    </description>
-    <example>Examples of dimensions include size and duration. Recommended best practice is to
-      select a value from a controlled vocabulary (for example, the list of Internet Media Types
-      defining computer media formats).
-    </example>
+    <description>The physical or digital manifestation of the resource. Typically, Format will include the media-type or dimensions of the resource. Format may be used to identify the software, hardware, or other equipment needed to display or operate the resource.</description>
+    <example>Examples of dimensions include size and duration. Recommended best practice is to select a value from a controlled vocabulary (for example, the list of Internet Media Types defining computer media formats).</example>
   </element>
 </labels>
