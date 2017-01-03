@@ -61,7 +61,7 @@
 	<xs:element name="publisher" type="foaf:Agent"/>
 	<xs:element name="type" type="skos:Concept"/>
 	<xs:element name="identifier" type="xs:anyURI"/>
-	<xs:element name="language" type="xs:anyURI"/>
+	<xs:element name="language" type="skos:Concept"/>
 	<!-- dct:LicenseDocument -->
 	<xs:complexType name="LicenseDocument">
 		<xs:sequence>

@@ -50,5 +50,7 @@ Date in
 	</xs:complexType>
 	<!-- individual elements -->
 	<xs:attribute name="about" type="xs:anyURI"/>
+	<xs:attribute name="resource" type="xs:anyURI"/>
+	<xs:attribute name="nodeID" type="xs:NCName"/>
 	<xs:element name="RDF" type="rdf:CatalogRoot"/>
 </xs:schema>
