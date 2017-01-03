@@ -217,6 +217,7 @@
     <xsl:param name="labels" select="$labels" required="no"/>
     
     <xsl:variable name="coverage" select="."/>
+<!--
     <xsl:variable name="n" select="substring-after($coverage,'North ')"/>
     <xsl:variable name="north" select="substring-before($n,',')"/>
     <xsl:variable name="s" select="substring-after($coverage,'South ')"/>
@@ -226,12 +227,11 @@
     <xsl:variable name="w" select="substring-after($coverage,'West ')"/>
     <xsl:variable name="west" select="if (contains($w, '. '))
                                       then substring-before($w,'. ') else $w"/>
-<!--
-    <xsl:variable name="north" select="51.4960''"/>
+-->
+    <xsl:variable name="north" select="'51.4960'"/>
     <xsl:variable name="south" select="'50.6746'"/>
     <xsl:variable name="east" select="'5.9200'"/>
     <xsl:variable name="west" select="'2.5579'"/>
--->
     <xsl:variable name="place" select="substring-after($coverage,'. ')"/>
 
     <xsl:call-template name="render-boxed-element">

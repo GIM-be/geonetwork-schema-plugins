@@ -24,6 +24,71 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 version="2.0"
-                exclude-result-prefixes="#all">
+	  xmlns:dc="http://purl.org/dc/elements/1.1/"
+	  xmlns:dct="http://purl.org/dc/terms/"
+	  xmlns:dcat="http://www.w3.org/ns/dcat#"
+	  xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+	  xmlns:foaf="http://xmlns.com/foaf/0.1/" 
+	  xmlns:gn="http://www.fao.org/geonetwork"
+	  xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
+	  xmlns:gn-fn-dcat-ap="http://geonetwork-opensource.org/xsl/functions/profiles/dcat-ap"
+      exclude-result-prefixes="#all">
+
+  <!--
+  Date with not date type.
+   eg. editionDate
+  -->
+  <xsl:template mode="mode-dcat-ap"
+                priority="2000"
+                match="dct:issued">
+    <xsl:param name="schema" select="$schema" required="no"/>
+    <xsl:param name="labels" select="$labels" required="no"/>
+
+    <xsl:variable name="xpath" select="gn-fn-metadata:getXPath(..)"/>
+    <xsl:variable name="labelConfig"
+                  select="gn-fn-metadata:getLabel($schema, 'dct:issued', $labels, name(..), '', $xpath)"/>
+    <xsl:variable name="dateTypeElementRef"
+                  select="gn:element/@ref"/>
+	<message select="concat('$schema is ',$xpath)"/>
+	<message select="concat('labelConfig is ',$labelConfig)"/>
+	<message select="concat('dateTypeElementRef is ',$dateTypeElementRef)"/>
+    <div class="form-group gn-field gn-title gn-required"
+         id="gn-el-{$dateTypeElementRef}"
+         data-gn-field-highlight="">
+      <label class="col-sm-2 control-label">
+        <xsl:value-of select="$labelConfig/label"/>
+      </label>
+	<message select="concat('Label is ',$labelConfig/label)"/>
+      <div class="col-sm-9 gn-value">
+        <div data-gn-date-picker="{.}"
+             data-label=""
+             data-element-name="{name(.)}"
+             data-element-ref="{concat('_X', gn:element/@ref)}">
+        </div>
+	<message select="concat('Value is ',.)"/>
+	<message select="concat('Name is ',name(.))"/>
+	<message select="concat('data-element-ref is ',concat('_X', gn:element/@ref))"/>
+
+
+        <!-- Create form for all existing attribute (not in gn namespace)
+         and all non existing attributes not already present. -->
+        <div class="well well-sm gn-attr {if ($isDisplayingAttributes) then '' else 'hidden'}">
+          <xsl:apply-templates mode="render-for-field-for-attribute"
+                               select="
+            ../../@*|
+            ../../gn:attribute[not(@name = parent::node()/@*/name())]">
+            <xsl:with-param name="ref" select="../../gn:element/@ref"/>
+            <xsl:with-param name="insertRef" select="../gn:element/@ref"/>
+          </xsl:apply-templates>
+        </div>
+      </div>
+      <div class="col-sm-1 gn-control">
+        <xsl:call-template name="render-form-field-control-remove">
+          <xsl:with-param name="editInfo" select="../gn:element"/>
+          <xsl:with-param name="parentEditInfo" select="../../gn:element"/>
+        </xsl:call-template>
+      </div>
+    </div>
+  </xsl:template>
 
 </xsl:stylesheet>

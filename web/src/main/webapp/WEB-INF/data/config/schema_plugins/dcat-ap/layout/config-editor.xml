@@ -78,6 +78,7 @@
 			       del="."/>
 		    </section>
         	<field name="dct:issued"
+        	use="gn-date-picker"
 		       xpath="/dcat:Dataset/dct:issued"
 		       or="issued"
 		       in="/dcat:Dataset/*"
