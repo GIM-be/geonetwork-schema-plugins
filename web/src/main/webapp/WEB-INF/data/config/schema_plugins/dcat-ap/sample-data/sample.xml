@@ -10,6 +10,7 @@
 				<dct:type>
 					<skos:Concept rdf:about="http://www.altova.com/">
 						<skos:prefLabel xml:lang="en-us">String</skos:prefLabel>
+						<skos:inScheme rdf:resource="http://www.altova.com"/>
 					</skos:Concept>
 				</dct:type>
 			</foaf:Agent>
@@ -54,7 +55,15 @@
 							</foaf:Document>
 						</foaf:page>
 						<dcat:downloadURL>http://www.altova.com/</dcat:downloadURL>
-						<dct:language>http://www.altova.com/</dct:language>
+<dct:language>
+	<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/language/NLD">
+		<skos:prefLabel xml:lang="nl">Nederlands</skos:prefLabel>
+		<skos:prefLabel xml:lang="fr">néerlandais</skos:prefLabel>
+		<skos:prefLabel xml:lang="en">Dutch</skos:prefLabel>
+		<skos:prefLabel xml:lang="de">Niederländisch</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/language"/>
+	</skos:Concept>
+</dct:language>
 						<dct:conformsTo>http://www.altova.com/</dct:conformsTo>
 						<dcat:mediaType>http://www.altova.com/</dcat:mediaType>
 						<dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2001-12-17T09:30:47Z</dct:issued>
@@ -71,10 +80,20 @@
 						<dct:type>
 							<skos:Concept rdf:about="http://www.altova.com/">
 								<skos:prefLabel xml:lang="en-us">String</skos:prefLabel>
+								<skos:inScheme rdf:resource="http://www.altova.com"/>
 							</skos:Concept>
 						</dct:type>
 					</foaf:Agent>
 				</dct:publisher>
+<dcat:theme>
+	<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/ECON">
+		<skos:prefLabel xml:lang="nl">Economie en financiën</skos:prefLabel>
+		<skos:prefLabel xml:lang="fr">Économie et finances</skos:prefLabel>
+		<skos:prefLabel xml:lang="de">Wirtschaft und Finanzen</skos:prefLabel>
+		<skos:prefLabel xml:lang="en">Economy and finance</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+	</skos:Concept>
+</dcat:theme>
 <dcat:theme>
 	<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/ECON">
 		<skos:prefLabel xml:lang="nl">Economie en financiën</skos:prefLabel>
@@ -96,7 +115,15 @@
 				<dct:identifier>http://www.altova.com/</dct:identifier>
 				<dct:isVersionOf>http://www.altova.com/</dct:isVersionOf>
 				<dcat:landingPage>http://www.altova.com/</dcat:landingPage>
-				<dct:language>http://www.altova.com/</dct:language>
+<dct:language>
+	<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/language/NLD">
+		<skos:prefLabel xml:lang="nl">Nederlands</skos:prefLabel>
+		<skos:prefLabel xml:lang="fr">néerlandais</skos:prefLabel>
+		<skos:prefLabel xml:lang="en">Dutch</skos:prefLabel>
+		<skos:prefLabel xml:lang="de">Niederländisch</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/language"/>
+	</skos:Concept>
+</dct:language>
 				<adms:identifier>
 					<adms:Identifier rdf:about="http://www.altova.com/">
 						<skos:notation rdf:datatype="http://www.altova.com/">String</skos:notation>
@@ -124,7 +151,24 @@
 							</foaf:Document>
 						</foaf:page>
 						<dcat:downloadURL>http://www.altova.com/</dcat:downloadURL>
-						<dct:language>http://www.altova.com/</dct:language>
+<dct:language>
+	<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/language/NLD">
+		<skos:prefLabel xml:lang="nl">Nederlands</skos:prefLabel>
+		<skos:prefLabel xml:lang="fr">néerlandais</skos:prefLabel>
+		<skos:prefLabel xml:lang="en">Dutch</skos:prefLabel>
+		<skos:prefLabel xml:lang="de">Niederländisch</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/language"/>
+	</skos:Concept>
+</dct:language>
+<dct:language>
+	<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/language/ENG">
+		<skos:prefLabel xml:lang="nl">Engels</skos:prefLabel>
+		<skos:prefLabel xml:lang="fr">anglais</skos:prefLabel>
+		<skos:prefLabel xml:lang="en">English</skos:prefLabel>
+		<skos:prefLabel xml:lang="de">Englisch</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/language"/>
+	</skos:Concept>
+</dct:language>
 						<dct:conformsTo>http://www.altova.com/</dct:conformsTo>
 						<dcat:mediaType>http://www.altova.com/</dcat:mediaType>
 						<dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2001-12-17T09:30:47Z</dct:issued>
@@ -150,6 +194,7 @@
 				<dct:type>
 					<skos:Concept rdf:about="http://www.altova.com/">
 						<skos:prefLabel xml:lang="en-us">String</skos:prefLabel>
+						<skos:inScheme rdf:resource="http://www.altova.com"/>
 					</skos:Concept>
 				</dct:type>
 				<dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2001-12-17T09:30:47Z</dct:modified>
@@ -163,7 +208,15 @@
 			</foaf:Document>
 		</dcat:homepage>
 		<dct:license>http://www.altova.com/</dct:license>
-		<dct:language>http://www.altova.com/</dct:language>
+<dct:language>
+	<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/language/NLD">
+		<skos:prefLabel xml:lang="nl">Nederlands</skos:prefLabel>
+		<skos:prefLabel xml:lang="fr">néerlandais</skos:prefLabel>
+		<skos:prefLabel xml:lang="en">Dutch</skos:prefLabel>
+		<skos:prefLabel xml:lang="de">Niederländisch</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/language"/>
+	</skos:Concept>
+</dct:language>
 		<dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2001-12-17T09:30:47Z</dct:issued>
 		<dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2001-12-17T09:30:47Z</dct:modified>
 		<dcat:themeTaxonomy>
@@ -181,7 +234,15 @@
 				<adms:status>http://www.altova.com/</adms:status>
 				<dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2001-12-17T09:30:47Z</dct:issued>
 				<dct:description xml:lang="en-us">String</dct:description>
-				<dct:language>http://www.altova.com/</dct:language>
+<dct:language>
+	<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/language/NLD">
+		<skos:prefLabel xml:lang="nl">Nederlands</skos:prefLabel>
+		<skos:prefLabel xml:lang="fr">néerlandais</skos:prefLabel>
+		<skos:prefLabel xml:lang="en">Dutch</skos:prefLabel>
+		<skos:prefLabel xml:lang="de">Niederländisch</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/language"/>
+	</skos:Concept>
+</dct:language>
 				<dct:source>http://www.altova.com/</dct:source>
 				<dct:title xml:lang="en-us">String</dct:title>
 			</dcat:CatalogRecord>

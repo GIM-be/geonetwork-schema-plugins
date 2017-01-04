@@ -61,12 +61,20 @@
 
 
   <xsl:template match="/">
-    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-             xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-             xmlns:foaf="http://xmlns.com/foaf/0.1/"
-             xmlns:void="http://www.w3.org/TR/void/" xmlns:dcat="http://www.w3.org/ns/dcat#"
-             xmlns:dct="http://purl.org/dc/terms/"
-             xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+    <rdf:RDF xmlns:adms="http://www.w3.org/ns/adms#" 
+				xmlns:dct="http://purl.org/dc/terms/" 
+				xmlns:dcat="http://www.w3.org/ns/dcat#" 
+				xmlns:foaf="http://xmlns.com/foaf/0.1/" 
+				xmlns:locn="http://www.w3.org/ns/locn#" 
+				xmlns:owl="http://www.w3.org/2002/07/owl#" 
+				xmlns:schema="http://schema.org/" 
+				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+				xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+				xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+				xmlns:spdx="http://spdx.org/rdf/terms#"
+				xmlns:time="http://www.w3.org/2006/time#"
+				xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+				xmlns:void="http://www.w3.org/TR/void/">
       <!-- Metadata element -->
 
       <xsl:call-template name="catalogue"/>
@@ -94,7 +102,7 @@
       </dct:title>
 
       <!-- free-text account of the catalog. -->
-      <dct:description/>
+      <dct:description xml:lang="{$iso2letterLanguageCode}"/>
 
       <rdfs:label xml:lang="{$iso2letterLanguageCode}">
         <xsl:value-of select="$env/system/site/name"/> (<xsl:value-of
@@ -117,7 +125,7 @@
       <!-- The knowledge organization system (KOS) used to classify catalog's datasets.
       -->
       <xsl:for-each select="/root/gui/thesaurus/thesauri/thesaurus">
-        <dcat:themes rdf:resource="{$resourcePrefix}/registries/vocabularies/{key}"/>
+        <dcat:themeTaxonomy rdf:resource="{$resourcePrefix}/registries/vocabularies/{key}"/>
       </xsl:for-each>
 
 
