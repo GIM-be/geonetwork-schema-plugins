@@ -21,8 +21,11 @@
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
 
-<xsl:stylesheet xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+				xmlns:dct="http://purl.org/dc/terms/"
+				xmlns:dcat="http://www.w3.org/ns/dcat#"
+				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+				xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 xmlns:date="http://exslt.org/dates-and-times"
                 xmlns:java="java:org.fao.geonet.util.XslUtil"
                 xmlns:joda="java:org.fao.geonet.domain.ISODate"
@@ -44,30 +47,7 @@
   <!-- latlon coordinates indexed as numeric. -->
 
   <xsl:template match="*" mode="latLon">
-    <xsl:variable name="format" select="'##.00'"></xsl:variable>
-
-    <xsl:if test="number(gmd:westBoundLongitude/gco:Decimal)
-            and number(gmd:southBoundLatitude/gco:Decimal)
-            and number(gmd:eastBoundLongitude/gco:Decimal)
-            and number(gmd:northBoundLatitude/gco:Decimal)
-            ">
-      <Field name="westBL" string="{format-number(gmd:westBoundLongitude/gco:Decimal, $format)}"
-             store="false" index="true"/>
-      <Field name="southBL" string="{format-number(gmd:southBoundLatitude/gco:Decimal, $format)}"
-             store="false" index="true"/>
-
-      <Field name="eastBL" string="{format-number(gmd:eastBoundLongitude/gco:Decimal, $format)}"
-             store="false" index="true"/>
-      <Field name="northBL" string="{format-number(gmd:northBoundLatitude/gco:Decimal, $format)}"
-             store="false" index="true"/>
-
-      <Field name="geoBox" string="{concat(gmd:westBoundLongitude/gco:Decimal, '|',
-                gmd:southBoundLatitude/gco:Decimal, '|',
-                gmd:eastBoundLongitude/gco:Decimal, '|',
-                gmd:northBoundLatitude/gco:Decimal
-                )}" store="true" index="false"/>
-    </xsl:if>
-
+  	<xsl:message>TO DO: Indexing location</xsl:message>
   </xsl:template>
   <!-- ================================================================== -->
 
@@ -105,18 +85,16 @@
   <!-- iso3code of default index language -->
   <xsl:variable name="defaultLang">eng</xsl:variable>
 
-  <xsl:template name="langId19139">
+  <xsl:template name="langId-dcat-ap">
+	<xsl:variable name="authorityLanguage" select="/*[name(.)='rdf:RDF']/dcat:Catalog/dcat:dataset/dcat:Dataset/dct:language[1]/skos:Concept/@rdf:about" />
     <xsl:variable name="tmp">
-      <xsl:choose>
-        <xsl:when test="/*[name(.)='gmd:MD_Metadata' or @gco:isoType='gmd:MD_Metadata']/gmd:language/gco:CharacterString|
-                                /*[name(.)='gmd:MD_Metadata' or @gco:isoType='gmd:MD_Metadata']/gmd:language/gmd:LanguageCode/@codeListValue">
-          <xsl:value-of select="/*[name(.)='gmd:MD_Metadata' or @gco:isoType='gmd:MD_Metadata']/gmd:language/gco:CharacterString|
-                                /*[name(.)='gmd:MD_Metadata' or @gco:isoType='gmd:MD_Metadata']/gmd:language/gmd:LanguageCode/@codeListValue"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$defaultLang"/>
-        </xsl:otherwise>
-      </xsl:choose>
+		<xsl:choose>
+			<xsl:when test="ends-with($authorityLanguage,'NLD')">dut</xsl:when>
+			<xsl:when test="ends-with($authorityLanguage,'FRA')">fre</xsl:when>
+			<xsl:when test="ends-with($authorityLanguage,'ENG')">eng</xsl:when>
+			<xsl:when test="ends-with($authorityLanguage,'DEU')">ger</xsl:when>
+			<xsl:otherwise><xsl:value-of select="$defaultLang"/></xsl:otherwise>
+		</xsl:choose>
     </xsl:variable>
     <xsl:value-of select="normalize-space(string($tmp))"></xsl:value-of>
   </xsl:template>

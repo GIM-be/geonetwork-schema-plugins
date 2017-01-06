@@ -215,7 +215,7 @@
   <xsl:template mode="mode-dcat-ap" match="dct:spatial" priority="2000">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
-    
+    <xsl:message>TO DO: transform dct:spatial location wkt format to bbox, now fixed bbox for each record</xsl:message>
     <xsl:variable name="coverage" select="."/>
 <!--
     <xsl:variable name="n" select="substring-after($coverage,'North ')"/>

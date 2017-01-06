@@ -15,9 +15,9 @@
     <for name="dct:description" use="textarea"/>
     <for name="vcard:hasEmail" use="email"/>
     <for name="dct:issued" use="data-gn-date-picker"/>  
+    <for name="dct:language" use="data-gn-keyword-picker"/>    
     <for name="dcat:theme" use="data-gn-keyword-picker"/>
     <for name="dcat:keyword" use="data-gn-keyword-picker"/>
-    <for name="dct:language" use="data-gn-language-picker"/>    
   </fields>
   
   <!-- Complex fields. -->
@@ -60,6 +60,11 @@
 			       in="/dcat:Dataset/dcat:contactPoint/vcard:Organization/*"
 			       del="."/>		             
         	</section>
+        	<field name="dct:language"
+		       xpath="/dcat:Dataset/dct:language"
+		       or="language"
+		       in="/dcat:Dataset/*"
+		       del="."/>
         	<field name="dcat:theme"
 		       xpath="/dcat:Dataset/dcat:theme"
 		       or="theme"
@@ -138,13 +143,12 @@
       </tab>
      
       <flatModeExceptions>
-        <for name="dcat:distribution"/>
-        <for name="dcat:theme"/>
         <for name="dcat:keyword"/>
+        <for name="dcat:distribution"/>
       </flatModeExceptions>
 
       <thesaurusList>
-		  <thesaurus key="theme.data-theme-skos"
+		  <thesaurus key="theme.data-theme"
 		             maxtags="5"
 		             transformations=""/>
 		  <thesaurus key="temporal.frequencies-skos"

@@ -23,19 +23,66 @@
   -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                version="2.0"
+				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 				xmlns:dct="http://purl.org/dc/terms/"
+				xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                xmlns:xslutil="java:org.fao.geonet.util.XslUtil"
+                version="2.0"
                 exclude-result-prefixes="#all">
 
   <!-- Get the main metadata languages -->
   <xsl:template name="get-dcat-ap-language">
-    <xsl:value-of select="$metadata/descendant::node()/dct:language[1]"/>
+  	<xsl:variable name="authorityLanguage" select="$metadata/descendant::node()/dct:language[1]/skos:Concept/@rdf:about" />
+  	<xsl:choose>
+  		<xsl:when test="ends-with($authorityLanguage,'NLD')">dut</xsl:when>
+  		<xsl:when test="ends-with($authorityLanguage,'FRA')">fre</xsl:when>
+  		<xsl:when test="ends-with($authorityLanguage,'ENG')">eng</xsl:when>
+  		<xsl:when test="ends-with($authorityLanguage,'DEU')">ger</xsl:when>
+  		<xsl:otherwise>eng</xsl:otherwise>
+  	</xsl:choose>
   </xsl:template>
   
-  <!-- No multilingual support in Dublin core -->
-  <xsl:template name="get-dcat-ap-other-languages-as-json"/>
-  
-  <!-- Get the list of other languages -->
-  <xsl:template name="get-dcat-ap-other-languages"/>
+  <!-- Get the list of other languages in JSON -->
+  <xsl:template name="get-dcat-ap-other-languages-as-json">
+    <xsl:variable name="langs">
+      <xsl:choose>
+        <xsl:when test="count($metadata/descendant::node()/*[@xml:lang!=''])>1">
 
+          <xsl:for-each select="distinct-values($metadata/descendant::node()/*/@xml:lang)">
+            <xsl:variable name="langId" select="xslutil:threeCharLangCode(string(.))"/>
+            <lang>
+              <xsl:value-of select="concat('&quot;', $langId, '&quot;:&quot;#', upper-case($langId), '&quot;')"/>
+            </lang>
+          </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+			<xsl:variable name="mainLanguage">
+				<xsl:call-template name="get-dcat-ap-language"/>
+			</xsl:variable>
+			<lang>
+				<xsl:value-of select="concat('&quot;', $mainLanguage, '&quot;:&quot;#', upper-case($mainLanguage), '&quot;')"/>
+			</lang>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:text>{</xsl:text><xsl:value-of select="string-join($langs/lang, ',')"/><xsl:text>}</xsl:text>
+  </xsl:template>
+
+  <!-- Get the list of other languages -->
+  <xsl:template name="get-dcat-ap-other-languages">
+	<xsl:choose>
+	  <xsl:when test="count($metadata/descendant::node()/*[@xml:lang!=''])>1">
+          <xsl:for-each select="distinct-values($metadata/descendant::node()/*/@xml:lang)">
+		      <xsl:variable name="langId" select="xslutil:threeCharLangCode(string(.))"/>
+		      <lang id="{upper-case($langId)}" code="{$langId}"/>
+	      </xsl:for-each>
+	  </xsl:when>
+	  <xsl:otherwise>
+		<xsl:variable name="mainLanguage">
+			<xsl:call-template name="get-dcat-ap-language"/>
+		</xsl:variable>
+		<lang id="{upper-case($mainLanguage)}" code="{$mainLanguage}"/>
+	  </xsl:otherwise>
+	</xsl:choose>
+	</xsl:template>
 </xsl:stylesheet>

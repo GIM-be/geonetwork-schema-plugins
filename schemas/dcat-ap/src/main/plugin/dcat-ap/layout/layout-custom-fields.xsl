@@ -26,6 +26,7 @@
                 version="2.0"
                 exclude-result-prefixes="#all">
 
+  <xsl:include href="layout-custom-fields-theme.xsl"/>
   <xsl:include href="layout-custom-fields-keywords.xsl"/>
   <xsl:include href="layout-custom-fields-sds.xsl"/>
 

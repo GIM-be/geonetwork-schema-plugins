@@ -51,12 +51,6 @@
     <xsl:param name="base" as="node()"/>
     <xsl:param name="overrideLabel" as="xs:string" required="no" select="''"/>
     <xsl:param name="refToDelete" as="node()?" required="no"/>
-
-    <xsl:message select="concat('Base content is ',$base)"/>
-    <xsl:message select="concat('Local name of Base is ',local-name($base))"/>
-    <xsl:message select="concat('Name of Base is ',name($base))"/>
-    <xsl:message select="concat('OverrideLabel is ',$overrideLabel)"/>
-    <xsl:message select="concat('refToDelete is ',$refToDelete)"/>
     <xsl:apply-templates mode="mode-dcat-ap" select="$base">
       <xsl:with-param name="overrideLabel" select="$overrideLabel"/>
       <xsl:with-param name="refToDelete" select="$refToDelete"/>

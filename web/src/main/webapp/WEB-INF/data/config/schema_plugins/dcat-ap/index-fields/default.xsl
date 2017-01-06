@@ -14,6 +14,7 @@
 	- FAO - Viale delle Terme di Caracalla 2, ~ Rome - Italy. email: geonetwork@osgeo.org -->
 <xsl:stylesheet version="2.0" xmlns:foaf="http://xmlns.com/foaf/0.1/"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:locn="http://www.w3.org/ns/locn#"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:dcat="http://www.w3.org/ns/dcat#"
 	xmlns:util="java:org.fao.geonet.util.XslUtil"
@@ -45,9 +46,9 @@ xmlns:java="java:org.fao.geonet.util.XslUtil"
 		<xsl:apply-templates select="rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset" />
 	</xsl:template>
 	<xsl:template match="dcat:Dataset">
-		<xsl:variable name="langCode"
-			select="if (normalize-space(dct:language) != '')
-                          then string(dct:language) else 'eng'" />
+		<xsl:variable name="langCode">
+			<xsl:call-template name="langId-dcat-ap"/>
+		</xsl:variable>
 		<Document locale="{$langCode}">
 			<!-- locale information -->
 			<Field name="_locale" string="{$langCode}" store="true" index="true" />
@@ -104,6 +105,7 @@ xmlns:java="java:org.fao.geonet.util.XslUtil"
 					store="true" index="true" />
 			</xsl:for-each>
 			<xsl:for-each select="dct:spatial">
+		        <xsl:apply-templates select="dct:Location/locn:geometry[@rdf:datatype='http://www.opengis.net/ont/geosparql#wktLiteral']" mode="latLon"/>
 				<Field name="spatial" string="{string(.)}" store="false"
 					index="true" />
 			</xsl:for-each>

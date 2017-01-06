@@ -726,7 +726,12 @@ public class Thesaurus {
                 this.defaultNamespace = title.getParentElement().getAttributeValue("about", rdfNamespace);
             } else {
                 this.title = defaultTitle;
-                this.defaultNamespace = DEFAULT_THESAURUS_NAMESPACE;
+                Element conceptSchemaEl = Xml.selectElement(thesaurusEl, "skos:ConceptScheme", theNSs);
+                if (conceptSchemaEl != null) {
+                	this.defaultNamespace = conceptSchemaEl.getAttributeValue("about", rdfNamespace);
+                } else {
+                    this.defaultNamespace = DEFAULT_THESAURUS_NAMESPACE;
+                }
             }
 
             try {
