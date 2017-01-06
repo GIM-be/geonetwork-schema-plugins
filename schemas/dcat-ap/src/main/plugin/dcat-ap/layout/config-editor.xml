@@ -143,6 +143,8 @@
       </tab>
      
       <flatModeExceptions>
+        <for name="dct:language"/>
+        <for name="dcat:theme"/>
         <for name="dcat:keyword"/>
         <for name="dcat:distribution"/>
       </flatModeExceptions>

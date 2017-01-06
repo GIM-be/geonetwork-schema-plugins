@@ -23,6 +23,7 @@
   -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+				xmlns:dct="http://purl.org/dc/terms/" 
 				xmlns:dcat="http://www.w3.org/ns/dcat#"
 				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 				xmlns:skos="http://www.w3.org/2004/02/skos/core#"
@@ -79,8 +80,7 @@
     <xsl:param name="withAnchor"/>
     <xsl:param name="withXlink"/>
     <xsl:param name="withThesaurusAnchor"/>
-	<xsl:message>==========>Theme added in xml</xsl:message>
-    <dcat:theme>
+    <xsl:variable name="concept" as="element()?">
       <xsl:choose>
         <xsl:when test="$withXlink">
           <xsl:variable name="multiple"
@@ -109,7 +109,26 @@
           </xsl:call-template>
         </xsl:otherwise>
       </xsl:choose>
-    </dcat:theme>
+	</xsl:variable>
+	<xsl:variable name="thesaurusKey"
+	              select="if (thesaurus/key) then thesaurus/key else /root/request/thesaurus"/>
+    <xsl:choose>
+    	<xsl:when test="ends-with($thesaurusKey,'data-theme')">
+			<xsl:message>==========>dcat:theme added in xml</xsl:message>
+		    <dcat:theme>
+		    	<xsl:copy-of select="$concept"/>
+		    </dcat:theme>
+		</xsl:when>
+    	<xsl:when test="ends-with($thesaurusKey,'languages')">
+			<xsl:message>==========>dct:language added in xml</xsl:message>
+		    <dct:language>
+		    	<xsl:copy-of select="$concept"/>
+		    </dct:language>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:message>==========>No concept added in xml</xsl:message>
+		</xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template mode="to-dcat-ap-concept" match="*[/root/request/skipdescriptivekeywords]">
@@ -162,6 +181,9 @@
 	<xsl:choose>
 		<xsl:when test="$key = 'external.theme.data-theme'">
 			<xsl:value-of select="'http://publications.europa.eu/resource/authority/data-theme'"/>
+		</xsl:when>
+		<xsl:when test="$key = 'external.theme.languages'">
+			<xsl:value-of select="'http://publications.europa.eu/resource/authority/language'"/>
 		</xsl:when>
 		<xsl:otherwise>
 	  		<xsl:value-of select="$key"/>

@@ -116,8 +116,8 @@
 		              * 'tagsinput' and maxTags = 1 for only one tag
 		              * 'multiplelist' for multiple selection list
 		        -->
-<!--		        <xsl:variable name="widgetMode" select="'tagsinput'"/>-->
-		        <xsl:variable name="widgetMode" select="'multiplelist'"/>
+		        <xsl:variable name="widgetMode" select="'tagsinput'"/>
+<!--		        <xsl:variable name="widgetMode" select="'multiplelist'"/>-->
 		        <xsl:variable name="maxTags"
 		                      as="xs:string"><xsl:choose><xsl:when test="$thesaurusKey = 'external.theme.data-theme'">1</xsl:when><xsl:otherwise><xsl:value-of select="if ($thesaurusConfig/@maxtags) then $thesaurusConfig/@maxtags else ''"/></xsl:otherwise></xsl:choose></xsl:variable>
 		        <!--
@@ -165,7 +165,10 @@
 	<xsl:param name="resource"/>
 	<xsl:choose>
 		<xsl:when test="$resource = 'http://publications.europa.eu/resource/authority/data-theme'">
-			<xsl:value-of select="'Dataset types Named Authority List'"/>
+			<xsl:value-of select="'Theme thesaurus'"/>
+		</xsl:when>
+		<xsl:when test="$resource = 'http://publications.europa.eu/resource/authority/language'">
+			<xsl:value-of select="'Language thesaurus'"/>
 		</xsl:when>
 		<xsl:otherwise>
 	  		<xsl:value-of select="'Untitled thesaurus'"/>
