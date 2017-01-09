@@ -24,6 +24,7 @@
   -->
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:gco="http://www.isotc211.org/2005/gco"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:dct="http://purl.org/dc/terms/"
 	xmlns:dcat="http://www.w3.org/ns/dcat#">
@@ -62,5 +63,13 @@
       <xsl:apply-templates select="dcat:*"/>
     </dcat:Dataset>
   </xsl:template>
+
+  <xsl:template match="dct:issued[*:DateTime]">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+	  <xsl:value-of select="*:DateTime"/>
+    </xsl:copy>
+  </xsl:template>
+
 </xsl:stylesheet>
   

@@ -16,6 +16,7 @@
     <for name="vcard:hasEmail" use="email"/>
     <for name="dct:issued" use="data-gn-date-picker"/>  
     <for name="dct:language" use="data-gn-keyword-picker"/>    
+    <for name="dct:type" use="data-gn-keyword-picker"/>
     <for name="dcat:theme" use="data-gn-keyword-picker"/>
     <for name="dcat:keyword" use="data-gn-keyword-picker"/>
   </fields>
@@ -81,6 +82,11 @@
 			       or="name"
 			       in="/dcat:Dataset/dct:publisher/foaf:Agent/*"
 			       del="."/>
+	        	<field name="dct:type"
+			       xpath="/dcat:Dataset/dct:publisher/foaf:Agent/dct:type"
+			       or="type"
+			       in="/dcat:Dataset/dct:publisher/foaf:Agent/*"
+			       del="."/>
 		    </section>
         	<field name="dct:issued"
         	use="gn-date-picker"
@@ -144,6 +150,7 @@
      
       <flatModeExceptions>
         <for name="dct:language"/>
+        <for name="dct:type"/>
         <for name="dcat:theme"/>
         <for name="dcat:keyword"/>
         <for name="dcat:distribution"/>

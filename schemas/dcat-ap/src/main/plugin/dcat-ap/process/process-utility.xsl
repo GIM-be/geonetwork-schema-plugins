@@ -23,24 +23,26 @@
   -->
 
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:gn-fn-dcat-ap="http://geonetwork-opensource.org/xsl/functions/profiles/dcat-ap"
-	exclude-result-prefixes="#all">
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:gn-fn-dcat-ap="http://geonetwork-opensource.org/xsl/functions/profiles/dcat-ap"
+                exclude-result-prefixes="#all">
 
-  <xsl:function name="gn-fn-dcat-ap:getThesaurusTitle" as="xs:string">
-	<xsl:param name="resource"/>
+
+  <xsl:function name="gn-fn-dcat-ap:getThesaurusResource" as="xs:string">
+	<xsl:param name="key"/>
 	<xsl:choose>
-		<xsl:when test="$resource = 'http://publications.europa.eu/resource/authority/data-theme'">
-			<xsl:value-of select="'Theme thesaurus'"/>
+		<xsl:when test="$key = 'external.theme.data-theme'">
+			<xsl:value-of select="'http://publications.europa.eu/resource/authority/data-theme'"/>
 		</xsl:when>
-		<xsl:when test="$resource = 'http://publications.europa.eu/resource/authority/language'">
-			<xsl:value-of select="'Language thesaurus'"/>
+		<xsl:when test="$key = 'external.theme.languages'">
+			<xsl:value-of select="'http://publications.europa.eu/resource/authority/language'"/>
 		</xsl:when>
-		<xsl:when test="$resource = 'http://publications.europa.eu/resource/authority/organization-type'">
-			<xsl:value-of select="'Organization type thesaurus'"/>
+		<xsl:when test="$key = 'external.theme.organizationtypes'">
+			<xsl:value-of select="'http://publications.europa.eu/resource/authority/organization-type'"/>
 		</xsl:when>
 		<xsl:otherwise>
-	  		<xsl:value-of select="'Untitled thesaurus'"/>
+			<xsl:message select="concat('Thesaurus NIET gevonden met key = ',$key)"/>
+	  		<xsl:value-of select="$key"/>
 		</xsl:otherwise>
 	</xsl:choose>
   </xsl:function>

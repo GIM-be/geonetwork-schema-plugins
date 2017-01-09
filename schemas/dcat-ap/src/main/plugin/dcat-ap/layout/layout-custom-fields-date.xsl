@@ -24,6 +24,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 version="2.0"
+	  xmlns:gco="http://www.isotc211.org/2005/gco"
 	  xmlns:dc="http://purl.org/dc/elements/1.1/"
 	  xmlns:dct="http://purl.org/dc/terms/"
 	  xmlns:dcat="http://www.w3.org/ns/dcat#"
@@ -49,27 +50,18 @@
                   select="gn-fn-metadata:getLabel($schema, 'dct:issued', $labels, name(..), '', $xpath)"/>
     <xsl:variable name="dateTypeElementRef"
                   select="gn:element/@ref"/>
-	<message select="concat('$schema is ',$xpath)"/>
-	<message select="concat('labelConfig is ',$labelConfig)"/>
-	<message select="concat('dateTypeElementRef is ',$dateTypeElementRef)"/>
     <div class="form-group gn-field gn-title gn-required"
          id="gn-el-{$dateTypeElementRef}"
          data-gn-field-highlight="">
       <label class="col-sm-2 control-label">
         <xsl:value-of select="$labelConfig/label"/>
       </label>
-	<message select="concat('Label is ',$labelConfig/label)"/>
       <div class="col-sm-9 gn-value">
         <div data-gn-date-picker="{.}"
              data-label=""
              data-element-name="{name(.)}"
              data-element-ref="{concat('_X', gn:element/@ref)}">
         </div>
-	<message select="concat('Value is ',.)"/>
-	<message select="concat('Name is ',name(.))"/>
-	<message select="concat('data-element-ref is ',concat('_X', gn:element/@ref))"/>
-
-
         <!-- Create form for all existing attribute (not in gn namespace)
          and all non existing attributes not already present. -->
         <div class="well well-sm gn-attr {if ($isDisplayingAttributes) then '' else 'hidden'}">

@@ -23,8 +23,26 @@
   -->
 
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
-  xmlns:gn-fn-dcat-ap="http://geonetwork-opensource.org/xsl/functions/profiles/dcat-ap">
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:gn-fn-dcat-ap="http://geonetwork-opensource.org/xsl/functions/profiles/dcat-ap"
+	exclude-result-prefixes="#all">
+
+  <xsl:function name="gn-fn-dcat-ap:getThesaurusTitle" as="xs:string">
+	<xsl:param name="resource"/>
+	<xsl:choose>
+		<xsl:when test="$resource = 'http://publications.europa.eu/resource/authority/data-theme'">
+			<xsl:value-of select="'Theme thesaurus'"/>
+		</xsl:when>
+		<xsl:when test="$resource = 'http://publications.europa.eu/resource/authority/language'">
+			<xsl:value-of select="'Language thesaurus'"/>
+		</xsl:when>
+		<xsl:when test="$resource = 'http://publications.europa.eu/resource/authority/organization-type'">
+			<xsl:value-of select="'Organization type thesaurus'"/>
+		</xsl:when>
+		<xsl:otherwise>
+	  		<xsl:value-of select="'Untitled thesaurus'"/>
+		</xsl:otherwise>
+	</xsl:choose>
+  </xsl:function>
 
 </xsl:stylesheet>

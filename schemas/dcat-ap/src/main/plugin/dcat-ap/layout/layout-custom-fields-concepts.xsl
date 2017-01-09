@@ -8,17 +8,18 @@
                 xmlns:gn="http://www.fao.org/geonetwork"
                 xmlns:xslutil="java:org.fao.geonet.util.XslUtil"
                 xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
+				xmlns:gn-fn-dcat-ap="http://geonetwork-opensource.org/xsl/functions/profiles/dcat-ap"
                 version="2.0"
                 exclude-result-prefixes="#all">
 
 
-  <xsl:template mode="mode-dcat-ap" priority="2000" match="dcat:theme|dct:language">
+  <xsl:template mode="mode-dcat-ap" priority="2000" match="dcat:theme|dct:language|dct:type">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
 
     <xsl:variable name="xpath" select="gn-fn-metadata:getXPath(.)"/>
     <xsl:variable name="resource" select="normalize-space(skos:Concept/skos:inScheme/@rdf:resource)"/>
-    <xsl:variable name="thesaurusTitle"><xsl:call-template name="get-dcat-ap-thesaurus-title"><xsl:with-param name="resource" select="$resource"/></xsl:call-template></xsl:variable>
+    <xsl:variable name="thesaurusTitle" select="gn-fn-dcat-ap:getThesaurusTitle($resource)" />
     <xsl:variable name="attributes">
       <xsl:if test="$isEditing">
         <!-- Create form for all existing attribute (not in gn namespace)
@@ -59,7 +60,7 @@
 
     <xsl:variable name="resource" select="normalize-space(skos:inScheme/@rdf:resource)"/>
 
-    <xsl:variable name="thesaurusTitle"><xsl:call-template name="get-dcat-ap-thesaurus-title"><xsl:with-param name="resource" select="$resource"/></xsl:call-template></xsl:variable>
+    <xsl:variable name="thesaurusTitle" select="gn-fn-dcat-ap:getThesaurusTitle($resource)" />
 
     <xsl:choose>
       <xsl:when test="$resource!=''">
@@ -86,16 +87,12 @@
                         then $lang
                         else $metadataLanguage"/>
                  		        <!-- if gui lang eng > #EN -->
-		        <xsl:message select="concat('===>lang (gui) = ',$lang)"/>
-		        <xsl:message select="concat('===>guiLangId = ',$guiLangId)"/>
 		        <xsl:variable name="prefLabelLangId" select="lower-case(xslutil:twoCharLangCode($guiLangId))"/>
-		        <xsl:message select="concat('===>prefLabelLangId = ',$prefLabelLangId)"/>
 		        <!--
 		        get keyword in gui lang
 		        in default language
 		        -->
 		        <xsl:variable name="keywords" select="string-join(replace(skos:prefLabel[@xml:lang=$prefLabelLangId], ',', ',,'), ',')"/>
-		        <xsl:message select="concat('===>keywords = |',$keywords,'|')"/>
 		
 		        <!-- Define the list of transformation mode available. -->
 		        <xsl:variable name="transformations"
@@ -159,21 +156,6 @@
       </xsl:otherwise>
     </xsl:choose>
 
-  </xsl:template>
-
-  <xsl:template name="get-dcat-ap-thesaurus-title">
-	<xsl:param name="resource"/>
-	<xsl:choose>
-		<xsl:when test="$resource = 'http://publications.europa.eu/resource/authority/data-theme'">
-			<xsl:value-of select="'Theme thesaurus'"/>
-		</xsl:when>
-		<xsl:when test="$resource = 'http://publications.europa.eu/resource/authority/language'">
-			<xsl:value-of select="'Language thesaurus'"/>
-		</xsl:when>
-		<xsl:otherwise>
-	  		<xsl:value-of select="'Untitled thesaurus'"/>
-		</xsl:otherwise>
-	</xsl:choose>
   </xsl:template>
 
 </xsl:stylesheet>

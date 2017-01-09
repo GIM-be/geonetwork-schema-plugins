@@ -22,7 +22,7 @@
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 				xmlns:dct="http://purl.org/dc/terms/" 
 				xmlns:dcat="http://www.w3.org/ns/dcat#"
 				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -30,7 +30,7 @@
                 xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:util="java:org.fao.geonet.util.XslUtil"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                version="2.0"
+				xmlns:gn-fn-dcat-ap="http://geonetwork-opensource.org/xsl/functions/profiles/dcat-ap"
                 exclude-result-prefixes="#all">
 
 
@@ -80,7 +80,7 @@
     <xsl:param name="withAnchor"/>
     <xsl:param name="withXlink"/>
     <xsl:param name="withThesaurusAnchor"/>
-    <xsl:variable name="concept" as="element()?">
+    <xsl:variable name="concept">
       <xsl:choose>
         <xsl:when test="$withXlink">
           <xsl:variable name="multiple"
@@ -114,19 +114,22 @@
 	              select="if (thesaurus/key) then thesaurus/key else /root/request/thesaurus"/>
     <xsl:choose>
     	<xsl:when test="ends-with($thesaurusKey,'data-theme')">
-			<xsl:message>==========>dcat:theme added in xml</xsl:message>
 		    <dcat:theme>
 		    	<xsl:copy-of select="$concept"/>
 		    </dcat:theme>
 		</xsl:when>
     	<xsl:when test="ends-with($thesaurusKey,'languages')">
-			<xsl:message>==========>dct:language added in xml</xsl:message>
 		    <dct:language>
 		    	<xsl:copy-of select="$concept"/>
 		    </dct:language>
 		</xsl:when>
+    	<xsl:when test="ends-with($thesaurusKey,'organizationtypes')">
+		    <dct:type>
+		    	<xsl:copy-of select="$concept"/>
+		    </dct:type>
+		</xsl:when>
 		<xsl:otherwise>
-			<xsl:message>==========>No concept added in xml</xsl:message>
+			<xsl:message select="concat('No concept added for a field value of thesaurus ', $thesaurusKey, '. Verify thesaurus-transformation.xsl.')"/>
 		</xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -154,40 +157,21 @@
 	<!-- Get thesaurus ID from keyword or from request parameter if no keyword found. -->
 	<xsl:variable name="currentThesaurus"
 	              select="if (thesaurus/key) then thesaurus/key else /root/request/thesaurus"/>
-    <xsl:variable name="resource"><xsl:call-template name="get-dcat-ap-thesaurus-resource"><xsl:with-param name="key" select="$currentThesaurus"/></xsl:call-template></xsl:variable>
+    <xsl:variable name="resource" select="gn-fn-dcat-ap:getThesaurusResource($currentThesaurus)"/>
 	<!-- Loop on all keyword from the same thesaurus -->
 	<xsl:for-each select="//keyword[thesaurus/key = $currentThesaurus]">
 		<skos:Concept>
 			<xsl:attribute name="rdf:about"><xsl:value-of select="uri" /></xsl:attribute>
 			<xsl:variable name="keyword" select="." />
-			<xsl:message select="$keyword/values"/>
 			<xsl:for-each select="$listOfLanguage">
 				<xsl:variable name="lang" select="." />
-				<xsl:message select="concat('$lang = ',$lang)"/>
 				<skos:prefLabel>
 					<xsl:attribute name="xml:lang" select="lower-case(util:twoCharLangCode($lang))" />
 					<xsl:value-of select="$keyword/values/value[@language = $lang]/text()" />
 				</skos:prefLabel>
-				<xsl:message select="concat('$keyword value via attribute = ',$keyword/values/value[@language = $lang])"/>
-				<xsl:message select="concat('$keyword value via attribute text() = ',$keyword/values/value[@language = $lang]/text())"/>
 			</xsl:for-each>
 			<skos:inScheme rdf:resource="{$resource}" />
 		</skos:Concept>
 	</xsl:for-each>
-  </xsl:template>
-
-  <xsl:template name="get-dcat-ap-thesaurus-resource">
-	<xsl:param name="key"/>
-	<xsl:choose>
-		<xsl:when test="$key = 'external.theme.data-theme'">
-			<xsl:value-of select="'http://publications.europa.eu/resource/authority/data-theme'"/>
-		</xsl:when>
-		<xsl:when test="$key = 'external.theme.languages'">
-			<xsl:value-of select="'http://publications.europa.eu/resource/authority/language'"/>
-		</xsl:when>
-		<xsl:otherwise>
-	  		<xsl:value-of select="$key"/>
-		</xsl:otherwise>
-	</xsl:choose>
   </xsl:template>
 </xsl:stylesheet>

@@ -239,7 +239,6 @@
     dct:dateAccepted|dct:dateCopyrighted|dct:issued|dct:available|dct:valid">
     <xsl:param name="schema"/>
     <xsl:param name="edit"/>
-    
     <xsl:apply-templates mode="simpleElement" select=".">
       <xsl:with-param name="schema"  select="$schema"/>
       <xsl:with-param name="edit"   select="$edit"/>
