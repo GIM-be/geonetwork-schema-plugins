@@ -58,7 +58,8 @@ public class LanguageUtils {
     public Locale parseAcceptLanguage(final Enumeration<Locale> listOfLocales) {
         while (listOfLocales.hasMoreElements()) {
             Locale l = listOfLocales.nextElement();
-            if (iso3code.contains(locale2gnCode(l.getISO3Language()))) {
+        	//listOfLocales can contain on element with a null value, for example in rest api plugin of firefox.
+            if (l.getLanguage()!=null && iso3code.contains(locale2gnCode(l.getISO3Language()))) {
                 return l;
             }
         }
@@ -72,9 +73,10 @@ public class LanguageUtils {
     private String locale2gnCode (String code) {
         if (code.equals("fra")) {
             return "fre";
-        } else {
-            return code;
-        }
+        } else if (code.equals("nld")) {
+            return "dut";
+	    }
+        return code;
 	}
 
     public Locale parseAcceptLanguage(final Locale locale) {
