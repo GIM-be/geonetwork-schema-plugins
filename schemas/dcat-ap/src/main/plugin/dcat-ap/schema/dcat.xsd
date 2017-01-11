@@ -134,7 +134,7 @@
 						<xs:element name="downloadURL" type="xs:anyURI" minOccurs="0"/>
 						<xs:element ref="dct:language" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="dct:conformsTo" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:element name="mediaType" type="xs:anyURI" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="mediaType" type="skos:Concept" minOccurs="0" maxOccurs="1"/>
 						<xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
 						<xs:element ref="dct:rights" minOccurs="0" maxOccurs="1"/>
 						<xs:element ref="adms:status" minOccurs="0" maxOccurs="1"/>

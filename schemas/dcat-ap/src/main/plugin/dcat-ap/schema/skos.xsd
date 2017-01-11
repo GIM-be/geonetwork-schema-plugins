@@ -31,7 +31,7 @@
 					<xs:sequence>
 						<!-- mandatory properties for skos:Concept-->
 						<xs:element ref="skos:prefLabel" minOccurs="1" maxOccurs="unbounded"/>
-						<xs:element name="inScheme" minOccurs="1" maxOccurs="1">
+						<xs:element name="inScheme" minOccurs="0" maxOccurs="1">
 							<xs:complexType>
 								<xs:attribute ref="rdf:resource"/>
 							</xs:complexType>
