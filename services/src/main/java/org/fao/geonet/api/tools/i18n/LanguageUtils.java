@@ -58,8 +58,8 @@ public class LanguageUtils {
     public Locale parseAcceptLanguage(final Enumeration<Locale> listOfLocales) {
         while (listOfLocales.hasMoreElements()) {
             Locale l = listOfLocales.nextElement();
-        	//listOfLocales can contain on element with a null value, for example in rest api plugin of firefox.
-            if (l.getLanguage()!=null && iso3code.contains(locale2gnCode(l.getISO3Language()))) {
+        	//listOfLocales can contain on element with a null value, for example in case of using the geonetwork api in the rest api plugin of firefox.
+            if (l.getLanguage()!=null && !"null".equals(l.getLanguage()) && iso3code.contains(locale2gnCode(l.getISO3Language()))) {
                 return l;
             }
         }
