@@ -48,12 +48,10 @@ import static org.fao.geonet.api.ApiParams.API_CLASS_RECORD_OPS;
 import static org.fao.geonet.api.ApiParams.API_CLASS_RECORD_TAG;
 
 @RequestMapping(value = {
-	    "/api/records",
-	    "/api/" + API.VERSION_0_1 +
-	        "/records"
-	},
-	headers="Accept=*/*"
-)
+    "/api/records",
+    "/api/" + API.VERSION_0_1 +
+        "/records"
+})
 @Api(value = API_CLASS_RECORD_TAG,
     tags = API_CLASS_RECORD_TAG,
     description = API_CLASS_RECORD_OPS)
@@ -70,6 +68,7 @@ public class CatalogApi {
         nickname = "getAsRdf")
     @RequestMapping(
         method = RequestMethod.GET,
+        headers="Accept=*/*",
         consumes = {
             MediaType.ALL_VALUE
         },
