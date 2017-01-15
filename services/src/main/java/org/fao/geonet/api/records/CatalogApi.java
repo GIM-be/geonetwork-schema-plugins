@@ -48,10 +48,12 @@ import static org.fao.geonet.api.ApiParams.API_CLASS_RECORD_OPS;
 import static org.fao.geonet.api.ApiParams.API_CLASS_RECORD_TAG;
 
 @RequestMapping(value = {
-    "/api/records",
-    "/api/" + API.VERSION_0_1 +
-        "/records"
-})
+	    "/api/records",
+	    "/api/" + API.VERSION_0_1 +
+	        "/records"
+	},
+	headers="Accept=*/*"
+)
 @Api(value = API_CLASS_RECORD_TAG,
     tags = API_CLASS_RECORD_TAG,
     description = API_CLASS_RECORD_OPS)

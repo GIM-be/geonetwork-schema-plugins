@@ -48,7 +48,9 @@ import java.util.*;
 
 @RequestMapping(value = {
     "/search"
-})
+},
+	headers="Accept=*/*"
+)
 @Api(value = "search",
     tags = "search",
     description = "Search operations")
