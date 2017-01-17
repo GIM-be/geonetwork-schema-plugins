@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:saxon="http://saxon.sf.net/" xmlns:adms="http://www.w3.org/ns/adms#" xmlns:dct="http://purl.org/dc/terms/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:locn="http://www.w3.org/ns/locn#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:schema="http://schema.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:spdx="http://spdx.org/rdf/terms#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:void="http://www.w3.org/TR/void/" xmlns:ogc="http://www.opengis.net/rdf#" extension-element-prefixes="saxon" exclude-result-prefixes="#all">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:saxon="http://saxon.sf.net/" 
+		xmlns:spdx="http://spdx.org/rdf/terms#"
+		xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+		xmlns:adms="http://www.w3.org/ns/adms#" 
+		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:dct="http://purl.org/dc/terms/"
+        xmlns:dcat="http://www.w3.org/ns/dcat#"
+		xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+		xmlns:foaf="http://xmlns.com/foaf/0.1/" 
+		xmlns:locn="http://www.w3.org/ns/locn#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:schema="http://schema.org/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:void="http://www.w3.org/TR/void/" xmlns:ogc="http://www.opengis.net/rdf#" extension-element-prefixes="saxon" exclude-result-prefixes="#all">
 	<!-- 
     Create reference block to metadata record and dataset to be added in dcat:Catalog usually.
   -->

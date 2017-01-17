@@ -25,7 +25,7 @@
 	<xs:element name="dateAccepted" type="rdf:DateTimeLiteral"/>
 	<xs:element name="dateCopyrighted" type="rdf:DateTimeLiteral"/>
 	<xs:element name="dateSubmitted" type="rdf:DateTimeLiteral"/>
-	<xs:element name="format" type="xs:anyURI"/>
+	<xs:element name="format" type="skos:Concept"/>
 	<xs:element name="extent" type="xs:anyURI"/>
 	<xs:element name="medium" type="xs:anyURI"/>
 	<xs:element name="isVersionOf" type="xs:anyURI"/>
@@ -56,7 +56,7 @@
 	<xs:element name="mediator" substitutionGroup="dct:audience"/>
 	<xs:element name="educationLevel" substitutionGroup="dct:audience"/>
 	<xs:element name="accessRights" type="xs:anyURI"/>
-	<xs:element name="license" type="xs:anyURI"/>
+	<xs:element name="license" type="skos:Concept"/>
 	<xs:element name="bibliographicCitation" type="xs:anyURI"/>
 	<xs:element name="publisher" type="foaf:Agent"/>
 	<xs:element name="type" type="skos:Concept"/>

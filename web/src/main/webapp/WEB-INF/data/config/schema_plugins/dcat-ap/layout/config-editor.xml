@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+		xmlns:spdx="http://spdx.org/rdf/terms#"
+		xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+		xmlns:adms="http://www.w3.org/ns/adms#" 
+		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
         xmlns:dc="http://purl.org/dc/elements/1.1/"
         xmlns:dct="http://purl.org/dc/terms/"
         xmlns:dcat="http://www.w3.org/ns/dcat#"
@@ -15,16 +18,22 @@
     <for name="dct:description" use="textarea"/>
     <for name="vcard:hasEmail" use="email"/>
     <for name="dct:issued" use="data-gn-date-picker"/>  
+    <for name="dct:modified" use="data-gn-date-picker"/>  
     <for name="dct:language" use="data-gn-keyword-picker"/>    
     <for name="dct:type" use="data-gn-keyword-picker"/>
     <for name="dcat:theme" use="data-gn-keyword-picker"/>
-    <for name="dcat:keyword" use="data-gn-keyword-picker"/>
+    <for name="dcat:keyword" use="data-gn-keyword-picker">
+      <directiveAttributes data-include="external.authority.data-theme"/>
+<!--		<directiveAttributes data-include="-external.authority.data-theme,-external.authority.file-type,-external.authority.language,-external.authority.organzation-type,-external.authority.licence"/>
+  		<directiveAttributes data-include="xpath::string-join(//skos:inScheme[starts-with(@rdf:resource,'http://publications.europa.eu/resource/authority')]/concat('-external.authority.', substring-after(@rdf:resource[. != ''], 'http://publications.europa.eu/resource/authority/')), ',')"/>
+		<directiveAttributes data-include="xpath::string-join(//skos:inScheme[contains(@rdf:resource,'authority')]/concat('-external.authority.', substring-after(@rdf:resource[. != ''], 'authority/')), ',')"/>-->
+    </for>
+    <for name="dct:format" use="data-gn-keyword-picker"/>
   </fields>
   
   <!-- Complex fields. -->
   <fieldsWithFieldset>
   	<name>dcat:Dataset</name>
-  	<name>dcat:distribution</name>
   </fieldsWithFieldset>
 
 
@@ -100,69 +109,223 @@
 		       in="/dcat:Dataset/*"
 		       del="."/>     	       		       			       
 		</section>      
+		<section name="dcat:distribution">
+          <field name="sds-accesspoint"
+                 templateModeOnly="true"
+                 xpath="/dcat:Dataset/dcat:distribution/dcat:Distribution"
+
+                 del=".">
+            <template>
+              <values>
+                <key label="accessURL" xpath="dcat:accessURL"/>
+                <key label="description" xpath="dct:description"/>
+                <key label="format" xpath="dct:format" use="gn-keyword-picker"/>
+                <key label="mediaType" xpath="dcat:mediaType">
+					<helper name="dcat:mediaType"/>
+                </key>
 <!--
-		<section name="distribution">
-			<field xpath="/dcat:distribution" />
-	        	<action type="add"
-	        		forceLabel="true" 
-	        		name="sds-addOperation" 
-	        		or="distribution" 
-	        		in="/dcat:Dataset/*"
-					if="count(/dcat:Dataset/dcat:distribution/dcat:Distribution) > 0">
-				<template>
-					<snippet>
-						<dcat:distribution>
-							<dcat:Distribution>
-								<dcat:accessURL></dcat:accessURL>
-								<dct:description xml:lang="nl"></dct:description>
-								<dct:format></dct:format>
-								<dct:title xml:lang="nl"></dct:title>
-							</dcat:Distribution>
-						</dcat:distribution>
-					</snippet>
-				</template>
-			</action>
-		</section>
-      	<section name="dcat:Distribution">
-	        <field name="dcat:Distribution" templateModeOnly="true" notDisplayedIfMissing="true"
-	               xpath="/dcat:Distribution"
-	               del="..">
-	          <template>
-	            <values>
-	              <key label="dcat:accessURL" xpath="dcat:accessURL"/>
-	              <key label="dct:description" xpath="dct:description"/>
-	              <key label="dct:format" xpath="dct:format"/>
-	              <key label="dct:title" xpath="dct:title"/>
-	            </values>
-	            <snippet>
-	              <dcat:Distribution>
-						<dcat:accessURL>{{dcat:accessURL}}</dcat:accessURL>
-						<dct:description xml:lang="nl">{{dct:description}}</dct:description>
-						<dct:format>{{dct:format}}</dct:format>
-						<dct:title xml:lang="nl">{{dct:title}}</dct:title>
-	              </dcat:Distribution>
-	            </snippet>
-	          </template>
-	        </field>
-        </section> 
+                <key label="license" xpath="dct:license" use="gn-keyword-picker"/>
+                <key label="byteSize" xpath="dcat:byteSize"/>
+                <key label="page" xpath="foaf:page"/>
+                <key label="downloadURL" xpath="dcat:downloadURL"/>
+                <key label="language" xpath="dct:language" use="data-gn-keyword-picker"/>
+                <key label="conformsTo" xpath="dct:conformsTo"/>
+                <key label="issued" xpath="dct:issued"  use="gn-date-picker"/>
+                <key label="issuedDatatype" xpath="dct:issued/@rdf:datatype"/>
+                <key label="rights" xpath="dct:rights"/>
+                <key label="status" xpath="adms:status"/>
+                <key label="dct:title" xpath="dct:title"/>
 -->
+                <key label="modified" xpath="dct:modified" use="gn-date-picker"/>
+                <key label="modifiedDatatype" xpath="dct:modified/@rdf:datatype"/>
+              </values>
+              <snippet>
+                <dcat:Distribution>
+					<dcat:accessURL>{{accessURL}}</dcat:accessURL>
+					<dct:description xml:lang="nl">{{description}}</dct:description>
+					<dct:format>{{format}}</dct:format>
+					<dcat:mediaType>{{mediaType}}</dcat:mediaType>
+<!--
+					<dct:license>{{license}}</dct:license>
+					<dcat:byteSize>{{byteSize}}</dcat:byteSize>
+					<foaf:page>{{page}}</foaf:page>
+					<dcat:downloadURL>{{downloadURL}}</dcat:downloadURL>
+					<dct:language>{{language}}</dct:language>
+					<dct:conformsTo>{{conformsTo}}</dct:conformsTo>
+					<dct:issued rdf:datatype="{{issuedDatatype}}">{{issued}}</dct:issued>
+					<dct:rights>{{rights}}</dct:rights>
+					<adms:status>{{status}}</adms:status>
+					<dct:title xml:lang="nl">{{dct:title}}</dct:title>
+-->					
+					<dct:modified rdf:datatype="{{modifiedDatatype}}">{{modified}}</dct:modified>
+                </dcat:Distribution>
+              </snippet>
+            </template>
+          </field>
+          <action type="add"
+                  name="sds-add-accesspoint"
+                  forceLabel="true"
+                  or="dcat:Distribution"
+                  in="/dcat:Dataset/dcat:distribution">
+            <template>
+              <snippet>
+				<dcat:Distribution rdf:about="http://www.altova.com/">
+					<dcat:accessURL>http://www.altova.com/</dcat:accessURL>
+					<dct:description xml:lang="nl">String</dct:description>
+					<dct:format>
+						<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/CSV">
+							<skos:prefLabel xml:lang="nl">CSV</skos:prefLabel>
+							<skos:prefLabel xml:lang="fr">CSV</skos:prefLabel>
+							<skos:prefLabel xml:lang="en">CSV</skos:prefLabel>
+							<skos:prefLabel xml:lang="de">CSV</skos:prefLabel>
+							<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type"/>
+						</skos:Concept>
+					</dct:format>
+					<dct:license>
+						<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/licence/CC0">
+							<skos:prefLabel xml:lang="nl">Creative Commons CC0 1.0 Universeel</skos:prefLabel>
+							<skos:prefLabel xml:lang="en">Creative Commons CC0 1.0 Universal</skos:prefLabel>
+							<skos:prefLabel xml:lang="fr">Creative Commons CC0 1.0 Universel</skos:prefLabel>
+							<skos:prefLabel xml:lang="de">Creative Commons CC0 1.0 Universell</skos:prefLabel>		
+							<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/licence"/>
+						</skos:Concept>
+					</dct:license>
+					<dcat:byteSize>0</dcat:byteSize>
+<!--
+					<spdx:checksum>
+						<spdx:CheckSum rdf:about="http://www.altova.com/">
+							<spdx:algorithm>http://www.altova.com/</spdx:algorithm>
+							<spdx:checksumValue>41394644363445313243</spdx:checksumValue>
+						</spdx:CheckSum>
+					</spdx:checksum>
+-->
+					<foaf:page>
+						<foaf:Document rdf:about="http://www.altova.com/">
+							<foaf:name xml:lang="nl">String</foaf:name>
+						</foaf:Document>
+					</foaf:page>
+					<dcat:downloadURL>http://www.altova.com/</dcat:downloadURL>
+					<dct:language>
+						<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/language/NLD">
+							<skos:prefLabel xml:lang="nl">Nederlands</skos:prefLabel>
+							<skos:prefLabel xml:lang="fr">néerlandais</skos:prefLabel>
+							<skos:prefLabel xml:lang="en">Dutch</skos:prefLabel>
+							<skos:prefLabel xml:lang="de">Niederländisch</skos:prefLabel>
+							<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/language"/>
+						</skos:Concept>
+					</dct:language>
+					<dct:conformsTo>http://www.altova.com/</dct:conformsTo>
+					<dcat:mediaType>	
+						<skos:Concept>
+							<skos:prefLabel xml:lang="nl">text/csv</skos:prefLabel>
+							<skos:prefLabel xml:lang="fr">text/csv</skos:prefLabel>
+							<skos:prefLabel xml:lang="en">text/csv</skos:prefLabel>
+							<skos:prefLabel xml:lang="de">text/csv</skos:prefLabel>
+						</skos:Concept>						
+					</dcat:mediaType>
+					<dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2001-12-17T09:30:47Z</dct:issued>
+					<dct:rights>http://www.altova.com/</dct:rights>
+					<adms:status>http://www.altova.com/</adms:status>
+					<dct:title xml:lang="nl">String</dct:title>
+					<dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2001-12-17T09:30:47Z</dct:modified>
+				</dcat:Distribution>
+              </snippet>
+            </template>
+          </action>
+        </section>
+
+          <!-- 4.4.2 Resource locator -->
+          <!-- 4.4.2 Function -->
+          <!-- *** endPoint *** -->
+<!--
+          <field name="sds-endpoint"
+                 templateModeOnly="true"
+                 xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution//gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine[gmd:CI_OnlineResource/gmd:description/gmx:Anchor/text() = 'endPoint']"
+                 notDisplayedIfMissing="true"
+                 del=".">
+            <template>
+              <values>
+                <key label="linkage" xpath="gmd:CI_OnlineResource/gmd:linkage/gmd:URL"/>
+              </values>
+              <snippet>
+                <gmd:onLine>
+                  <gmd:CI_OnlineResource>
+                    <gmd:linkage>
+                      <gmd:URL>{{linkage}}</gmd:URL>
+                    </gmd:linkage>
+                    <gmd:description>
+                      <gmx:Anchor
+                        xlink:href="http://inspire.ec.europa.eu/registry/metadata-codelist/ResourceLocatorDescription/endPoint">
+                        endPoint
+                      </gmx:Anchor>
+                    </gmd:description>
+                    <gmd:function>
+                      <gmd:CI_OnLineFunctionCode
+                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                        codeListValue="information">
+                      </gmd:CI_OnLineFunctionCode>
+                    </gmd:function>
+                  </gmd:CI_OnlineResource>
+                </gmd:onLine>
+              </snippet>
+            </template>
+          </field>
+
+          <action type="add"
+                  name="sds-add-endpoint"
+                  forceLabel="true"
+                  or="onLine"
+                  in="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution//gmd:transferOptions/gmd:MD_DigitalTransferOptions">
+            <template>
+              <snippet>
+                <gmd:onLine>
+                  <gmd:CI_OnlineResource>
+                    <gmd:linkage>
+                      <gmd:URL>http://endpoint.url</gmd:URL>
+                    </gmd:linkage>
+                    <gmd:description>
+                      <gmx:Anchor
+                        xlink:href="http://inspire.ec.europa.eu/registry/metadata-codelist/ResourceLocatorDescription/endPoint">
+                        endPoint
+                      </gmx:Anchor>
+                    </gmd:description>
+                    <gmd:function>
+                      <gmd:CI_OnLineFunctionCode
+                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                        codeListValue="information"></gmd:CI_OnLineFunctionCode>
+                    </gmd:function>
+                  </gmd:CI_OnlineResource>
+                </gmd:onLine>
+              </snippet>
+            </template>
+          </action>
+     -->
       </tab>
-     
       <flatModeExceptions>
         <for name="dct:language"/>
         <for name="dct:type"/>
+        <for name="dct:format"/>
+        <for name="dcat:license"/>
         <for name="dcat:theme"/>
         <for name="dcat:keyword"/>
-        <for name="dcat:distribution"/>
       </flatModeExceptions>
 
       <thesaurusList>
-		  <thesaurus key="theme.data-theme"
-		             maxtags="5"
+		  <thesaurus key="authority.data-theme"
+		             maxtags="1"
 		             transformations=""/>
-		  <thesaurus key="temporal.frequencies-skos"
-		             maxtags="5"
-		             transformations=""/>		             
+		  <thesaurus key="authority.organization-type"
+		             maxtags="1"
+		             transformations=""/>
+		  <thesaurus key="authority.file-type"
+		             maxtags="1"
+		             transformations=""/>
+		  <thesaurus key="authority.language"
+		             maxtags="4"
+		             transformations=""/>
+		  <thesaurus key="authority.license"
+		             maxtags="1"
+		             transformations=""/>
 	  </thesaurusList>
       
     </view>

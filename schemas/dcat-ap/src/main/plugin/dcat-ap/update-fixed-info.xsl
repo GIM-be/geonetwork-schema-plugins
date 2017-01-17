@@ -64,7 +64,7 @@
     </dcat:Dataset>
   </xsl:template>
 
-  <xsl:template match="dct:issued[*:DateTime]">
+  <xsl:template match="dct:issued[*:DateTime]|dct:modified[*:DateTime]">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
 	  <xsl:value-of select="*:DateTime"/>

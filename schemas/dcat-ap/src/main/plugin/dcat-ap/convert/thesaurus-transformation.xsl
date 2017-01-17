@@ -118,15 +118,25 @@
 		    	<xsl:copy-of select="$concept"/>
 		    </dcat:theme>
 		</xsl:when>
-    	<xsl:when test="ends-with($thesaurusKey,'languages')">
+    	<xsl:when test="ends-with($thesaurusKey,'language')">
 		    <dct:language>
 		    	<xsl:copy-of select="$concept"/>
 		    </dct:language>
 		</xsl:when>
-    	<xsl:when test="ends-with($thesaurusKey,'organizationtypes')">
+    	<xsl:when test="ends-with($thesaurusKey,'organization-type')">
 		    <dct:type>
 		    	<xsl:copy-of select="$concept"/>
 		    </dct:type>
+		</xsl:when>
+    	<xsl:when test="ends-with($thesaurusKey,'file-type')">
+		    <dct:format>
+		    	<xsl:copy-of select="$concept"/>
+		    </dct:format>
+		</xsl:when>
+    	<xsl:when test="ends-with($thesaurusKey,'licence')">
+		    <dct:license>
+		    	<xsl:copy-of select="$concept"/>
+		    </dct:license>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:message select="concat('No concept added for a field value of thesaurus ', $thesaurusKey, '. Verify thesaurus-transformation.xsl.')"/>

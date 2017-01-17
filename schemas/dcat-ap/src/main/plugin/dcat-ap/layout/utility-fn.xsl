@@ -29,15 +29,22 @@
 
   <xsl:function name="gn-fn-dcat-ap:getThesaurusTitle" as="xs:string">
 	<xsl:param name="resource"/>
+	<xsl:variable name="resourceBaseUrl" select="'http://publications.europa.eu/resource/authority/'"/>
 	<xsl:choose>
-		<xsl:when test="$resource = 'http://publications.europa.eu/resource/authority/data-theme'">
+		<xsl:when test="$resource = concat($resourceBaseUrl,'data-theme')">
 			<xsl:value-of select="'Theme thesaurus'"/>
 		</xsl:when>
-		<xsl:when test="$resource = 'http://publications.europa.eu/resource/authority/language'">
+		<xsl:when test="$resource = concat($resourceBaseUrl,'language')">
 			<xsl:value-of select="'Language thesaurus'"/>
 		</xsl:when>
-		<xsl:when test="$resource = 'http://publications.europa.eu/resource/authority/organization-type'">
+		<xsl:when test="$resource = concat($resourceBaseUrl,'organization-type')">
 			<xsl:value-of select="'Organization type thesaurus'"/>
+		</xsl:when>
+		<xsl:when test="$resource = concat($resourceBaseUrl,'file-type')">
+			<xsl:value-of select="'File type thesaurus'"/>
+		</xsl:when>
+		<xsl:when test="$resource = concat($resourceBaseUrl,'licence')">
+			<xsl:value-of select="'Licence thesaurus'"/>
 		</xsl:when>
 		<xsl:otherwise>
 	  		<xsl:value-of select="'Untitled thesaurus'"/>

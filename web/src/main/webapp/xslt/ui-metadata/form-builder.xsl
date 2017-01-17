@@ -696,6 +696,7 @@
     <xsl:param name="btnClass" required="no" as="xs:string?" select="''"/>
 
     <xsl:if test="not($isDisabled) and $parentEditInfo/@ref != ''">
+<!--      <xsl:message select="concat('Executing render-elemenet-to-add for element ',name(), ' with parent ', name(..))"/>-->
       <xsl:variable name="id" select="generate-id()"/>
       <xsl:variable name="qualifiedName"
                     select="concat($childEditInfo/@prefix, ':', $childEditInfo/@name)"/>

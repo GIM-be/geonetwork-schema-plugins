@@ -30,15 +30,23 @@
 
   <xsl:function name="gn-fn-dcat-ap:getThesaurusResource" as="xs:string">
 	<xsl:param name="key"/>
+	<xsl:variable name="resourceBaseUrl" select="'http://publications.europa.eu/resource/authority/'"/>
+	<xsl:variable name="keyPrefix" select="'external.authority.'"/>
 	<xsl:choose>
-		<xsl:when test="$key = 'external.theme.data-theme'">
-			<xsl:value-of select="'http://publications.europa.eu/resource/authority/data-theme'"/>
+		<xsl:when test="$key = concat($keyPrefix,'data-theme')">
+			<xsl:value-of select="concat($resourceBaseUrl,'data-theme')"/>
 		</xsl:when>
-		<xsl:when test="$key = 'external.theme.languages'">
-			<xsl:value-of select="'http://publications.europa.eu/resource/authority/language'"/>
+		<xsl:when test="$key = concat($keyPrefix,'language')">
+			<xsl:value-of select="concat($resourceBaseUrl,'language')"/>
 		</xsl:when>
-		<xsl:when test="$key = 'external.theme.organizationtypes'">
-			<xsl:value-of select="'http://publications.europa.eu/resource/authority/organization-type'"/>
+		<xsl:when test="$key = concat($keyPrefix,'organization-type')">
+			<xsl:value-of select="concat($resourceBaseUrl,'organization-type')"/>
+		</xsl:when>
+		<xsl:when test="$key = concat($keyPrefix,'file-type')">
+			<xsl:value-of select="concat($resourceBaseUrl,'file-type')"/>
+		</xsl:when>
+		<xsl:when test="$key = concat($keyPrefix,'licence')">
+			<xsl:value-of select="concat($resourceBaseUrl,'licence')"/>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:message select="concat('Thesaurus NIET gevonden met key = ',$key)"/>

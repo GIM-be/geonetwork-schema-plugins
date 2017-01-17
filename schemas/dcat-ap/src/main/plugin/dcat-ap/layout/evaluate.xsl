@@ -23,11 +23,15 @@
   -->
 
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
-	xmlns:foaf="http://xmlns.com/foaf/0.1/"
-	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/"
-  xmlns:dcat="http://www.w3.org/ns/dcat#"
+		xmlns:spdx="http://spdx.org/rdf/terms#"
+		xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+		xmlns:adms="http://www.w3.org/ns/adms#" 
+		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:dct="http://purl.org/dc/terms/"
+        xmlns:dcat="http://www.w3.org/ns/dcat#"
+		xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+		xmlns:foaf="http://xmlns.com/foaf/0.1/" 
   xmlns:gn="http://www.fao.org/geonetwork" xmlns:saxon="http://saxon.sf.net/"
   extension-element-prefixes="saxon" exclude-result-prefixes="#all">
 

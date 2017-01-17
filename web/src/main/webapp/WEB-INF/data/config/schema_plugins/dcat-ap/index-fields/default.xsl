@@ -134,11 +134,6 @@ xmlns:java="java:org.fao.geonet.util.XslUtil"
 					store="true" index="false" />
 			</xsl:for-each>
 
-			<xsl:message>
-				format is:
-				<xsl:value-of select="dcat:distribution/dcat:Distribution[0]/text()" />
-			</xsl:message>
-
 			<!-- dcat:Distribution -->
 			<xsl:for-each select="dcat:distribution/dcat:Distribution">
 				<xsl:variable name="name" select="dct:title" />

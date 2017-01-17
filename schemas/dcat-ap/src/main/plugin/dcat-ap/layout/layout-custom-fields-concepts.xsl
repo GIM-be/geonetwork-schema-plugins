@@ -13,7 +13,7 @@
                 exclude-result-prefixes="#all">
 
 
-  <xsl:template mode="mode-dcat-ap" priority="2000" match="dcat:theme|dct:language|dct:type">
+  <xsl:template mode="mode-dcat-ap" priority="2000" match="dcat:theme|dct:language|dct:type|dct:format|dct:license">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
 
@@ -116,12 +116,10 @@
 		        <xsl:variable name="widgetMode" select="'tagsinput'"/>
 <!--		        <xsl:variable name="widgetMode" select="'multiplelist'"/>-->
 		        <xsl:variable name="maxTags"
-		                      as="xs:string"><xsl:choose><xsl:when test="$thesaurusKey = 'external.theme.data-theme'">1</xsl:when><xsl:otherwise><xsl:value-of select="if ($thesaurusConfig/@maxtags) then $thesaurusConfig/@maxtags else ''"/></xsl:otherwise></xsl:choose></xsl:variable>
-		        <!--
-		          Example: to restrict number of keyword to 1 for INSPIRE
-		          <xsl:variable name="maxTags"
-		          select="if ($thesaurusKey = 'external.theme.inspire-theme') then '1' else ''"/>
-		        -->
+		                      as="xs:string"
+		                      select="if ($thesaurusConfig/@maxtags != '')
+		                              then $thesaurusConfig/@maxtags
+		                              else ''"/>
 		        <!-- Create a div with the directive configuration
 		            * elementRef: the element ref to edit
 		            * elementName: the element name
@@ -137,7 +135,7 @@
 		        <div data-gn-keyword-selector="{$widgetMode}"
 		             data-metadata-id="{$metadataId}"
 		             data-element-ref="{concat('_X', ../gn:element/@ref, '_replace')}"
-		             data-thesaurus-title="{$thesaurusTitle}"
+		             data-thesaurus-title="{gn-fn-metadata:getLabel($schema, name(), $labels, name(..), '', gn-fn-metadata:getXPath(.))/label}"
 		             data-thesaurus-key="{$thesaurusKey}"
 		             data-keywords="{$keywords}" data-transformations="{$transformations}"
 		             data-current-transformation="{$transformation}"
