@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:sr="http://www.w3.org/2005/sparql-results#" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-		xmlns:spdx="http://spdx.org/rdf/terms#"
-		xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-		xmlns:adms="http://www.w3.org/ns/adms#" 
-		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
-        xmlns:dct="http://purl.org/dc/terms/"
-        xmlns:dcat="http://www.w3.org/ns/dcat#"
-		xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
-		xmlns:foaf="http://xmlns.com/foaf/0.1/" 
-xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
-xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:locn="http://www.w3.org/ns/locn#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:schema="http://schema.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:saxon="http://saxon.sf.net/" xmlns:fn-rdf="http://geonetwork-opensource.org/xsl/functions/rdf" version="2.0" extension-element-prefixes="saxon">
+<xsl:stylesheet xmlns:sr="http://www.w3.org/2005/sparql-results#" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:spdx="http://spdx.org/rdf/terms#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:adms="http://www.w3.org/ns/adms#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:locn="http://www.w3.org/ns/locn#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:schema="http://schema.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:saxon="http://saxon.sf.net/" version="2.0" extension-element-prefixes="saxon" xmlns:uuid="java:java.util.UUID">
 	<!-- Tell the XSL processor to output XML. -->
 	<xsl:output method="xml" indent="yes"/>
-	<!-- Default language for plain literals. -->
+	<!-- Default language for plain literals.   uuid:randomUUID()   java.util.UUID.randomUUID() -->
 	<xsl:variable name="defaultLang">nl</xsl:variable>
+	<!-- Retrieves a UUID from external source. Alternative XSLT2.0  uuid   :randomUUID()  -->
+	<xsl:param name="uuid" select="uuid"/>
 	<!-- dcat:Catalog -->
 	<xsl:template match="/">
 		<xsl:variable name="results" select="/sr:sparql/sr:results/sr:result"/>
@@ -55,7 +46,8 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:locn="http://www.w3.org/ns/loc
 				</dcat:Catalog>
 			</xsl:for-each>
 			<!-- if no catalog information found -->
-			<xsl:if test="fn:count($catalogs) = 0">
+			<!-- fn:count($catalogs) = 0 -->
+			<xsl:if test="not(xs:boolean($catalogs[1]))">
 				<!-- dcat:dataset -->
 				<dcat:Catalog>
 					<dct:title>Put here the catalog title</dct:title>
@@ -161,7 +153,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:locn="http://www.w3.org/ns/loc
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:hasVersion')"/>
 					</xsl:call-template>
 					<!-- dct:identifier -->
-					<xsl:call-template name="properties">
+					<xsl:call-template name="identifier">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:identifier')"/>
@@ -497,6 +489,8 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:locn="http://www.w3.org/ns/loc
 		<xsl:for-each select="$distributionURIs">
 			<xsl:element name="{$predicate}">
 				<dcat:Distribution rdf:about="{.}">
+					<!-- dcat:accessURL: TODO: remove this tweek. -->
+					<dcat:accessURL><xsl:value-of select="."/></dcat:accessURL>
 					<!-- dcat:accessURL -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
@@ -614,16 +608,25 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:locn="http://www.w3.org/ns/loc
 						<xsl:if test="fn:exists(./sr:literal/@datatype)">
 							<xsl:attribute name="rdf:datatype" select="./sr:literal/@datatype"/>
 						</xsl:if>
-						<!-- language tag attriburte -->
+						<!-- language tag attribute -->
 						<xsl:choose>
 							<xsl:when test="fn:exists(./sr:literal/@lang)">
 								<xsl:attribute name="xml:lang" select="./sr:literal/@lang"/>
 							</xsl:when>
-							<xsl:when test="fn:local-name-from-QName($predicate) = ('description', 'title', 'keyword', 'name')">
+							<!-- XSLT 2.0 could be easier: when test="fn:string(fn:local-name-from-QName($predicate)) = ('description', 'title', 'keyword', 'name')"  -->
+							<xsl:when test="contains('description|title|keyword|name',concat('|',fn:local-name-from-QName($predicate),'|'))">
 								<xsl:attribute name="xml:lang" select="$defaultLang"/>
 							</xsl:when>
 						</xsl:choose>
-						<xsl:value-of select="./sr:literal"/>
+						<!-- literal value (append Piloot Metadata in case of title) -->
+						<xsl:choose>
+							<xsl:when test="fn:string(fn:local-name-from-QName($predicate)) != 'title'">
+								<xsl:value-of select="./sr:literal"/>
+							</xsl:when>
+							<xsl:when test="fn:string(fn:local-name-from-QName($predicate)) = 'title'">
+								<xsl:value-of select="concat(' Piloot Metadata - ',./sr:literal)"/>
+							</xsl:when>
+						</xsl:choose>
 					</xsl:element>
 				</xsl:when>
 				<!-- URIs -->
@@ -637,8 +640,47 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:locn="http://www.w3.org/ns/loc
 					<xsl:element name="{$predicate}">
 						<xsl:attribute name="rdf:resource" select="./sr:bnode"/>
 					</xsl:element>
-				</xsl:when>				
+				</xsl:when>
 			</xsl:choose>
 		</xsl:for-each>
 	</xsl:template>
+	<!-- dct:identifier -->
+	<xsl:template name="identifier">
+		<xsl:param name="results"/>
+		<xsl:param name="subject"/>
+		<xsl:param name="predicate"/>
+		<xsl:variable name="predicateString" select="concat(fn:namespace-uri-from-QName($predicate),fn:local-name-from-QName($predicate))"/>
+		<!-- Select all objects matching the subject and predicate pattern -->
+		<xsl:for-each select="$results[sr:binding[@name='subject']/* = $subject and
+											sr:binding[@name='predicate']/sr:uri = $predicateString]/sr:binding[@name='object']">
+			<xsl:choose>
+				<!-- plain literals -->
+				<xsl:when test="./sr:literal">
+					<xsl:element name="{$predicate}">
+						<xsl:choose>
+							<!-- if the identifier is a UUID, keep it, otherwise, generate another UUID -->
+							<xsl:when test="fn:matches(./sr:literal,'[a-f0-9]{8}-?[a-f0-9]{4}-?[1-5][a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}')">
+								<xsl:value-of select="./sr:literal"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$uuid"/>
+							</xsl:otherwise>							
+						</xsl:choose>
+					</xsl:element>
+				</xsl:when>
+				<!-- URIs -->
+				<xsl:when test="./sr:uri">
+					<xsl:element name="{$predicate}">
+						<xsl:attribute name="rdf:resource" select="./sr:uri"/>
+					</xsl:element>
+				</xsl:when>
+				<!-- blank nodes -->
+				<xsl:when test="./sr:bnode">
+					<xsl:element name="{$predicate}">
+						<xsl:attribute name="rdf:resource" select="./sr:bnode"/>
+					</xsl:element>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:for-each>
+	</xsl:template>	
 </xsl:stylesheet>

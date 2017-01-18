@@ -55,7 +55,7 @@
 
   <!-- ================================================================= -->
   <xsl:template match="dcat:Dataset">
-    <dcat:Dataset xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:dcat="http://www.w3.org/ns/dcat#">
+    <dcat:Dataset xmlns:dct="http://purl.org/dc/terms/" xmlns:dcat="http://www.w3.org/ns/dcat#">
       <dct:identifier>
         <xsl:value-of select="/root/env/uuid"/>
       </dct:identifier>
