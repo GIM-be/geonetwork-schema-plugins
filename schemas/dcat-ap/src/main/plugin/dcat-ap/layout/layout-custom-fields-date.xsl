@@ -33,10 +33,12 @@
         xmlns:dcat="http://www.w3.org/ns/dcat#"
 		xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
 		xmlns:foaf="http://xmlns.com/foaf/0.1/" 
-	  xmlns:gn="http://www.fao.org/geonetwork"
-	  xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
-	  xmlns:gn-fn-dcat-ap="http://geonetwork-opensource.org/xsl/functions/profiles/dcat-ap"
-      exclude-result-prefixes="#all">
+		xmlns:owl="http://www.w3.org/2002/07/owl#"
+		xmlns:schema="http://schema.org/"
+		xmlns:gn="http://www.fao.org/geonetwork"
+		xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
+		xmlns:gn-fn-dcat-ap="http://geonetwork-opensource.org/xsl/functions/profiles/dcat-ap"
+		exclude-result-prefixes="#all">
 
   <!--
   Date with not date type.
@@ -44,13 +46,13 @@
   -->
   <xsl:template mode="mode-dcat-ap"
                 priority="2000"
-                match="dct:issued">
+                match="dct:modified|dct:issued|schema:startDate|schema:endDate">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
 
     <xsl:variable name="xpath" select="gn-fn-metadata:getXPath(..)"/>
     <xsl:variable name="labelConfig"
-                  select="gn-fn-metadata:getLabel($schema, 'dct:issued', $labels, name(..), '', $xpath)"/>
+                  select="gn-fn-metadata:getLabel($schema, name(.), $labels, name(..), '', $xpath)"/>
     <xsl:variable name="dateTypeElementRef"
                   select="gn:element/@ref"/>
     <div class="form-group gn-field gn-title gn-required"

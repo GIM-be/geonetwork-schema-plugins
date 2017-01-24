@@ -194,7 +194,7 @@
   <xsl:template mode="dcat-ap" match="dct:description|dct:rights|dct:title">
     <xsl:param name="schema"/>
     <xsl:param name="edit"/>
-    
+    <xsl:message>================></xsl:message>
     <xsl:variable name="class">
       <xsl:choose>
         <xsl:when test="name(.)='dct:title'">title</xsl:when>
@@ -228,7 +228,7 @@
     <xsl:apply-templates mode="simpleElement" select=".">
       <xsl:with-param name="schema"   select="$schema"/>
       <xsl:with-param name="edit"     select="$edit"/>
-      <xsl:with-param name="title"    select="$title"/>
+      <xsl:with-param name="title"    select="concat('Hier kom ik: ',$title)"/>
       <xsl:with-param name="helpLink" select="$helpLink"/>
       <xsl:with-param name="text"     select="$text"/>
     </xsl:apply-templates>

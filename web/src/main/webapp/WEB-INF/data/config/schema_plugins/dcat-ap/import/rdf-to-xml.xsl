@@ -9,8 +9,18 @@
         xmlns:dcat="http://www.w3.org/ns/dcat#"
 		xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
 		xmlns:foaf="http://xmlns.com/foaf/0.1/" 
-xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
-xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:locn="http://www.w3.org/ns/locn#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:schema="http://schema.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:saxon="http://saxon.sf.net/" xmlns:fn-rdf="http://geonetwork-opensource.org/xsl/functions/rdf" version="2.0" extension-element-prefixes="saxon">
+		xmlns:owl="http://www.w3.org/2002/07/owl#"
+		xmlns:schema="http://schema.org/"
+		xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns:locn="http://www.w3.org/ns/locn#"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
+		xmlns:fn="http://www.w3.org/2005/xpath-functions"
+		xmlns:saxon="http://saxon.sf.net/"
+		xmlns:fn-rdf="http://geonetwork-opensource.org/xsl/functions/rdf"
+		version="2.0"
+		extension-element-prefixes="saxon">
 	<!-- Tell the XSL processor to output XML. -->
 	<xsl:output method="xml" indent="yes"/>
 	<!-- Default language for plain literals. -->

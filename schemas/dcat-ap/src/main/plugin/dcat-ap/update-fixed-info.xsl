@@ -24,12 +24,20 @@
   -->
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:gco="http://www.isotc211.org/2005/gco"
-	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-	xmlns:dct="http://purl.org/dc/terms/"
-	xmlns:dcat="http://www.w3.org/ns/dcat#">
+		xmlns:spdx="http://spdx.org/rdf/terms#"
+		xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+		xmlns:adms="http://www.w3.org/ns/adms#" 
+		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:dct="http://purl.org/dc/terms/"
+        xmlns:dcat="http://www.w3.org/ns/dcat#"
+		xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+		xmlns:foaf="http://xmlns.com/foaf/0.1/" 
+		xmlns:owl="http://www.w3.org/2002/07/owl#"
+		xmlns:schema="http://schema.org/">
 
   <!-- =================================================================   -->
+
+  <xsl:variable name="serviceUrl" select="/root/env/siteURL"/>
 
   <xsl:template match="/root">
     <xsl:apply-templates select="rdf:RDF"/>
@@ -38,6 +46,7 @@
   <!-- ================================================================= -->
 
   <xsl:template match="@*|node()">
+	<xsl:message select="concat('----->Verwerking element ',name(.))"/>
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
@@ -55,19 +64,26 @@
 
   <!-- ================================================================= -->
   <xsl:template match="dcat:Dataset">
-    <dcat:Dataset xmlns:dct="http://purl.org/dc/terms/" xmlns:dcat="http://www.w3.org/ns/dcat#">
+    <dcat:Dataset>
       <dct:identifier>
         <xsl:value-of select="/root/env/uuid"/>
       </dct:identifier>
-      <xsl:apply-templates select="dct:*[name(.)!= 'dct:modified' and name(.)!= 'dct:identifier']"/>
-      <xsl:apply-templates select="dcat:*"/>
+      <xsl:apply-templates select="dct:*[name(.)!= 'dct:identifier']"/>
+      <xsl:apply-templates select="dcat:*|vcard:*|foaf:*|spdx:*|adms:*|owl:*|schema:*"/>
     </dcat:Dataset>
   </xsl:template>
 
-  <xsl:template match="dct:issued[*:DateTime]|dct:modified[*:DateTime]">
+  <xsl:template match="dct:issued[*:DateTime]|dct:modified[*:DateTime]|schema:startDate[*:DateTime]|schema:endDate[*:DateTime]">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
 	  <xsl:value-of select="*:DateTime"/>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="dcat:homepage/foaf:Document">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+	  <xsl:value-of select="$serviceUrl"/>
     </xsl:copy>
   </xsl:template>
 

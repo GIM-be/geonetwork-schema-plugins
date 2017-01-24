@@ -9,7 +9,14 @@
         xmlns:dcat="http://www.w3.org/ns/dcat#"
 		xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
 		xmlns:foaf="http://xmlns.com/foaf/0.1/" 
-		xmlns:locn="http://www.w3.org/ns/locn#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:schema="http://schema.org/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:void="http://www.w3.org/TR/void/" xmlns:ogc="http://www.opengis.net/rdf#" extension-element-prefixes="saxon" exclude-result-prefixes="#all">
+		xmlns:owl="http://www.w3.org/2002/07/owl#"
+		xmlns:schema="http://schema.org/"
+		xmlns:locn="http://www.w3.org/ns/locn#"
+		xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+		xmlns:void="http://www.w3.org/TR/void/"
+		xmlns:ogc="http://www.opengis.net/rdf#"
+		extension-element-prefixes="saxon"
+		exclude-result-prefixes="#all">
 	<!-- 
     Create reference block to metadata record and dataset to be added in dcat:Catalog usually.
   -->

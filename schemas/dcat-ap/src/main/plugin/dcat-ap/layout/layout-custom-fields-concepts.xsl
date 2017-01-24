@@ -116,10 +116,11 @@
 		        <xsl:variable name="widgetMode" select="'tagsinput'"/>
 <!--		        <xsl:variable name="widgetMode" select="'multiplelist'"/>-->
 		        <xsl:variable name="maxTags"
-		                      as="xs:string"
-		                      select="if ($thesaurusConfig/@maxtags != '')
+		                      select="if ($thesaurusConfig/@maxtags)
 		                              then $thesaurusConfig/@maxtags
 		                              else ''"/>
+<!--  				<xsl:variable name="maxTags"
+          	select="if ($thesaurusKey = 'external.authority.language') then '1' else ''"/>-->
 		        <!-- Create a div with the directive configuration
 		            * elementRef: the element ref to edit
 		            * elementName: the element name
@@ -139,7 +140,7 @@
 		             data-thesaurus-key="{$thesaurusKey}"
 		             data-keywords="{$keywords}" data-transformations="{$transformations}"
 		             data-current-transformation="{$transformation}"
-		             data-max-tags="{$maxTags}"
+		             data-max-tags="1"
 		             data-lang="{$metadataOtherLanguagesAsJson}"
 		             data-textgroup-only="false">
 		        </div>

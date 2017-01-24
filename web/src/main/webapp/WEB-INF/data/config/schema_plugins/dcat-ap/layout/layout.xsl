@@ -32,10 +32,12 @@
         xmlns:dcat="http://www.w3.org/ns/dcat#"
 		xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
 		xmlns:foaf="http://xmlns.com/foaf/0.1/" 
-  xmlns:gn="http://www.fao.org/geonetwork"
-  xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
-  xmlns:gn-fn-dcat-ap="http://geonetwork-opensource.org/xsl/functions/profiles/dcat-ap"
-  exclude-result-prefixes="#all">
+		xmlns:owl="http://www.w3.org/2002/07/owl#"
+		xmlns:schema="http://schema.org/"
+  		xmlns:gn="http://www.fao.org/geonetwork"
+		xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
+		xmlns:gn-fn-dcat-ap="http://geonetwork-opensource.org/xsl/functions/profiles/dcat-ap"
+		exclude-result-prefixes="#all">
 
   <xsl:include href="utility-fn.xsl"/>
   <xsl:include href="utility-tpl.xsl"/>
@@ -80,7 +82,7 @@
   </xsl:template>
 
   <!-- Visit all XML tree recursively -->
-  <xsl:template mode="mode-dcat-ap" match="dct:*|dcat:*|vcard:*|foaf:*">
+  <xsl:template mode="mode-dcat-ap" match="dct:*|dcat:*|vcard:*|foaf:*|spdx:*|adms:*|owl:*|schema:*">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
 
@@ -133,7 +135,7 @@
 
 
   <!-- the other elements in DC. -->
-  <xsl:template mode="mode-dcat-ap" priority="100" match="dc:*|dct:*|dcat:*|vcard:*|foaf:*">
+  <xsl:template mode="mode-dcat-ap" priority="100" match="dct:*|dcat:*|vcard:*|foaf:*|spdx:*|adms:*|owl:*|schema:*">
     <xsl:variable name="name" select="name(.)"/>
     <xsl:variable name="ref" select="gn:element/@ref"/>
     <xsl:variable name="labelConfig" select="gn-fn-metadata:getLabel($schema, $name, $labels)"/>

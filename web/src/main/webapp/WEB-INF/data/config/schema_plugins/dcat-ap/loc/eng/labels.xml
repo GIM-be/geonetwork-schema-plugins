@@ -306,11 +306,6 @@
     <description>Detailed text description of what the online resource is/does</description>
   </element>
   <!-- ==================================================== -->
-  <element name="description">
-    <label>Description</label>
-    <description>Detailed text description of what the online resource is/does</description>
-  </element>
-  <!-- ==================================================== -->
   <element name="skos:Concept" context="dct:license">
     <label>License</label>
     <description>A legal document giving official permission to do something with the resource.</description>
@@ -328,22 +323,6 @@
     </example>
   </element>
   <element name="dcat:mediaType">
-    <label>Media type</label>
-    <description>MIME type.</description>
-    <helper>
-      <option value="text/csv">CSV file (text/plain)</option>
-      <option value="text/plain">Text file (text/plain)</option>
-      <option value="application/vnd.ms-excel">Excel file (application/vnd.ms-excel)</option>
-      <option value="text/xml">XML file (text/xml)</option>
-      <option value="application/pdf">PDF file (application/pdf)</option>
-      <option value="application/xml">XML file (application/xml)</option>
-      <option value="application/dxf">DXF file (application/dxf)</option>
-      <option value="application/vnd.google-earth.kml+xml">KML file (application/vnd.google-earth.kml+xml)</option>
-      <option value="application/zip">ZIP file (application/zip)</option>
-      <option value="image/tiff">TIFF Image file (image/tiff)</option>
-    </helper>
-  </element>
-  <element name="mediaType">
     <label>Media type</label>
     <description>MIME type.</description>
     <helper>

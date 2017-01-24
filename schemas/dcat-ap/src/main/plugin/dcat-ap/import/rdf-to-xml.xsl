@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:sr="http://www.w3.org/2005/sparql-results#" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:spdx="http://spdx.org/rdf/terms#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:adms="http://www.w3.org/ns/adms#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:locn="http://www.w3.org/ns/locn#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:schema="http://schema.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:saxon="http://saxon.sf.net/" version="2.0" extension-element-prefixes="saxon" xmlns:uuid="java:java.util.UUID">
+<xsl:stylesheet xmlns:sr="http://www.w3.org/2005/sparql-results#" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+		xmlns:spdx="http://spdx.org/rdf/terms#"
+		xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+		xmlns:adms="http://www.w3.org/ns/adms#" 
+		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:dct="http://purl.org/dc/terms/"
+        xmlns:dcat="http://www.w3.org/ns/dcat#"
+		xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+		xmlns:foaf="http://xmlns.com/foaf/0.1/" 
+		xmlns:owl="http://www.w3.org/2002/07/owl#"
+		xmlns:schema="http://schema.org/"
+		xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns:locn="http://www.w3.org/ns/locn#"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
+		xmlns:fn="http://www.w3.org/2005/xpath-functions"
+		xmlns:saxon="http://saxon.sf.net/"
+		xmlns:fn-rdf="http://geonetwork-opensource.org/xsl/functions/rdf"
+		version="2.0"
+		extension-element-prefixes="saxon">
+>>>>>>> Stashed changes
 	<!-- Tell the XSL processor to output XML. -->
 	<xsl:output method="xml" indent="yes"/>
 	<!-- Default language for plain literals.   uuid:randomUUID()   java.util.UUID.randomUUID() -->

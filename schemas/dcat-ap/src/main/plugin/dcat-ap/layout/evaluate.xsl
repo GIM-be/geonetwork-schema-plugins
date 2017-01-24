@@ -32,8 +32,12 @@
         xmlns:dcat="http://www.w3.org/ns/dcat#"
 		xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
 		xmlns:foaf="http://xmlns.com/foaf/0.1/" 
-  xmlns:gn="http://www.fao.org/geonetwork" xmlns:saxon="http://saxon.sf.net/"
-  extension-element-prefixes="saxon" exclude-result-prefixes="#all">
+		xmlns:owl="http://www.w3.org/2002/07/owl#"
+		xmlns:schema="http://schema.org/"
+  		xmlns:gn="http://www.fao.org/geonetwork"
+  		xmlns:saxon="http://saxon.sf.net/"
+  		extension-element-prefixes="saxon"
+  		exclude-result-prefixes="#all">
 
   <!-- Evaluate an expression. This is schema dependant in order to properly 
         set namespaces required for evaluate.

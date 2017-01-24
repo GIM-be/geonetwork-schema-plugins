@@ -25,6 +25,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 				xmlns:dct="http://purl.org/dc/terms/"
+				xmlns:dcat="http://www.w3.org/ns/dcat#" 
 				xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 xmlns:xslutil="java:org.fao.geonet.util.XslUtil"
                 version="2.0"
@@ -32,7 +33,7 @@
 
   <!-- Get the main metadata languages -->
   <xsl:template name="get-dcat-ap-language">
-  	<xsl:variable name="authorityLanguage" select="$metadata/descendant::node()/dct:language[1]/skos:Concept/@rdf:about" />
+  	<xsl:variable name="authorityLanguage" select="$metadata/descendant::node()/dcat:Dataset/dct:language[1]/skos:Concept/@rdf:about" />
   	<xsl:choose>
   		<xsl:when test="ends-with($authorityLanguage,'NLD')">dut</xsl:when>
   		<xsl:when test="ends-with($authorityLanguage,'FRA')">fre</xsl:when>
