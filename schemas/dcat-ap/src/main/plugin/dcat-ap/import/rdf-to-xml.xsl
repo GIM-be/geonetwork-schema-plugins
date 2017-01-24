@@ -75,6 +75,12 @@
 		<xsl:for-each select="$datasetURIs">
 			<xsl:element name="{$predicate}">
 				<dcat:Dataset rdf:about="{.}">
+					<!-- dct:identifier -->
+					<xsl:call-template name="identifier">
+						<xsl:with-param name="results" select="$results"/>
+						<xsl:with-param name="subject" select="."/>
+						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:identifier')"/>
+					</xsl:call-template>				
 					<!-- dct:title -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
@@ -87,25 +93,24 @@
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:description')"/>
 					</xsl:call-template>
+					<!-- dct:issued-->
+					<xsl:call-template name="properties">
+						<xsl:with-param name="results" select="$results"/>
+						<xsl:with-param name="subject" select="."/>
+						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:issued')"/>
+					</xsl:call-template>
+					<!-- dct:modified-->
+					<xsl:call-template name="properties">
+						<xsl:with-param name="results" select="$results"/>
+						<xsl:with-param name="subject" select="."/>
+						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:modified')"/>
+					</xsl:call-template>						
 					<!-- dcat:contactPoint -->
 					<xsl:call-template name="organizations">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="organizationURIs" select="$results[sr:binding[@name='predicate']/sr:uri = 'http://www.w3.org/ns/dcat#contactPoint' and
 											sr:binding[@name='subject']/sr:uri = $datasetURIs]/sr:binding[@name='object']/*"/>
 						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:contactPoint')"/>
-					</xsl:call-template>
-					<!-- dcat:distribution -->
-					<xsl:call-template name="distributions">
-						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="distributionURIs" select="$results[sr:binding[@name='predicate']/sr:uri = 'http://www.w3.org/ns/dcat#distribution' and
-											sr:binding[@name='subject']/sr:uri = $datasetURIs]/sr:binding[@name='object']/*"/>
-						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:distribution')"/>
-					</xsl:call-template>
-					<!-- dcat:keyword -->
-					<xsl:call-template name="properties">
-						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:keyword')"/>
 					</xsl:call-template>
 					<!-- dct:publisher -->
 					<xsl:call-template name="agents">
@@ -114,13 +119,26 @@
 											sr:binding[@name='subject']/sr:uri = $datasetURIs]/sr:binding[@name='object']/*"/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/publisher','dct:publisher')"/>
 					</xsl:call-template>
+					<!-- dcat:keyword -->
+					<xsl:call-template name="properties">
+						<xsl:with-param name="results" select="$results"/>
+						<xsl:with-param name="subject" select="."/>
+						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:keyword')"/>
+					</xsl:call-template>
 					<!-- dcat:theme -->
+					<dcat:theme>
+						<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/GOVE">
+							<skos:prefLabel xml:lang="nl">Overheid en publieke sector</skos:prefLabel>
+							<skos:prefLabel xml:lang="en">Government and public sector</skos:prefLabel>
+							<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+						</skos:Concept>
+					</dcat:theme>
 					<xsl:call-template name="concepts">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="conceptURIs" select="$results[sr:binding[@name='predicate']/sr:uri = 'http://www.w3.org/ns/dcat#theme' and
 											sr:binding[@name='subject']/sr:uri = $datasetURIs]/sr:binding[@name='object']/*"/>
 						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:theme')"/>
-					</xsl:call-template>
+					</xsl:call-template>				
 					<!-- dct:accessRights -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
@@ -152,12 +170,6 @@
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:hasVersion')"/>
 					</xsl:call-template>
-					<!-- dct:identifier -->
-					<xsl:call-template name="identifier">
-						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:identifier')"/>
-					</xsl:call-template>
 					<!-- dct:isVersionOf-->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
@@ -171,6 +183,13 @@
 						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:landingPage')"/>
 					</xsl:call-template>
 					<!-- dct:language-->
+					<dct:language>
+						<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/language/NLD">
+							<skos:prefLabel xml:lang="nl">Nederlands</skos:prefLabel>
+							<skos:prefLabel xml:lang="en">Dutch</skos:prefLabel>
+							<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/language"/>
+						</skos:Concept>
+					</dct:language>
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
@@ -194,19 +213,6 @@
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:relation')"/>
-					</xsl:call-template>
-					<!-- dct:issued-->
-					<xsl:call-template name="properties">
-						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:issued')"/>
-					</xsl:call-template>
-					<!-- adms:sample -->
-					<xsl:call-template name="distributions">
-						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="distributionURIs" select="$results[sr:binding[@name='predicate']/sr:uri = 'http://www.w3.org/ns/adms#sample' and
-											sr:binding[@name='subject']/sr:uri = $datasetURIs]/sr:binding[@name='object']/*"/>
-						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/adms#','adms:sample')"/>
 					</xsl:call-template>
 					<!-- dct:source-->
 					<xsl:call-template name="properties">
@@ -234,12 +240,6 @@
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:type')"/>
 					</xsl:call-template>
-					<!-- dct:modified-->
-					<xsl:call-template name="properties">
-						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:modified')"/>
-					</xsl:call-template>
 					<!-- owl:versionInfo -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
@@ -252,6 +252,20 @@
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/adms#','adms:versionNotes')"/>
 					</xsl:call-template>
+					<!-- dcat:distribution -->
+					<xsl:call-template name="distributions">
+						<xsl:with-param name="results" select="$results"/>
+						<xsl:with-param name="distributionURIs" select="$results[sr:binding[@name='predicate']/sr:uri = 'http://www.w3.org/ns/dcat#distribution' and
+											sr:binding[@name='subject']/sr:uri = $datasetURIs]/sr:binding[@name='object']/*"/>
+						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:distribution')"/>
+					</xsl:call-template>
+					<!-- adms:sample -->
+					<xsl:call-template name="distributions">
+						<xsl:with-param name="results" select="$results"/>
+						<xsl:with-param name="distributionURIs" select="$results[sr:binding[@name='predicate']/sr:uri = 'http://www.w3.org/ns/adms#sample' and
+											sr:binding[@name='subject']/sr:uri = $datasetURIs]/sr:binding[@name='object']/*"/>
+						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/adms#','adms:sample')"/>
+					</xsl:call-template>				
 				</dcat:Dataset>
 			</xsl:element>
 		</xsl:for-each>
@@ -489,32 +503,76 @@
 		<xsl:for-each select="$distributionURIs">
 			<xsl:element name="{$predicate}">
 				<dcat:Distribution rdf:about="{.}">
-					<!-- dcat:accessURL: TODO: remove this tweek. -->
-					<dcat:accessURL><xsl:value-of select="."/></dcat:accessURL>
-					<!-- dcat:accessURL -->
+					<!-- dct:title -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:accessURL')"/>
+						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:title')"/>
 					</xsl:call-template>
 					<!-- dct:description -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:description')"/>
+					</xsl:call-template>		
+					<!-- dcat:accessURL: TODO: remove this tweak. -->
+					<dcat:accessURL>
+						<xsl:value-of select="."/>
+					</dcat:accessURL>
+					<!-- dcat:accessURL -->
+					<xsl:call-template name="properties">
+						<xsl:with-param name="results" select="$results"/>
+						<xsl:with-param name="subject" select="."/>
+						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:accessURL')"/>
 					</xsl:call-template>
+					<!-- dcat:downloadURL -->
+					<xsl:call-template name="properties">
+						<xsl:with-param name="results" select="$results"/>
+						<xsl:with-param name="subject" select="."/>
+						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:downloadURL')"/>
+					</xsl:call-template>
+					<!-- dct:issued -->
+					<xsl:call-template name="properties">
+						<xsl:with-param name="results" select="$results"/>
+						<xsl:with-param name="subject" select="."/>
+						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:issued')"/>
+					</xsl:call-template>
+					<!-- dct:modified-->
+					<xsl:call-template name="properties">
+						<xsl:with-param name="results" select="$results"/>
+						<xsl:with-param name="subject" select="."/>
+						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:modified')"/>
+					</xsl:call-template>			
 					<!-- dct:format -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:format')"/>
 					</xsl:call-template>
+					<!-- dcat:mediaType -->
+					<xsl:call-template name="properties">
+						<xsl:with-param name="results" select="$results"/>
+						<xsl:with-param name="subject" select="."/>
+						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:mediaType')"/>
+					</xsl:call-template>					
+					<!-- dct:language -->
+					<xsl:call-template name="properties">
+						<xsl:with-param name="results" select="$results"/>
+						<xsl:with-param name="subject" select="."/>
+						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:language')"/>
+					</xsl:call-template>					
 					<!-- dct:license -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:license')"/>
 					</xsl:call-template>
+					<!-- dct:rights -->
+					<xsl:call-template name="properties">
+						<xsl:with-param name="results" select="$results"/>
+						<xsl:with-param name="subject" select="."/>
+						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:rights')"/>
+					</xsl:call-template>					
 					<!-- dcat:byteSize -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
@@ -533,59 +591,17 @@
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://xmlns.com/foaf/0.1/','foaf:page')"/>
 					</xsl:call-template>
-					<!-- dcat:downloadURL -->
-					<xsl:call-template name="properties">
-						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:downloadURL')"/>
-					</xsl:call-template>
-					<!-- dct:language -->
-					<xsl:call-template name="properties">
-						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:language')"/>
-					</xsl:call-template>
 					<!-- dct:conformsTo-->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:conformsTo')"/>
 					</xsl:call-template>
-					<!-- dcat:mediaType -->
-					<xsl:call-template name="properties">
-						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:mediaType')"/>
-					</xsl:call-template>
-					<!-- dct:issued -->
-					<xsl:call-template name="properties">
-						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:issued')"/>
-					</xsl:call-template>
-					<!-- dct:rights -->
-					<xsl:call-template name="properties">
-						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:rights')"/>
-					</xsl:call-template>
 					<!-- adms:status -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/adms#','adms:status')"/>
-					</xsl:call-template>
-					<!-- dct:title -->
-					<xsl:call-template name="properties">
-						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:title')"/>
-					</xsl:call-template>
-					<!-- dct:modified-->
-					<xsl:call-template name="properties">
-						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:modified')"/>
 					</xsl:call-template>
 				</dcat:Distribution>
 			</xsl:element>
@@ -664,7 +680,7 @@
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="$uuid"/>
-							</xsl:otherwise>							
+							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:element>
 				</xsl:when>
@@ -682,5 +698,5 @@
 				</xsl:when>
 			</xsl:choose>
 		</xsl:for-each>
-	</xsl:template>	
+	</xsl:template>
 </xsl:stylesheet>
