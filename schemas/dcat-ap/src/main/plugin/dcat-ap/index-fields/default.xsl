@@ -12,7 +12,7 @@
 	program; if not, write to the Free Software ~ Foundation, Inc., 51 Franklin 
 	St, Fifth Floor, Boston, MA 02110-1301, USA ~ ~ Contact: Jeroen Ticheler 
 	- FAO - Viale delle Terme di Caracalla 2, ~ Rome - Italy. email: geonetwork@osgeo.org -->
-<xsl:stylesheet version="2.0" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dct="http://purl.org/dc/terms/" xmlns:spdx="http://spdx.org/rdf/terms#" xmlns:adms="http://www.w3.org/ns/adms#" xmlns:locn="http://www.w3.org/ns/locn#" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:util="java:org.fao.geonet.util.XslUtil" xmlns:geonet="http://www.fao.org/geonetwork">
+<xsl:stylesheet version="2.0" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:spdx="http://spdx.org/rdf/terms#" xmlns:adms="http://www.w3.org/ns/adms#" xmlns:locn="http://www.w3.org/ns/locn#" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:util="java:org.fao.geonet.util.XslUtil" xmlns:geonet="http://www.fao.org/geonetwork">
 	<!--TODO: uncomment
 	<xsl:include href="../convert/functions.xsl"/>
 	<xsl:include href="../../../xsl/utils-fn.xsl"/>
@@ -30,9 +30,8 @@
 		<xsl:apply-templates select="rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset"/>
 	</xsl:template>
 	<xsl:template match="dcat:Dataset">
-		<xsl:variable name="langCode">NLD
 			<!--TODO: uncomment<xsl:call-template name="langId-dcat-ap"/>-->
-		</xsl:variable>
+		<xsl:variable name="langCode">NLD</xsl:variable>
 		<Document locale="{$langCode}">
 			<!-- locale information -->
 			<Field name="_locale" string="{$langCode}" store="true" index="true"/>

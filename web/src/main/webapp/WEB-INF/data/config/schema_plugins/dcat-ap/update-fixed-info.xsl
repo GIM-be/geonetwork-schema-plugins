@@ -28,7 +28,7 @@
 		xmlns:skos="http://www.w3.org/2004/02/skos/core#"
 		xmlns:adms="http://www.w3.org/ns/adms#" 
 		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
+		xmlns:dc="http://purl.org/dc/elements/1.1/" 
         xmlns:dct="http://purl.org/dc/terms/"
         xmlns:dcat="http://www.w3.org/ns/dcat#"
 		xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
@@ -47,7 +47,6 @@
   <!-- ================================================================= -->
 
   <xsl:template match="@*|node()">
-	<xsl:message select="concat('----->Verwerking element ',name(.))"/>
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
@@ -70,7 +69,7 @@
         <xsl:value-of select="/root/env/uuid"/>
       </dct:identifier>
       <xsl:apply-templates select="dct:*[name(.)!= 'dct:identifier']"/>
-      <xsl:apply-templates select="dcat:*|vcard:*|foaf:*|spdx:*|adms:*|owl:*|schema:*"/>
+      <xsl:apply-templates select="dc:*|dcat:*|vcard:*|foaf:*|spdx:*|adms:*|owl:*|schema:*|skos:*"/>
     </dcat:Dataset>
   </xsl:template>
 

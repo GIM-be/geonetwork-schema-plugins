@@ -27,6 +27,7 @@
                 xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
                 xmlns:foaf="http://xmlns.com/foaf/0.1/"
                 xmlns:void="http://www.w3.org/TR/void/"
+                xmlns:dc="http://purl.org/dc/elements/1.1/"
                 xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:dct="http://purl.org/dc/terms/"
                 xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 version="2.0"
@@ -62,6 +63,7 @@
 
   <xsl:template match="/">
     <rdf:RDF xmlns:adms="http://www.w3.org/ns/adms#" 
+				xmlns:dc="http://purl.org/dc/elements/1.1/" 
 				xmlns:dct="http://purl.org/dc/terms/" 
 				xmlns:dcat="http://www.w3.org/ns/dcat#" 
 				xmlns:foaf="http://xmlns.com/foaf/0.1/" 

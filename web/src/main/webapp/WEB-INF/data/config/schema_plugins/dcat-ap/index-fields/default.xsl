@@ -12,26 +12,11 @@
 	program; if not, write to the Free Software ~ Foundation, Inc., 51 Franklin 
 	St, Fifth Floor, Boston, MA 02110-1301, USA ~ ~ Contact: Jeroen Ticheler 
 	- FAO - Viale delle Terme di Caracalla 2, ~ Rome - Italy. email: geonetwork@osgeo.org -->
-<xsl:stylesheet version="2.0" xmlns:foaf="http://xmlns.com/foaf/0.1/"
-	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-	xmlns:locn="http://www.w3.org/ns/locn#"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:dcat="http://www.w3.org/ns/dcat#"
-	xmlns:util="java:org.fao.geonet.util.XslUtil"
-	xmlns:geonet="http://www.fao.org/geonetwork" xmlns:dct="http://purl.org/dc/terms/">
-	<xsl:include href="../convert/functions.xsl" />
+<xsl:stylesheet version="2.0" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:spdx="http://spdx.org/rdf/terms#" xmlns:adms="http://www.w3.org/ns/adms#" xmlns:locn="http://www.w3.org/ns/locn#" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:util="java:org.fao.geonet.util.XslUtil" xmlns:geonet="http://www.fao.org/geonetwork">
+	<!--TODO: uncomment
+	<xsl:include href="../convert/functions.xsl"/>
 	<xsl:include href="../../../xsl/utils-fn.xsl"/>
-	
-	<!-- TODO: remove this comment 
-	<xsl:include href="../../../../../../../web/target/geonetwork/xsl/utils-fn.xsl" /> 
-	xmlns:util="java:org.fao.geonet.util.XslUtil?path=file:///C:/git/aiv-geonetwork-gim/core/target/classes/"
-
-<xsl:include href="../../../../../../../web/target/geonetwork/xsl/utils-fn.xsl" />	
-<xsl:include href="../../../xsl/utils-fn.xsl"/>
-
-xmlns:java="java:org.fao.geonet.util.XslUtil"
-	 -->
-	 
+-->
 	<!-- This file defines what parts of the metadata are indexed by Lucene 
 		Searches can be conducted on indexes defined here. The Field@name attribute 
 		defines the name of the search variable. If a variable has to be maintained 
@@ -39,116 +24,105 @@ xmlns:java="java:org.fao.geonet.util.XslUtil"
 		the Java source code. Please keep indexes consistent among metadata standards 
 		if they should work accross different metadata resources -->
 	<!-- ========================================================================================= -->
-	<xsl:output method="xml" version="1.0" encoding="UTF-8"
-		indent="yes" />
+	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 	<!-- ========================================================================================= -->
 	<xsl:template match="/">
-		<xsl:apply-templates select="rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset" />
+		<xsl:apply-templates select="rdf:RDF/dcat:Catalog/dcat:dataset/dcat:Dataset"/>
 	</xsl:template>
 	<xsl:template match="dcat:Dataset">
-		<xsl:variable name="langCode">
-			<xsl:call-template name="langId-dcat-ap"/>
-		</xsl:variable>
+			<!--TODO: uncomment<xsl:call-template name="langId-dcat-ap"/>-->
+		<xsl:variable name="langCode">NLD</xsl:variable>
 		<Document locale="{$langCode}">
 			<!-- locale information -->
-			<Field name="_locale" string="{$langCode}" store="true" index="true" />
-			<Field name="_docLocale" string="{$langCode}" store="true"
-				index="true" />
+			<Field name="_locale" string="{$langCode}" store="true" index="true"/>
+			<Field name="_docLocale" string="{$langCode}" store="true" index="true"/>
 			<!-- For multilingual docs it is good to have a title in the default locale. 
 				In this type of metadata we don't have one but in the general case we do 
 				so we need to add it to all -->
-			<Field name="_defaultTitle" string="{string(dct:title)}" store="true"
-				index="true" />
-			<xsl:for-each select="dct:language">
-				<Field name="mdLanguage" string="{string(.)}" store="true"
-					index="true" />
+			<Field name="_defaultTitle" string="{string(dct:title)}" store="true" index="true"/>
+			<xsl:for-each select="dct:language/skos:Concept/skos:prefLabel[@xml:lang='nl']">
+				<Field name="mdLanguage" string="{string(.)}" store="true" index="true"/>
 			</xsl:for-each>
 			<xsl:for-each select="dct:identifier">
-				<Field name="identifier" string="{string(.)}" store="false"
-					index="true" />
+				<Field name="identifier" string="{string(.)}" store="false" index="true"/>
 			</xsl:for-each>
 			<xsl:for-each select="dct:description">
-				<Field name="abstract" string="{string(.)}" store="true"
-					index="true" />
+				<Field name="abstract" string="{string(.)}" store="true" index="true"/>
 			</xsl:for-each>
 			<xsl:for-each select="dct:issued">
-				<Field name="createDate" string="{string(.)}" store="true"
-					index="true" />
-				<Field name="createDateYear" string="{substring(string(.), 0, 5)}"
-					store="true" index="true" />
+				<Field name="createDate" string="{string(.)}" store="true" index="true"/>
+				<Field name="createDateYear" string="{substring(string(.), 0, 5)}" store="true" index="true"/>
 			</xsl:for-each>
 			<xsl:for-each select="dct:modified">
-				<Field name="changeDate" string="{string(.)}" store="true"
-					index="true" />
+				<Field name="changeDate" string="{string(.)}" store="true" index="true"/>
 				<!--<Field name="createDateYear" string="{substring(., 0, 5)}" store="true" 
 					index="true"/> -->
 			</xsl:for-each>
-			<xsl:for-each select="dct:format">
-				<Field name="format" string="{string(.)}" store="true" index="true" />
-			</xsl:for-each>
 			<xsl:for-each select="dct:type">
-				<Field name="type" string="{string(.)}" store="true" index="true" />
+				<Field name="type" string="{string(.)}" store="true" index="true"/>
 			</xsl:for-each>
 			<xsl:for-each select="dct:source">
-				<Field name="lineage" string="{string(.)}" store="true" index="true" />
+				<Field name="lineage" string="{string(.)}" store="true" index="true"/>
 			</xsl:for-each>
 			<xsl:for-each select="dct:relation">
-				<Field name="relation" string="{string(.)}" store="false"
-					index="true" />
+				<Field name="relation" string="{string(.)}" store="false" index="true"/>
 			</xsl:for-each>
 			<xsl:for-each select="dct:accessRights">
-				<Field name="MD_ConstraintsUseLimitation" string="{string(.)}"
-					store="true" index="true" />
+				<Field name="MD_ConstraintsUseLimitation" string="{string(.)}" store="true" index="true"/>
 			</xsl:for-each>
 			<xsl:for-each select="dct:rights">
-				<Field name="MD_LegalConstraintsUseLimitation" string="{string(.)}"
-					store="true" index="true" />
+				<Field name="MD_LegalConstraintsUseLimitation" string="{string(.)}" store="true" index="true"/>
 			</xsl:for-each>
 			<xsl:for-each select="dct:spatial">
-		        <xsl:apply-templates select="dct:Location/locn:geometry[@rdf:datatype='http://www.opengis.net/ont/geosparql#wktLiteral']" mode="latLon"/>
-				<Field name="spatial" string="{string(.)}" store="false"
-					index="true" />
+				<xsl:apply-templates select="dct:Location/locn:geometry[@rdf:datatype='http://www.opengis.net/ont/geosparql#wktLiteral']" mode="latLon"/>
+				<Field name="spatial" string="{string(.)}" store="false" index="true"/>
 			</xsl:for-each>
 			<!-- This is needed by the CITE test script to look for strings like 'a 
 				b*' strings that contain spaces -->
 			<xsl:for-each select="dct:title">
-				<Field name="title" string="{string(.)}" store="true" index="true" />
+				<Field name="title" string="{string(.)}" store="true" index="true"/>
 				<!-- not tokenized title for sorting -->
-				<Field name="_title" string="{string(.)}" store="false" index="true" />
+				<Field name="_title" string="{string(.)}" store="false" index="true"/>
 			</xsl:for-each>
-			<xsl:for-each
-				select="(dcat:landingPage|dcat:downloadURL|dcat:accessURL)[normalize-space(.) != '']">
-				<xsl:variable name="name" select="tokenize(., '/')[last()]" />
-				<!-- Index link where last token after the last / is the link name. -->
-				<Field name="link" string="{concat($name, '||', ., '|WWW-LINK|WWW:LINK|0')}"
-					store="true" index="false" />
+			<!-- dcat:keyword -->
+			<xsl:for-each select="dcat:keyword">
+				<xsl:variable name="keyword" select="string(.)"/>
+				<Field name="keyword" string="{$keyword}" store="true" index="true"/>
 			</xsl:for-each>
-			<xsl:for-each
-				select="(dcat:landingPage|dcat:downloadURL|dcat:accessURL)[normalize-space(.) != ''
-                              and matches(., '.*(.gif|.png.|.jpeg|.jpg)$', 'i')]">
-				<xsl:variable name="thumbnailType"
-					select="if (position() = 1) then 'thumbnail' else 'overview'" />
-				<!-- First thumbnail is flagged as thumbnail and could be considered 
-					the main one -->
-				<Field name="image" string="{concat($thumbnailType, '|', ., '|')}"
-					store="true" index="false" />
+			<!-- dcat:theme -->
+			<xsl:for-each select="dcat:theme/skos:Concept/skos:prefLabel">
+				<xsl:variable name="theme" select="string(.)"/>
+				<Field name="data-theme" string="{$theme}" store="true" index="true"/>
 			</xsl:for-each>
-
 			<!-- dcat:Distribution -->
 			<xsl:for-each select="dcat:distribution/dcat:Distribution">
-				<xsl:variable name="name" select="dct:title" />
-				<!-- Index link where last token after the last / is the link name. -->
-				<Field name="link"
-					string="{concat(dct:title, '||', dcat:accessURL, '|WWW-LINK|WWW:LINK|0')}"
-					store="true" index="false" />
-				<xsl:for-each select="dct:format">
-					<Field name="format" string="{.}" store="true" index="true" />
+				<xsl:variable name="title" select="dct:title"/>
+				<xsl:variable name="description" select="substring(string(dct:description),1,1024)"/>
+				<xsl:variable name="dPosition" select="position()"/>
+				<xsl:for-each select="dcat:accessURL">
+					<xsl:variable name="aPosition" select="position()"/>
+					<xsl:variable name="aURL" select="string(.)"/>
+					<!-- Index link -->
+					<Field name="link" string="{concat($title, '|',$description,'|', $aURL, '|WWW:DOWNLOAD|text/csv|',$dPosition,$aPosition)}" store="true" index="false"/>
+					<Field name="download" string="true" store="false" index="true"/>
 				</xsl:for-each>
-				<Field name="linkage_name_des"
+				<xsl:for-each select="dcat:downloadURL">
+					<xsl:variable name="bPosition" select="position()"/>
+					<xsl:variable name="bURL" select="string(.)"/>
+					<!-- Index link -->
+					<Field name="link" string="{concat($title, '|',$description,'|', $bURL, '|WWW:DOWNLOAD|text/csv|',$dPosition,$bPosition)}" store="true" index="false"/>
+					<Field name="download" string="true" store="false" index="true"/>
+				</xsl:for-each>
+				<xsl:for-each select="dct:format/skos:Concept/skos:prefLabel">
+					<Field name="format" string="{.}" store="true" index="true"/>
+				</xsl:for-each>
+				<xsl:for-each select="dct:license">
+					<Field name="MD_LegalConstraintsUseLimitation" string="{string(.)}" store="true" index="true"/>
+				</xsl:for-each>
+				<!-- 				<Field name="linkage_name_des"
 					string="{string(concat(variable_title, ':::', variable_desc))}"
 					store="true" index="true" />
-				<!-- index online protocol -->
-				<xsl:variable name="tPosition" select="position()" />
+				<!$$comment index online protocol $$comment>
 				<xsl:variable name="download_check">
 					<xsl:text>&amp;fname=&amp;access</xsl:text>
 				</xsl:variable>
@@ -161,8 +135,8 @@ xmlns:java="java:org.fao.geonet.util.XslUtil"
 					select="normalize-space(dcat:protocol/dcat:CharacterString)" />
 				<xsl:variable name="mimetype"
 					select="geonet:protocolMimeType($linkage, $protocol, dcat:name/dcat:MimeFileType/@type)" />
-				<!-- If the linkage points to WMS service and no protocol specified, 
-					manage as protocol OGC:WMS -->
+				<!$$comment If the linkage points to WMS service and no protocol specified, 
+					manage as protocol OGC:WMS $$comment>
 				<xsl:variable name="wmsLinkNoProtocol"
 					select="contains(lower-case($linkage), 'service=wms') and not(string($protocol))" />
 				<xsl:if
@@ -178,24 +152,24 @@ xmlns:java="java:org.fao.geonet.util.XslUtil"
 				<xsl:if test="contains($protocol, 'OGC:WMS') or $wmsLinkNoProtocol">
 					<Field name="dynamic" string="true" store="false" index="true" />
 				</xsl:if>
-				<!-- ignore WMS links without protocol (are indexed below with mimetype 
-					application/vnd.ogc.wms_xml) -->
+				<!$$comment ignore WMS links without protocol (are indexed below with mimetype 
+					application/vnd.ogc.wms_xml) $$comment>
 				<xsl:if test="not($wmsLinkNoProtocol)">
 					<Field name="link"
 						string="{concat(dct:title, '|', dct:description, '|', $linkage, '|', $protocol, '|', $mimetype, '|', $tPosition)}"
 						store="true" index="false" />
 				</xsl:if>
-				<!-- Add KML link if WMS -->
+				<!$$comment Add KML link if WMS $$comment>
 				<xsl:if
 					test="starts-with($protocol,'OGC:WMS') and string($linkage)!='' and string(dct:title)!=''">
-					<!-- FIXME : relative path -->
+					<!$$comment FIXME : relative path $$comment>
 					<Field name="link"
 						string="{concat(dct:title, '|', dct:description, '|',
                                                 '../../srv/en/google.kml?uuid=', /dcat:MD_Metadata/dcat:fileIdentifier/dcat:CharacterString, '&amp;layers=', dct:title,
                                                 '|application/vnd.google-earth.kml+xml|application/vnd.google-earth.kml+xml', '|', $tPosition)}"
 						store="true" index="false" />
 				</xsl:if>
-				<!-- Try to detect Web Map Context by checking protocol or file extension -->
+				<!$$comment Try to detect Web Map Context by checking protocol or file extension $$comment>
 				<xsl:if
 					test="starts-with($protocol,'OGC:WMC') or contains($linkage,'.wmc')">
 					<Field name="link"
@@ -203,7 +177,7 @@ xmlns:java="java:org.fao.geonet.util.XslUtil"
                                                 $linkage, '|application/vnd.ogc.wmc|application/vnd.ogc.wmc', '|', $tPosition)}"
 						store="true" index="false" />
 				</xsl:if>
-				<!-- Try to detect OWS Context by checking protocol or file extension -->
+				<!$$comment Try to detect OWS Context by checking protocol or file extension $$comment>
 				<xsl:if
 					test="starts-with($protocol,'OGC:OWS-C') or contains($linkage,'.ows')">
 					<Field name="link"
@@ -216,7 +190,7 @@ xmlns:java="java:org.fao.geonet.util.XslUtil"
 						string="{concat(dct:title, '|', dct:description, '|',
                                                 $linkage, '|OGC:WMS|application/vnd.ogc.wms_xml', '|', $tPosition)}"
 						store="true" index="false" />
-				</xsl:if>
+				</xsl:if>  -->
 			</xsl:for-each>
 			<!-- This index for "coverage" requires significant expansion to work 
 				well for spatial searches. It now only works for very strictly formatted 
@@ -239,17 +213,21 @@ xmlns:java="java:org.fao.geonet.util.XslUtil"
 				$north )}" store="true" index="false"/> <Field name="keyword" string="{$place}" 
 				store="true" index="true"/> </xsl:when> <xsl:otherwise> <Field name="keyword" 
 				string="{.}" store="true" index="true"/> </xsl:otherwise> </xsl:choose> </xsl:for-each> -->
-			<xsl:apply-templates select="dct:subject">
-				<xsl:with-param name="name" select="'keyword'" />
-				<xsl:with-param name="store" select="'true'" />
-			</xsl:apply-templates>
-			<xsl:apply-templates select="dcat:keyword">
-				<xsl:with-param name="name" select="'keyword'" />
-				<xsl:with-param name="store" select="'true'" />
-			</xsl:apply-templates>
 			<xsl:for-each select="dct:isPartOf">
-				<Field name="parentUuid" string="{string(.)}" store="true"
-					index="true" />
+				<Field name="parentUuid" string="{string(.)}" store="true" index="true"/>
+			</xsl:for-each>
+			<xsl:for-each select="(dcat:landingPage)[normalize-space(.) != '']">
+				<xsl:variable name="name" select="tokenize(., '/')[last()]"/>
+				<xsl:variable name="tPosition" select="position()"/>
+				<!-- Index link where last token after the last / is the link name. -->
+				<Field name="link" string="{concat($name, '|description|', ., '|WWW:DOWNLOAD|WWW-DOWNLOAD|',$tPosition)}" store="true" index="false"/>
+			</xsl:for-each>
+			<xsl:for-each select="(dcat:landingPage)[normalize-space(.) != ''
+                              and matches(., '.*(.gif|.png.|.jpeg|.jpg)$', 'i')]">
+				<xsl:variable name="thumbnailType" select="if (position() = 1) then 'thumbnail' else 'overview'"/>
+				<!-- First thumbnail is flagged as thumbnail and could be considered 
+					the main one -->
+				<Field name="image" string="{concat($thumbnailType, '|', ., '|')}" store="true" index="false"/>
 			</xsl:for-each>
 			<!-- TODO when using this we get an error about the concat first parameter 
 				<Field name="any" store="false" index="true"> <xsl:attribute name="string"> 
@@ -258,44 +236,57 @@ xmlns:java="java:org.fao.geonet.util.XslUtil"
 				' ')"/> </xsl:for-each> </xsl:attribute> </Field> -->
 			<!-- locally searchable fields -->
 			<!-- defaults to true -->
-			<Field name="digital" string="true" store="false" index="true" />
-			<xsl:for-each select="dcat:contactPerson">
-				<xsl:variable name="role" select="string($langCode)" />
-				<Field name="responsibleParty" string="{concat($role, '|resource|', ., '|')}"
-					store="true" index="false" />
+			<Field name="digital" string="true" store="false" index="true"/>
+			<xsl:for-each select="dcat:contactPoint">
+				<xsl:apply-templates mode="index-contact" select="vcard:Organization">
+					<xsl:with-param name="type" select="'resource'"/>
+					<xsl:with-param name="fieldPrefix" select="'responsibleParty'"/>
+					<xsl:with-param name="position" select="position()"/>
+				</xsl:apply-templates>
 			</xsl:for-each>
 			<xsl:for-each select="dct:publisher/foaf:Agent/foaf:name">
-				<xsl:variable name="role" select="string($langCode)" />
-				<Field name="responsibleParty" string="{concat($role, '|metadata|', ., '|')}"
-					store="true" index="false" />
+				<xsl:variable name="role" select="string($langCode)"/>
+				<Field name="responsibleParty" string="{concat('Contact', '|resource|', ., '|')}" store="true" index="false"/>
 			</xsl:for-each>
-			<xsl:choose>
-				<xsl:when test="dct:accrualPeriodicity">
-					<xsl:for-each select="dct:accrualPeriodicity">
-						<Field name="updateFrequency" string="{string(.)}" store="true"
-							index="true" />
-						<Field name="cl_maintenanceAndUpdateFrequency_text" string="string($langCode)"
-							store="true" index="true" />
-					</xsl:for-each>
-				</xsl:when>
-				<xsl:otherwise>
-					<Field name="updateFrequency" string="unknown" store="true"
-						index="true" />
-					<Field name="cl_maintenanceAndUpdateFrequency_text" string="string($langCode)"
-						store="true" index="true" />
-				</xsl:otherwise>
-			</xsl:choose>
+			<xsl:for-each select="dct:accrualPeriodicity">
+				<Field name="updateFrequency" string="{string(.)}" store="true" index="true"/>
+			</xsl:for-each>
+
 		</Document>
+	</xsl:template>
+	<xsl:template mode="index-contact" match="vcard:Organization">
+		<xsl:param name="type"/>
+		<xsl:param name="fieldPrefix"/>
+		<xsl:param name="position" select="'0'"/>
+		<xsl:variable name="orgName" select="vcard:organization-name"/>
+		<Field name="orgName" string="{string($orgName)}" store="true" index="true"/>
+		<Field name="orgNameTree" string="{string($orgName)}" store="true" index="true"/>
+		<xsl:variable name="role" select="'Contact'"/>
+		<!--<xsl:variable name="roleTranslation"
+                  select="util:getCodelistTranslation('gmd:CI_RoleCode', string($role), string($isoLangId))"/>-->
+		<xsl:variable name="email" select="vcard:hasEmail"/>
+		<xsl:variable name="phone" select="vcard:hasTelephone[normalize-space(.) != '']/*/text()"/>
+		<xsl:variable name="individualName" select="vcard:fn/text()"/>
+		<xsl:variable name="address" select="string-join(vcard:hasAddress/vcard:Address/(
+                                        vcard:street-address|vcard:postal-code|vcard:locality|
+                                        vcard:locality|vcard:country-name)/text(), ', ')"/>
+		<Field name="{$fieldPrefix}" string="{concat('contact', '|', $type,'|',
+                             $orgName, '|',
+							 '', '|',
+                             string-join($email, ','), '|',
+                             $individualName, '|',
+                             'contactpersoon', '|',
+                             $address, '|',
+                             string-join($phone, ','), '|',
+                             'uuid', '|',
+                             $position)}" store="true" index="false"/>
+		<xsl:for-each select="$email">
+			<Field name="{$fieldPrefix}Email" string="{string(.)}" store="true" index="true"/>
+			<!--  <Field name="{$fieldPrefix}RoleAndEmail" string="{$role}|{string(.)}" store="true" index="true"/> -->
+		</xsl:for-each>
 	</xsl:template>
 	<!-- {java:getCodelistTranslation('dcat:MD_MaintenanceFrequencyCode', string(.), 
 		string($langCode))} -->
 	<!-- ========================================================================================= -->
-	<!-- text element, by default indexed, not stored, tokenized -->
-	<xsl:template match="*">
-		<xsl:param name="name" select="name(.)" />
-		<xsl:param name="store" select="'false'" />
-		<xsl:param name="index" select="'true'" />
-		<Field name="{$name}" string="{string(.)}" store="{$store}"
-			index="{$index}" />
-	</xsl:template>
+	
 </xsl:stylesheet>

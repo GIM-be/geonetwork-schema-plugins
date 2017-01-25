@@ -78,37 +78,34 @@
 			<xs:element name="Dataset">
 				<xs:complexType>
 					<xs:sequence>
-						<!-- mandatory properties for dcat:Dataset-->
+						<xs:element ref="dct:identifier" minOccurs="0" maxOccurs="1"/>
 						<xs:element ref="dct:title" minOccurs="1" maxOccurs="unbounded"/>
 						<xs:element ref="dct:description" minOccurs="1" maxOccurs="unbounded"/>
-						<!-- recommended properties for dcat:Dataset-->
+						<xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="dct:modified" minOccurs="0" maxOccurs="1"/>								
 						<xs:element name="contactPoint" type="vcard:Organization" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:element name="distribution" type="dcat:Distribution" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element ref="dct:publisher" minOccurs="0" maxOccurs="unbounded"/>									
 						<xs:element name="keyword" type="rdf:PlainLiteral" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:element ref="dct:publisher" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element name="theme" type="skos:Concept" minOccurs="0" maxOccurs="unbounded"/>
-						<!-- Optional properties for dcat:Dataset and dcat:Dataset-->
 						<xs:element ref="dct:accessRights" minOccurs="0" maxOccurs="1"/>
 						<xs:element ref="dct:conformsTo" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="foaf:page" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="dct:accrualPeriodicity" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="dct:hasVersion" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:element ref="dct:identifier" minOccurs="0" maxOccurs="1"/>
 						<xs:element ref="dct:isVersionOf" minOccurs="0" maxOccurs="1"/>
 						<xs:element name="landingPage" type="xs:anyURI" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="dct:language" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="adms:identifier" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="dct:provenance" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:element ref="dct:relation" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="adms:sample" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element ref="dct:relation" minOccurs="0" maxOccurs="unbounded"/>				
 						<xs:element ref="dct:source" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="dct:spatial" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="dct:temporal" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="dct:type" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="dct:modified" minOccurs="0" maxOccurs="1"/>
 						<xs:element ref="owl:versionInfo" minOccurs="0" maxOccurs="1"/>
 						<xs:element ref="adms:versionNotes" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="distribution" type="dcat:Distribution" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element ref="adms:sample" minOccurs="0" maxOccurs="unbounded"/>									
 					</xs:sequence>
 					<xs:attribute ref="rdf:about"/>
 				</xs:complexType>
@@ -121,25 +118,22 @@
 			<xs:element name="Distribution">
 				<xs:complexType>
 					<xs:sequence>
-						<!-- mandatory properties for dcat:Distribution-->
-						<xs:element name="accessURL" type="xs:anyURI" minOccurs="1" maxOccurs="unbounded"/>
-						<!-- recommended properties for dcat:Distribution-->
+						<xs:element ref="dct:title" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="dct:description" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="accessURL" type="xs:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+						<xs:element name="downloadURL" type="xs:anyURI" minOccurs="0"/>
+						<xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="dct:modified" minOccurs="0" maxOccurs="1"/>	
 						<xs:element ref="dct:format" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="mediaType" type="skos:Concept" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="dct:language" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="dct:license" minOccurs="0" maxOccurs="unbounded"/>
-						<!-- optional properties for dcat:Distribution-->
+						<xs:element ref="dct:rights" minOccurs="0" maxOccurs="1"/>
 						<xs:element name="byteSize" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
 						<xs:element ref="spdx:checksum" minOccurs="0" maxOccurs="1"/>
 						<xs:element ref="foaf:page" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:element name="downloadURL" type="xs:anyURI" minOccurs="0"/>
-						<xs:element ref="dct:language" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="dct:conformsTo" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:element name="mediaType" type="skos:Concept" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="dct:rights" minOccurs="0" maxOccurs="1"/>
 						<xs:element ref="adms:status" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="dct:title" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:element ref="dct:modified" minOccurs="0" maxOccurs="1"/>
 					</xs:sequence>
 					<xs:attribute ref="rdf:about"/>
 				</xs:complexType>

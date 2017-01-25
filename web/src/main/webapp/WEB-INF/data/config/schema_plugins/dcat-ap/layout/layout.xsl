@@ -82,7 +82,7 @@
   </xsl:template>
 
   <!-- Visit all XML tree recursively -->
-  <xsl:template mode="mode-dcat-ap" match="dct:*|dcat:*|vcard:*|foaf:*|spdx:*|adms:*|owl:*|schema:*">
+  <xsl:template mode="mode-dcat-ap" match="dc:*|dct:*|dcat:*|vcard:*|foaf:*|spdx:*|adms:*|owl:*|schema:*|skos:*">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
 
@@ -135,7 +135,7 @@
 
 
   <!-- the other elements in DC. -->
-  <xsl:template mode="mode-dcat-ap" priority="100" match="dct:*|dcat:*|vcard:*|foaf:*|spdx:*|adms:*|owl:*|schema:*">
+  <xsl:template mode="mode-dcat-ap" priority="100" match="dc:*|dct:*|dcat:*|vcard:*|foaf:*|spdx:*|adms:*|owl:*|schema:*|skos:*">
     <xsl:variable name="name" select="name(.)"/>
     <xsl:variable name="ref" select="gn:element/@ref"/>
     <xsl:variable name="labelConfig" select="gn-fn-metadata:getLabel($schema, $name, $labels)"/>
