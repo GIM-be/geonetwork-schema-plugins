@@ -105,16 +105,14 @@
             </dcat:contactPoint>
             <dcat:keyword xmlns:gco="http://www.isotc211.org/2005/gco" xml:lang="nl">Trefwoord 1</dcat:keyword>
             <dcat:keyword xmlns:gco="http://www.isotc211.org/2005/gco" xml:lang="nl">Trefwoord 2</dcat:keyword>
-            <dcat:theme xmlns:gco="http://www.isotc211.org/2005/gco">
-               <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/ECON">
-                  <skos:prefLabel xml:lang="nl">Economie en financiën</skos:prefLabel>
-                  <skos:prefLabel xml:lang="en">Economy and finance</skos:prefLabel>
-                  <skos:prefLabel xml:lang="fr">Économie et finances</skos:prefLabel>
-                  <skos:prefLabel xml:lang="de">Wirtschaft und Finanzen</skos:prefLabel>
-                  <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
-               </skos:Concept>
-            </dcat:theme>
-            <dcat:landingPage xmlns:gco="http://www.isotc211.org/2005/gco">Link naar html pagina</dcat:landingPage>
+					<dcat:theme>
+						<skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/GOVE">
+							<skos:prefLabel xml:lang="nl">Overheid en publieke sector</skos:prefLabel>
+							<skos:prefLabel xml:lang="en">Government and public sector</skos:prefLabel>
+							<skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+						</skos:Concept>
+					</dcat:theme>
+            <dcat:landingPage rdf:resource="http://vlaanderen.be/"/>
             <adms:identifier>
                <adms:Identifier rdf:about="http://www.altova.com/">
                   <skos:notation rdf:datatype="http://www.altova.com/">String</skos:notation>
@@ -124,7 +122,7 @@
             <adms:versionNotes>Version notes</adms:versionNotes>
             <dcat:distribution xmlns:gco="http://www.isotc211.org/2005/gco">
                <dcat:Distribution rdf:about="http://data.opendataforum.info/dataset/15c85d4c-3654-4cc6-820d-a944a5dc875a/resource/3a029a70-b8e7-4bdf-9c37-a45ef0bab1ab">
-                  <dcat:accessURL>https://www.dov.vlaanderen.be/geoserver/bodemkaart/bodemtypes/wms</dcat:accessURL>
+                  <dcat:accessURL rdf:resource="http://vlaanderen.be/"/>
                   <dct:description xml:lang="nl">WMS-endpoint Bodemtypes</dct:description>
                   <dct:format>
                      <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/CSV">
@@ -156,7 +154,7 @@
                         <foaf:name xml:lang="nl">Naam document</foaf:name>
                      </foaf:Document>
                   </foaf:page>
-                  <dcat:downloadURL>download url</dcat:downloadURL>
+                  <dcat:downloadURL rdf:resource="http://vlaanderen.be/"/>
                   <dct:language>
                      <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/language/NLD">
                         <skos:prefLabel xml:lang="nl">Nederlands</skos:prefLabel>

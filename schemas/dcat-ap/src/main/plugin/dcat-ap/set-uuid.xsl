@@ -40,24 +40,7 @@
 	<xsl:template match="dcat:Dataset">
 		<xsl:copy>
 			<dct:identifier><xsl:value-of select="/root/env/uuid"/></dct:identifier>
-			<xsl:apply-templates select="dct:title"/>
-			<xsl:apply-templates select="dct:description"/>
-			<xsl:apply-templates select="dcat:accessURL"/>			
-			<xsl:apply-templates select="dcat:contactPoint"/>
-			<xsl:apply-templates select="dct:publisher"/>
-			<xsl:apply-templates select="dct:issued"/>
-			<xsl:apply-templates select="dct:license"/>
-			<xsl:apply-templates select="dcat:theme"/>			
-			<xsl:apply-templates select="dcat:keyword"/>
-			<xsl:apply-templates select="dcat:landingPage"/>
-			<xsl:apply-templates select="dcat:downloadURL"/>
-			<xsl:apply-templates select="dct:format"/>
-			<xsl:apply-templates select="dct:spatial"/>
-			<xsl:apply-templates select="dct:type"/>
-			<xsl:apply-templates select="dct:accrualPeriodicity"/>
-			<xsl:apply-templates select="dct:language"/>
-			<xsl:apply-templates select="dct:*[name(.)!= 'dct:identifer']"/>
-			<xsl:apply-templates select="dcat:*"/>
+			<xsl:apply-templates select="*[name(.)!= 'dct:identifer']"/>
 		</xsl:copy>
 	</xsl:template>
 	

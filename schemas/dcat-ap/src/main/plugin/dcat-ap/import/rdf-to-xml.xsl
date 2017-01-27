@@ -21,7 +21,6 @@
 		xmlns:fn-rdf="http://geonetwork-opensource.org/xsl/functions/rdf"
 		version="2.0"
 		extension-element-prefixes="saxon">
->>>>>>> Stashed changes
 	<!-- Tell the XSL processor to output XML. -->
 	<xsl:output method="xml" indent="yes"/>
 	<!-- Default language for plain literals.   uuid:randomUUID()   java.util.UUID.randomUUID() -->
@@ -35,7 +34,7 @@
 																		sr:binding[@name='object']/sr:uri = 'http://www.w3.org/ns/dcat#Catalog']"/>
 		<rdf:RDF>
 			<!-- Set the xsi:schemaLocation attribute, used for validation -->
-			<xsl:attribute name="xsi:schemaLocation" select="'http://www.w3.org/1999/02/22-rdf-syntax-ns# ../schema/rdf.xsd'"/>
+			<xsl:attribute name="xsi:schemaLocation" select="'http://www.w3.org/1999/02/22-rdf-syntax-ns# http://www.openarchives.org/OAI/2.0/rdf.xsd'"/>
 			<xsl:for-each select="$catalogs">
 				<xsl:variable name="catalogURI" select="./sr:binding[@name='subject']/sr:uri"/>
 				<dcat:Catalog rdf:about="{$catalogURI}">
@@ -134,6 +133,24 @@
 											sr:binding[@name='subject']/sr:uri = $datasetURIs]/sr:binding[@name='object']/*"/>
 						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:contactPoint')"/>
 					</xsl:call-template>
+					<!-- TODO: remove this template-->
+					<dcat:contactPoint xmlns:gco="http://www.isotc211.org/2005/gco">
+					   <vcard:Organization rdf:about="b1">
+						  <vcard:fn>Naam van persoon</vcard:fn>
+						  <vcard:organization-name>Naam van organisatie</vcard:organization-name>
+						  <vcard:hasAddress>
+							 <vcard:Address rdf:about="http://www.altova.com/">
+								<vcard:street-address>Straat en nummer</vcard:street-address>
+								<vcard:locality>Plaats</vcard:locality>
+								<vcard:postal-code>Postcode</vcard:postal-code>
+								<vcard:country-name>Land</vcard:country-name>
+							 </vcard:Address>
+						  </vcard:hasAddress>
+						  <vcard:hasEmail>nomail@trump.com</vcard:hasEmail>
+						  <vcard:hasURL>http://trump.com</vcard:hasURL>
+						  <vcard:hasTelephone>Telefoon</vcard:hasTelephone>
+					   </vcard:Organization>
+					</dcat:contactPoint>					
 					<!-- dct:publisher -->
 					<xsl:call-template name="agents">
 						<xsl:with-param name="results" select="$results"/>
@@ -180,6 +197,12 @@
 											sr:binding[@name='subject']/sr:uri = $datasetURIs]/sr:binding[@name='object']/*"/>
 						<xsl:with-param name="predicate" select="fn:QName('http://xmlns.com/foaf/0.1/','foaf:page')"/>
 					</xsl:call-template>
+					<!-- TODO: remove this template -->
+                  <foaf:page>
+                     <foaf:Document rdf:about="http://vlaanderen.be">
+                        <foaf:name xml:lang="nl">Kwaliteitsinformatie</foaf:name>
+                     </foaf:Document>
+                  </foaf:page>					
 					<!-- dct:accrualPeriod -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
@@ -199,7 +222,7 @@
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:isVersionOf')"/>
 					</xsl:call-template>
 					<!-- dcat:landingPage-->
-					<xsl:call-template name="properties">
+					<xsl:call-template name="urls">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:landingPage')"/>
@@ -249,6 +272,13 @@
 											sr:binding[@name='subject']/sr:uri = $datasetURIs]/sr:binding[@name='object']/*"/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:spatial')"/>
 					</xsl:call-template>
+					<!-- TODO: remove this template -->
+					<dct:spatial xmlns:gco="http://www.isotc211.org/2005/gco">
+					   <dct:Location rdf:about="b0">
+						  <locn:geometry rdf:datatype="https://www.iana.org/assignments/media-types/application/vnd.geo+json">{"type": "Polygon", "coordinates": [[[2.55791, 50.6746], [5.92, 50.6746], [5.92, 51.496], [2.55791, 51.496], [2.55791, 50.6746]]]}</locn:geometry>
+						  <locn:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral">POLYGON ((2.5579 50.6746, 5.9200 50.6746, 5.9200 51.4960, 2.5579 51.4960, 2.5579 50.6746))</locn:geometry>
+					   </dct:Location>
+					</dct:spatial>					
 					<!-- dct:temporal -->
 					<xsl:call-template name="periods">
 						<xsl:with-param name="results" select="$results"/>
@@ -313,6 +343,16 @@
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:type')"/>
 					</xsl:call-template>
+					<!-- TODO: remove this -->
+                  <dct:type>
+                     <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/organization-type/DIVISION">
+                        <skos:prefLabel xml:lang="nl">Afdeling</skos:prefLabel>
+                        <skos:prefLabel xml:lang="en">Division</skos:prefLabel>
+                        <skos:prefLabel xml:lang="fr">Division</skos:prefLabel>
+                        <skos:prefLabel xml:lang="de">Abteilung</skos:prefLabel>
+                        <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/organization-type"/>
+                     </skos:Concept>
+                  </dct:type>					
 				</foaf:Agent>
 			</xsl:element>
 		</xsl:for-each>
@@ -538,17 +578,15 @@
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:description')"/>
 					</xsl:call-template>		
 					<!-- dcat:accessURL: TODO: remove this tweak. -->
-					<dcat:accessURL>
-						<xsl:value-of select="."/>
-					</dcat:accessURL>
+					<dcat:accessURL rdf:resource="{.}"/>
 					<!-- dcat:accessURL -->
-					<xsl:call-template name="properties">
+					<xsl:call-template name="urls">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:accessURL')"/>
 					</xsl:call-template>
 					<!-- dcat:downloadURL -->
-					<xsl:call-template name="properties">
+					<xsl:call-template name="urls">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:downloadURL')"/>
@@ -582,13 +620,23 @@
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:language')"/>
-					</xsl:call-template>					
+					</xsl:call-template>
+					<!-- TODO: remove this -->
+                  <dct:license>
+                     <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/licence/CC0">
+                        <skos:prefLabel xml:lang="nl">Creative Commons CC0 1.0 Universeel</skos:prefLabel>
+                        <skos:prefLabel xml:lang="en">Creative Commons CC0 1.0 Universal</skos:prefLabel>
+                        <skos:prefLabel xml:lang="fr">Creative Commons CC0 1.0 Universel</skos:prefLabel>
+                        <skos:prefLabel xml:lang="de">Creative Commons CC0 1.0 Universell</skos:prefLabel>
+                        <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/licence"/>
+                     </skos:Concept>		
 					<!-- dct:license -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:license')"/>
 					</xsl:call-template>
+                  </dct:license>					
 					<!-- dct:rights -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
@@ -607,12 +655,25 @@
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://xmlns.com/foaf/0.1/','spdx:checksum')"/>
 					</xsl:call-template>
+					<!-- TODO: remove this template -->
+                  <spdx:checksum>
+                     <spdx:CheckSum>
+                        <spdx:algorithm>SHA256</spdx:algorithm>
+                        <spdx:checksumValue>41394644363445313243</spdx:checksumValue>
+                     </spdx:CheckSum>
+                  </spdx:checksum>					
 					<!-- foaf:page -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://xmlns.com/foaf/0.1/','foaf:page')"/>
 					</xsl:call-template>
+					<!-- TODO: remove this document -->
+                  <foaf:page>
+                     <foaf:Document rdf:about="http://vlaanderen.be">
+                        <foaf:name xml:lang="nl">Kwaliteitsinformatie</foaf:name>
+                     </foaf:Document>
+                  </foaf:page>						
 					<!-- dct:conformsTo-->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
@@ -721,4 +782,35 @@
 			</xsl:choose>
 		</xsl:for-each>
 	</xsl:template>
+	<!-- urls -->
+	<xsl:template name="urls">
+		<xsl:param name="results"/>
+		<xsl:param name="subject"/>
+		<xsl:param name="predicate"/>
+		<xsl:variable name="predicateString" select="concat(fn:namespace-uri-from-QName($predicate),fn:local-name-from-QName($predicate))"/>
+		<!-- Select all objects matching the subject and predicate pattern -->
+		<xsl:for-each select="$results[sr:binding[@name='subject']/* = $subject and
+											sr:binding[@name='predicate']/sr:uri = $predicateString]/sr:binding[@name='object']">
+			<xsl:choose>
+				<!-- plain literals, make them resources - this is needed for dcat:accessURL, dcat:downloadURL, which expect a resource and not a literal -->
+				<xsl:when test="./sr:literal">
+					<xsl:element name="{$predicate}">
+							<xsl:attribute name="rdf:resource" select="./sr:literal"/>
+					</xsl:element>
+				</xsl:when>
+				<!-- URIs -->
+				<xsl:when test="./sr:uri">
+					<xsl:element name="{$predicate}">
+						<xsl:attribute name="rdf:resource" select="./sr:uri"/>
+					</xsl:element>
+				</xsl:when>
+				<!-- blank nodes -->
+				<xsl:when test="./sr:bnode">
+					<xsl:element name="{$predicate}">
+						<xsl:attribute name="rdf:resource" select="./sr:bnode"/>
+					</xsl:element>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:for-each>
+	</xsl:template>	
 </xsl:stylesheet>

@@ -44,48 +44,26 @@
     <xsl:apply-templates select="rdf:RDF"/>
   </xsl:template>
   
-  <!-- ================================================================= -->
+  <!-- =================================================================  -->
 
   <xsl:template match="@*|node()">
     <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
+      <xsl:apply-templates select="@*|node()[name(.)!= 'dct:identifier']"/>
     </xsl:copy>
   </xsl:template>
 
-  <!-- ================================================================= -->
-
-  <xsl:template match="dcat:Catalog/dct:title">
-		<dct:title>Catalog name must be used here</dct:title>
-  </xsl:template>
-
-  <xsl:template match="dcat:Catalog/dct:description">
-		<dct:description>Catalog description must be used here with organization name and catalog site id?</dct:description>
-  </xsl:template>
 
   <!-- ================================================================= -->
   <xsl:template match="dcat:Dataset">
-    <dcat:Dataset>
+    <dcat:Dataset rdf:about="{@rdf:about}">
       <dct:identifier>
         <xsl:value-of select="/root/env/uuid"/>
       </dct:identifier>
-      <xsl:apply-templates select="dct:*[name(.)!= 'dct:identifier']"/>
-      <xsl:apply-templates select="dc:*|dcat:*|vcard:*|foaf:*|spdx:*|adms:*|owl:*|schema:*|skos:*"/>
+      <xsl:message>Identifier replaced!</xsl:message>
+      <xsl:apply-templates select="*[name(.)!= 'dct:identifier']"/>
     </dcat:Dataset>
   </xsl:template>
 
-  <xsl:template match="dct:issued[*:DateTime]|dct:modified[*:DateTime]|schema:startDate[*:DateTime]|schema:endDate[*:DateTime]">
-    <xsl:copy>
-      <xsl:apply-templates select="@*"/>
-	  <xsl:value-of select="*:DateTime"/>
-    </xsl:copy>
-  </xsl:template>
-
-  <xsl:template match="dcat:homepage/foaf:Document">
-    <xsl:copy>
-      <xsl:apply-templates select="@*"/>
-	  <xsl:value-of select="$serviceUrl"/>
-    </xsl:copy>
-  </xsl:template>
 
 </xsl:stylesheet>
   

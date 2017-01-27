@@ -31,7 +31,7 @@
 	</xsl:template>
 	<xsl:template match="dcat:Dataset">
 			<!--TODO: uncomment<xsl:call-template name="langId-dcat-ap"/>-->
-		<xsl:variable name="langCode">NLD</xsl:variable>
+		<xsl:variable name="langCode">eng</xsl:variable>
 		<Document locale="{$langCode}">
 			<!-- locale information -->
 			<Field name="_locale" string="{$langCode}" store="true" index="true"/>
@@ -89,108 +89,49 @@
 				<xsl:variable name="keyword" select="string(.)"/>
 				<Field name="keyword" string="{$keyword}" store="true" index="true"/>
 			</xsl:for-each>
+			<Field name="thesaurusIdentifier"
+                   string="data-theme"
+                   store="true" index="true"/>
 			<!-- dcat:theme -->
 			<xsl:for-each select="dcat:theme/skos:Concept/skos:prefLabel">
 				<xsl:variable name="theme" select="string(.)"/>
-				<Field name="data-theme" string="{$theme}" store="true" index="true"/>
+				<Field name="thesaurus-data-theme" string="{$theme}" store="true" index="true"/>
 			</xsl:for-each>
 			<!-- dcat:Distribution -->
 			<xsl:for-each select="dcat:distribution/dcat:Distribution">
-				<xsl:variable name="title" select="dct:title"/>
-				<xsl:variable name="description" select="substring(string(dct:description),1,1024)"/>
+				<xsl:variable name="title" select="concat('titel: ',dct:title)"/>
+				<xsl:variable name="description" select="concat('beschrijving',string(dct:description))"/>
 				<xsl:variable name="dPosition" select="position()"/>
 				<xsl:for-each select="dcat:accessURL">
 					<xsl:variable name="aPosition" select="position()"/>
-					<xsl:variable name="aURL" select="string(.)"/>
+					<xsl:variable name="aURL" select="string(@rdf:resource)"/>
+					<xsl:variable name="mimetype" select="text/csv"/>
 					<!-- Index link -->
-					<Field name="link" string="{concat($title, '|',$description,'|', $aURL, '|WWW:DOWNLOAD|text/csv|',$dPosition,$aPosition)}" store="true" index="false"/>
-					<Field name="download" string="true" store="false" index="true"/>
+					<Field name="protocol" string="WWW:DOWNLOAD" store="true" index="true"/>
+					<Field name="linkage_name_des" string="{string(concat($title, ':::', $description))}" store="true" index="true"/>
+					<Field name="mimetype" string="{$mimetype}" store="true" index="true"/>
+					<Field name="download" string="true" store="false" index="true"/>					
+					<Field name="link" string="{concat($title, '|',$description,'|', $aURL, '|WWW:DOWNLOAD|text/csv|',$dPosition)}" store="true" index="true"/>
 				</xsl:for-each>
 				<xsl:for-each select="dcat:downloadURL">
 					<xsl:variable name="bPosition" select="position()"/>
-					<xsl:variable name="bURL" select="string(.)"/>
+					<xsl:variable name="bURL" select="string(@rdf:resource)"/>
+					<xsl:variable name="mimetype" select="text/csv"/>
 					<!-- Index link -->
-					<Field name="link" string="{concat($title, '|',$description,'|', $bURL, '|WWW:DOWNLOAD|text/csv|',$dPosition,$bPosition)}" store="true" index="false"/>
+					<Field name="protocol" string="WWW:DOWNLOAD" store="true" index="true"/>
+					<Field name="linkage_name_des" string="{string(concat($title, ':::', $description))}" store="true" index="true"/>
+					<Field name="mimetype" string="{$mimetype}" store="true" index="true"/>
+					<Field name="download" string="true" store="false" index="true"/>	
+					<Field name="link" string="{concat($title, '|',$description,'|', $bURL, '|WWW:DOWNLOAD|text/csv|',$dPosition)}" store="true" index="true"/>
 					<Field name="download" string="true" store="false" index="true"/>
 				</xsl:for-each>
 				<xsl:for-each select="dct:format/skos:Concept/skos:prefLabel">
 					<Field name="format" string="{.}" store="true" index="true"/>
 				</xsl:for-each>
-				<xsl:for-each select="dct:license">
+				<!-- TODO: fix hardcoded language -->
+				<xsl:for-each select="dct:license/skos:Concept/skos:prefLabel[@xml:lang='nl']">
 					<Field name="MD_LegalConstraintsUseLimitation" string="{string(.)}" store="true" index="true"/>
 				</xsl:for-each>
-				<!-- 				<Field name="linkage_name_des"
-					string="{string(concat(variable_title, ':::', variable_desc))}"
-					store="true" index="true" />
-				<!$$comment index online protocol $$comment>
-				<xsl:variable name="download_check">
-					<xsl:text>&amp;fname=&amp;access</xsl:text>
-				</xsl:variable>
-				<xsl:variable name="linkage" select="dcat:accessURL" />
-				<xsl:variable name="title"
-					select="normalize-space(dcat:name/dcat:CharacterString|dcat:name/dcat:MimeFileType)" />
-				<xsl:variable name="desc"
-					select="normalize-space(dcat:description/dcat:CharacterString)" />
-				<xsl:variable name="protocol"
-					select="normalize-space(dcat:protocol/dcat:CharacterString)" />
-				<xsl:variable name="mimetype"
-					select="geonet:protocolMimeType($linkage, $protocol, dcat:name/dcat:MimeFileType/@type)" />
-				<!$$comment If the linkage points to WMS service and no protocol specified, 
-					manage as protocol OGC:WMS $$comment>
-				<xsl:variable name="wmsLinkNoProtocol"
-					select="contains(lower-case($linkage), 'service=wms') and not(string($protocol))" />
-				<xsl:if
-					test="string(dct:title)!='' and string(dct:description)!='' and not(contains(dcat:accessURL,$download_check))" />
-
-				<xsl:if test="normalize-space($mimetype)!=''">
-					<Field name="mimetype" string="{$mimetype}" store="true"
-						index="true" />
-				</xsl:if>
-				<xsl:if test="contains($protocol, 'WWW:DOWNLOAD')">
-					<Field name="download" string="true" store="false" index="true" />
-				</xsl:if>
-				<xsl:if test="contains($protocol, 'OGC:WMS') or $wmsLinkNoProtocol">
-					<Field name="dynamic" string="true" store="false" index="true" />
-				</xsl:if>
-				<!$$comment ignore WMS links without protocol (are indexed below with mimetype 
-					application/vnd.ogc.wms_xml) $$comment>
-				<xsl:if test="not($wmsLinkNoProtocol)">
-					<Field name="link"
-						string="{concat(dct:title, '|', dct:description, '|', $linkage, '|', $protocol, '|', $mimetype, '|', $tPosition)}"
-						store="true" index="false" />
-				</xsl:if>
-				<!$$comment Add KML link if WMS $$comment>
-				<xsl:if
-					test="starts-with($protocol,'OGC:WMS') and string($linkage)!='' and string(dct:title)!=''">
-					<!$$comment FIXME : relative path $$comment>
-					<Field name="link"
-						string="{concat(dct:title, '|', dct:description, '|',
-                                                '../../srv/en/google.kml?uuid=', /dcat:MD_Metadata/dcat:fileIdentifier/dcat:CharacterString, '&amp;layers=', dct:title,
-                                                '|application/vnd.google-earth.kml+xml|application/vnd.google-earth.kml+xml', '|', $tPosition)}"
-						store="true" index="false" />
-				</xsl:if>
-				<!$$comment Try to detect Web Map Context by checking protocol or file extension $$comment>
-				<xsl:if
-					test="starts-with($protocol,'OGC:WMC') or contains($linkage,'.wmc')">
-					<Field name="link"
-						string="{concat(dct:title, '|', dct:description, '|',
-                                                $linkage, '|application/vnd.ogc.wmc|application/vnd.ogc.wmc', '|', $tPosition)}"
-						store="true" index="false" />
-				</xsl:if>
-				<!$$comment Try to detect OWS Context by checking protocol or file extension $$comment>
-				<xsl:if
-					test="starts-with($protocol,'OGC:OWS-C') or contains($linkage,'.ows')">
-					<Field name="link"
-						string="{concat(dct:title, '|', dct:description, '|',
-                                                $linkage, '|application/vnd.ogc.ows|application/vnd.ogc.ows', '|', $tPosition)}"
-						store="true" index="false" />
-				</xsl:if>
-				<xsl:if test="$wmsLinkNoProtocol">
-					<Field name="link"
-						string="{concat(dct:title, '|', dct:description, '|',
-                                                $linkage, '|OGC:WMS|application/vnd.ogc.wms_xml', '|', $tPosition)}"
-						store="true" index="false" />
-				</xsl:if>  -->
 			</xsl:for-each>
 			<!-- This index for "coverage" requires significant expansion to work 
 				well for spatial searches. It now only works for very strictly formatted 
@@ -220,7 +161,7 @@
 				<xsl:variable name="name" select="tokenize(., '/')[last()]"/>
 				<xsl:variable name="tPosition" select="position()"/>
 				<!-- Index link where last token after the last / is the link name. -->
-				<Field name="link" string="{concat($name, '|description|', ., '|WWW:DOWNLOAD|WWW-DOWNLOAD|',$tPosition)}" store="true" index="false"/>
+				<Field name="link" string="{concat($name, '|description|', @rdf:resource, '|WWW:DOWNLOAD|WWW-DOWNLOAD|',$tPosition)}" store="true" index="false"/>
 			</xsl:for-each>
 			<xsl:for-each select="(dcat:landingPage)[normalize-space(.) != ''
                               and matches(., '.*(.gif|.png.|.jpeg|.jpg)$', 'i')]">

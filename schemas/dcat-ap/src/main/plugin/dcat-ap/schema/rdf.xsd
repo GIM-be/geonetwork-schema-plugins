@@ -42,6 +42,10 @@ Date in
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
+	<!-- rdf:Resource-->
+	<xs:complexType name="Resource">
+		<xs:attribute ref="rdf:resource"/>
+	</xs:complexType>		
 	<!-- CatalogRoot -->
 	<xs:complexType name="CatalogRoot">
 		<xs:choice>

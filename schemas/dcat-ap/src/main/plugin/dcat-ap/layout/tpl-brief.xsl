@@ -23,7 +23,7 @@
   -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   xmlns:dct="http://purl.org/dc/terms/"
   xmlns:dcat="http://www.w3.org/ns/dcat#"
   xmlns:gn="http://www.fao.org/geonetwork" xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -64,12 +64,7 @@
         </abstract>
       </xsl:if>
 
-      <xsl:for-each select="dc:subject[text()]">
-        <keyword>
-          <xsl:value-of select="."/>
-        </keyword>
-      </xsl:for-each>
-      <xsl:for-each select="dc:identifier[text()]">
+      <xsl:for-each select="dct:identifier[text()]">
         <link type="url">
           <xsl:value-of select="."/>
         </link>
@@ -106,13 +101,13 @@
         </geoBox>
       </xsl:if>
       
-      <xsl:for-each select="dcat:downloadURL[text()]">
+      <xsl:for-each select="dcat:downloadURL/@rdf:resource">
           <link type="download">
             <xsl:value-of select="."/>
           </link>
       </xsl:for-each>
       
-      <xsl:for-each select="dcat:accessURL[text()]|dcat:landingPage[text()]">
+      <xsl:for-each select="dcat:accessURL/@rdf:resource|dcat:landingPage/@rdf:resource">
           <link type="url">
             <xsl:value-of select="."/>
           </link>
