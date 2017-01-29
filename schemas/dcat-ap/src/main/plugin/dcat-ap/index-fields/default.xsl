@@ -45,7 +45,9 @@
 			</xsl:for-each>
 			<xsl:for-each select="dct:identifier">
 				<Field name="identifier" string="{string(.)}" store="false" index="true"/>
+				<Field name="fileId" string="{string(.)}" store="false" index="true"/>
 			</xsl:for-each>
+			<Field name="type" string="dataset" store="true" index="true"/>			
 			<xsl:for-each select="dct:description">
 				<Field name="abstract" string="{string(.)}" store="true" index="true"/>
 			</xsl:for-each>

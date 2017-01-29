@@ -32,7 +32,7 @@
 		<xsl:variable name="results" select="/sr:sparql/sr:results/sr:result"/>
 		<xsl:variable name="catalogs" select="$results[sr:binding[@name='predicate']/sr:uri = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and
 																		sr:binding[@name='object']/sr:uri = 'http://www.w3.org/ns/dcat#Catalog']"/>
-		<rdf:RDF>
+		<rdf:RDF xmlns:gco="http://www.isotc211.org/2005/gco">
 			<!-- Set the xsi:schemaLocation attribute, used for validation -->
 			<xsl:attribute name="xsi:schemaLocation" select="'http://www.w3.org/1999/02/22-rdf-syntax-ns# http://www.openarchives.org/OAI/2.0/rdf.xsd'"/>
 			<xsl:for-each select="$catalogs">
@@ -134,12 +134,12 @@
 						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/ns/dcat#','dcat:contactPoint')"/>
 					</xsl:call-template>
 					<!-- TODO: remove this template-->
-					<dcat:contactPoint xmlns:gco="http://www.isotc211.org/2005/gco">
+					<dcat:contactPoint>
 					   <vcard:Organization rdf:about="b1">
 						  <vcard:fn>Naam van persoon</vcard:fn>
 						  <vcard:organization-name>Naam van organisatie</vcard:organization-name>
 						  <vcard:hasAddress>
-							 <vcard:Address rdf:about="http://www.altova.com/">
+							 <vcard:Address>
 								<vcard:street-address>Straat en nummer</vcard:street-address>
 								<vcard:locality>Plaats</vcard:locality>
 								<vcard:postal-code>Postcode</vcard:postal-code>
@@ -273,7 +273,7 @@
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:spatial')"/>
 					</xsl:call-template>
 					<!-- TODO: remove this template -->
-					<dct:spatial xmlns:gco="http://www.isotc211.org/2005/gco">
+					<dct:spatial>
 					   <dct:Location rdf:about="b0">
 						  <locn:geometry rdf:datatype="https://www.iana.org/assignments/media-types/application/vnd.geo+json">{"type": "Polygon", "coordinates": [[[2.55791, 50.6746], [5.92, 50.6746], [5.92, 51.496], [2.55791, 51.496], [2.55791, 50.6746]]]}</locn:geometry>
 						  <locn:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral">POLYGON ((2.5579 50.6746, 5.9200 50.6746, 5.9200 51.4960, 2.5579 51.4960, 2.5579 50.6746))</locn:geometry>
@@ -442,13 +442,13 @@
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://xmlns.com/foaf/0.1/','foaf:name')"/>
+						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/2004/02/skos/core#','skos:prefLabel')"/>
 					</xsl:call-template>
 					<!-- dct:type -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
-						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:type')"/>
+						<xsl:with-param name="predicate" select="fn:QName('http://www.w3.org/2004/02/skos/core#','skos:inScheme')"/>
 					</xsl:call-template>
 				</skos:Concept>
 			</xsl:element>
@@ -571,13 +571,15 @@
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:title')"/>
 					</xsl:call-template>
+					<!-- tweak to force harvesting by CKAN for Ghent dataportal -->
+					<dct:title xml:lang="nl">downloadlink</dct:title>
 					<!-- dct:description -->
 					<xsl:call-template name="properties">
 						<xsl:with-param name="results" select="$results"/>
 						<xsl:with-param name="subject" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:description')"/>
 					</xsl:call-template>		
-					<!-- dcat:accessURL: TODO: remove this tweak. -->
+					<!-- tweak to force harvesting by CKAN for Ghent dataportal -->
 					<dcat:accessURL rdf:resource="{.}"/>
 					<!-- dcat:accessURL -->
 					<xsl:call-template name="urls">
@@ -604,9 +606,9 @@
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:modified')"/>
 					</xsl:call-template>			
 					<!-- dct:format -->
-					<xsl:call-template name="properties">
+					<xsl:call-template name="concepts">
 						<xsl:with-param name="results" select="$results"/>
-						<xsl:with-param name="subject" select="."/>
+						<xsl:with-param name="conceptURIs" select="."/>
 						<xsl:with-param name="predicate" select="fn:QName('http://purl.org/dc/terms/','dct:format')"/>
 					</xsl:call-template>
 					<!-- dcat:mediaType -->

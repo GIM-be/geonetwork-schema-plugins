@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
   ~ Copyright (C) 2001-2016 Food and Agriculture Organization of the
   ~ United Nations (FAO-UN), United Nations World Food Programme (WFP)
@@ -22,48 +21,34 @@
   ~ Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
-
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-		xmlns:spdx="http://spdx.org/rdf/terms#"
-		xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-		xmlns:adms="http://www.w3.org/ns/adms#" 
-		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-		xmlns:dc="http://purl.org/dc/elements/1.1/" 
-        xmlns:dct="http://purl.org/dc/terms/"
-        xmlns:dcat="http://www.w3.org/ns/dcat#"
-		xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
-		xmlns:foaf="http://xmlns.com/foaf/0.1/" 
-		xmlns:owl="http://www.w3.org/2002/07/owl#"
-		xmlns:schema="http://schema.org/">
-
-  <!-- =================================================================   -->
-
-  <xsl:variable name="serviceUrl" select="/root/env/siteURL"/>
-
-  <xsl:template match="/root">
-    <xsl:apply-templates select="rdf:RDF"/>
-  </xsl:template>
-  
-  <!-- =================================================================  -->
-
-  <xsl:template match="@*|node()">
-    <xsl:copy>
-      <xsl:apply-templates select="@*|node()[name(.)!= 'dct:identifier']"/>
-    </xsl:copy>
-  </xsl:template>
-
-
-  <!-- ================================================================= -->
-  <xsl:template match="dcat:Dataset">
-    <dcat:Dataset rdf:about="{@rdf:about}">
-      <dct:identifier>
-        <xsl:value-of select="/root/env/uuid"/>
-      </dct:identifier>
-      <xsl:message>Identifier replaced!</xsl:message>
-      <xsl:apply-templates select="*[name(.)!= 'dct:identifier']"/>
-    </dcat:Dataset>
-  </xsl:template>
-
-
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:spdx="http://spdx.org/rdf/terms#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:adms="http://www.w3.org/ns/adms#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:schema="http://schema.org/" xmlns:gco="http://www.isotc211.org/2005/gco">
+	<!-- Tell the XSL processor to output XML. -->
+	<xsl:output method="xml" indent="yes"/>
+	<!-- =================================================================   -->
+	<xsl:variable name="serviceUrl" select="/root/env/siteURL"/>
+	
+	<xsl:template match="/root">
+		<xsl:apply-templates select="//rdf:RDF"/>
+	</xsl:template>
+	<!-- =================================================================  -->
+	<xsl:template match="@*|node()[name(.)!= 'gco:DateTime' and name(.)!= 'dcat:Dataset' and name(.)!= 'root']">
+		<xsl:copy>
+			<xsl:apply-templates select="@*|node()"/>
+		</xsl:copy>
+	</xsl:template>
+	<!-- ================================================================= -->
+	<xsl:template match="dcat:Dataset">
+		<dcat:Dataset rdf:about="{@rdf:about}">
+			<dct:identifier>
+				<xsl:value-of select="/root/env/uuid"/>
+			</dct:identifier>
+			<xsl:apply-templates select="node()[name(.)!= 'dct:identifier']"/>
+		</dcat:Dataset>
+	</xsl:template>
+	<!-- Removes any surrounding gco:DateTime element (from ISO19139) that may have been inserted by the DateTime widget, keeps only the datetime value.-->
+	<xsl:template match="gco:DateTime">
+		<xsl:copy>
+			<xsl:value-of select="gco:DateTime"/>
+		</xsl:copy>
+	</xsl:template>
 </xsl:stylesheet>
-  
