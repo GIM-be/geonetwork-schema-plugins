@@ -54,7 +54,7 @@ import java.util.List;
  * @author Jose García
  */
 public class RdfOutputManager {
-    private final static int PAGE_SIZE = 5;
+    private final static int PAGE_SIZE = 25;
 
     private Element thesaurusEl;
 
