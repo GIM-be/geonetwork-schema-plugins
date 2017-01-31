@@ -1,8 +1,0 @@
-output/**
-output
-rdf-to-xml-gent.xsl
-rdf-to-xml-vlaanderen.xsl
-generate-samples-vlaanderen.cmd
-generate-samples-gent.cmd
-GenerateUUID.java
-GenerateUUID.class
