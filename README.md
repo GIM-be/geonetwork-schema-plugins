@@ -26,6 +26,6 @@ For further guidance on setting up a development environment/building Geonetwork
 
 ## Future work
 
-This plugin would merit from further improvements in the following areas:
+This plugin would merit further improvements in the following areas:
 * Integration of the import script in a GeoNetwork DCAT harvester.
 * Forms: The layout of the DCAT-AP editor needs furhter improvement. A number of components still need to be implemented (spatial coverage) or made more generic.
