@@ -21,7 +21,7 @@
   ~ Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:saxon="http://saxon.sf.net/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:dct="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/rdf#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:iso19139="http://geonetwork-opensource.org/schemas/iso19139" version="2.0" extension-element-prefixes="saxon" exclude-result-prefixes="#all">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:saxon="http://saxon.sf.net/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:dct="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/rdf#" xmlns:schema="http://schema.org/" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:iso19139="http://geonetwork-opensource.org/schemas/iso19139" version="2.0" extension-element-prefixes="saxon" exclude-result-prefixes="#all">
 	<!-- TODO : add Multilingual metadata support
     See http://www.w3.org/TR/2004/REC-rdf-syntax-grammar-20040210/#section-Syntax-languages
 
@@ -167,7 +167,7 @@
 
         xpath: //gmd:organisationName
       -->
-			<foaf:Organization rdf:about="{$url}/organizations/{encode-for-uri(current-grouping-key())}">
+			<foaf:Organization rdf:about="{$url}/organization/{encode-for-uri(current-grouping-key())}">
 				<foaf:name>
 					<xsl:value-of select="current-grouping-key()"/>
 				</foaf:name>
@@ -176,7 +176,7 @@
 					<foaf:member rdf:resource="{$url}/persons/{encode-for-uri(iso19139:getContactId(.))}"/>
 				</xsl:for-each-group>
 			</foaf:Organization>
-			<vcard:Organization rdf:about="{$url}/organizations/{encode-for-uri(current-grouping-key())}">
+			<vcard:Organization rdf:about="{$url}/organization/{encode-for-uri(current-grouping-key())}">
 				<vcard:organization-name>
 					<xsl:value-of select="current-grouping-key()"/>
 				</vcard:organization-name>
@@ -200,7 +200,6 @@
 				</xsl:for-each-group>
 			</vcard:Organization>
 		</xsl:for-each-group>
-		
 		<xsl:for-each-group select="//gmd:CI_ResponsibleParty" group-by="gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString">
 			<!-- Organization member
 
@@ -313,11 +312,16 @@
 		<!-- TODO could be improved-->
 		<xsl:for-each select="gmd:extent/*/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod">
 			<dct:temporal>
-				<xsl:value-of select="gml:beginPosition"/>
-				<xsl:if test="gml:endPosition">
-          /
-          <xsl:value-of select="gml:endPosition"/>
-				</xsl:if>
+				<dct:PeriodOfTime>
+					<schema:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">
+						<xsl:value-of select="gml:beginPosition"/>
+					</schema:startDate>
+					<xsl:if test="gml:endPosition">
+						<schema:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">
+							<xsl:value-of select="gml:endPosition"/>
+						</schema:endDate>
+					</xsl:if>
+				</dct:PeriodOfTime>
 			</dct:temporal>
 		</xsl:for-each>
 		<!-- xpath: gmd:identificationInfo/*/gmd:extent/*/gmd:temporalElement -->
@@ -333,7 +337,7 @@
 		</xsl:for-each>
 		<!-- "An entity responsible for making the dataset available" -->
 		<xsl:for-each select="gmd:pointOfContact/*/gmd:organisationName/gco:CharacterString[.!='']">
-			<dct:publisher rdf:resource="{$url}/organizations/{encode-for-uri(.)}"/>
+			<dct:publisher rdf:resource="{$url}/organization/{encode-for-uri(.)}"/>
 			<dcat:contactPoint rdf:resource="{$url}/organization/{encode-for-uri(.)}"/>
 		</xsl:for-each>
 		<!-- xpath: gmd:identificationInfo/*/gmd:pointOfContact -->
