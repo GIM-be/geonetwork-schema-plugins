@@ -1,4 +1,0 @@
-SELECT *
-WHERE {
-    ?subject ?predicate ?object.
-}
