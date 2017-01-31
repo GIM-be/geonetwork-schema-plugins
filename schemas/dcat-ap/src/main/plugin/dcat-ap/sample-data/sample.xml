@@ -5,12 +5,15 @@
 		<dct:publisher>
 			<foaf:Agent rdf:about="http://www.vlaanderen.be">
 				<foaf:name xml:lang="nl">String</foaf:name>
-				<dct:type>
-					<skos:Concept rdf:about="http://www.vlaanderen.be">
-						<skos:prefLabel xml:lang="nl">String</skos:prefLabel>
-						<skos:inScheme rdf:resource="http://www.vlaanderen.be"/>
-					</skos:Concept>
-				</dct:type>
+                  <dct:type>
+                     <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/organization-type/DIVISION">
+                        <skos:prefLabel xml:lang="nl">Afdeling</skos:prefLabel>
+                        <skos:prefLabel xml:lang="en">Division</skos:prefLabel>
+                        <skos:prefLabel xml:lang="fr">Division</skos:prefLabel>
+                        <skos:prefLabel xml:lang="de">Abteilung</skos:prefLabel>
+                        <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/organization-type"/>
+                     </skos:Concept>
+                  </dct:type>
 			</foaf:Agent>
 		</dct:publisher>
 		<dcat:dataset>

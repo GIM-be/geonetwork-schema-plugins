@@ -1,59 +1,31 @@
-# Build Health
+# DCAT-AP Schema Plugin for GeoNetwork
 
-[![Build Status](https://travis-ci.org/geonetwork/core-geonetwork.svg?branch=develop)](https://travis-ci.org/geonetwork/core-geonetwork)
+The [schemas/dcat-ap](/schemas/dcat-ap) folder contains a [DCAT-AP v1.1](https://joinup.ec.europa.eu/asset/dcat_application_profile/asset_release/dcat-ap-v11) schema plugin for [GeoNetwork](http://geonetwork-opensource.org/). 
 
-# Features
+The work on this schema plugin was funded by the [OpenTransportNet](http://opentransportnet.eu/) innovation project funding by the European Union’s Competitiveness and Innovation Framework Programme under grant agreement no. 620533. The work was carried out at the request of and in close collaboration with the Flemish Information Agency ([AIV](http://www.vlaanderen.be/nl/contact/adressengids/diensten-van-de-vlaamse-overheid/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-en-bestuur/agentschap-informatie-vlaanderen)). 
 
-* Immediate search access to local and distributed geospatial catalogues
-* Up- and downloading of data, graphics, documents, pdf files and any other content type
-* An interactive Web Map Viewer to combine Web Map Services from distributed servers around the world
-* Online editing of metadata with a powerful template system
-* Scheduled harvesting and synchronization of metadata between distributed catalogs
-* Support for OGC-CSW 2.0.2 ISO Profile, OAI-PMH, SRU protocols
-* Fine-grained access control with group and user management
-* Multi-lingual user interface
+## Features
 
-# Documentation
+* **XML Schema for DCAT-AP**: This plugin makes use of the fact that GeoNetwork is capable of storing metadata in any XML format. The plugin therefore defines its own XML Schema (see the [schema](/schemas/dcat-ap/src/main/plugin/dcat-ap/schema)) folder for DCAT-AP that is used for the internal representation of DCAT-AP fields. To limit the data conversion needed, the XML Schema was designed to fully resemble an XML/RDF syntax of DCAT-AP.
+* **Import script**: To import RDF metadata into GeoNetwork, something needs to be done to accomodate the many different formats (JSON-LD, Turtle, RDF/XML, etc.) and structure (nestings, ordering, etc.) that RDF data can take. Therefore, an import [script](/schemas/dcat-ap/src/main/plugin/dcat-ap/import) was written to "normalize" the RDF metadata, such that it fits in the XML Schema for DCAT-AP that was defined for the plugin. This script does the following: it downloads RDF metadata from a remote catalogue (curl), converts that into XML using a SPARQL SELECT query, converts that into DCAT-AP XML (XSL conversion), and imports this into GeoNetwork using the GeoNetwork API (curl).
+* **DCAT-AP input form**: A custom form was created following the guidance in the GeoNetwork [form customization guide](http://geonetwork-opensource.org/manuals/trunk/eng/users/customizing-application/editor-ui/creating-custom-editor.html). The form pays a lot of attention to the use of controlled vocabularies - which can be imported as SKOS [classification systems](http://geonetwork-opensource.org/manuals/3.0.5/eng/users/administrator-guide/managing-classification-systems/index.html) using standard GeoNetwork functionality.
+* **Export in DCAT-AP RDF format**: The plugin exports DCAT-AP RDF metadata using the GeoNetwork API (/geonetwork/srv/api/0.1/records), which can in turn be harvested by e.g. [CKAN](https://github.com/ckan/ckanext-dcat)
 
-User documentation is in the docs submodule in the current repository and is compiled into html pages during a release for publishing on
-a website.
 
-Developer documentation is also in the docs submodule but is being migrated out of that project into the Readme files in each module
-in the project.  General documentation for the project as a whole is in this Readme and module specific documentation can be found in
-each module (assuming there is module specific documentation required).
+## Usage note 
 
-# Software Development
+To include this schema plugin in a build, copy the dcat-ap schema folder in the 
+schemas folder, add it to the schemas/pom.xml 
+and add it to the copy-schemas execution in web/pom.xml.
 
-Instructions for setting up a development environment/building Geonetwork/compiling user documentation/making a release see:
-[Software Development Documentation](/software_development/)
+Samples and templates can be imported via the 'Admin Console' > 'Metadata and Templates' > 'DCAT-AP' menu.
 
-# Testing
+For further guidance on setting up a development environment/building Geonetwork/compiling user documentation/making a release see:
+[Software Development Documentation](https://github.com/geonetwork/core-geonetwork/tree/develop/software_development)
 
-With regards to testing Geonetwork is a standard Java project and primarily depends on JUnit for testing.  However there is a very important
-issue to consider when writing JUnit tests in Geonetwork and that is the separation between unit tests and integration tests
 
-* *Unit Tests* - In Geonetwork unit tests should be very very quick to execute and not start up any subsystems of the application in order to keep
-    the execution time of the unit tests very short.  Integration tests do not require super classes and any assistance methods can be static
-    imports, for example statically importing org.junit.Assert or org.junit.Assume or org.fao.geonet.Assert.
-* *Integration Tests* - Integration Test typically start much or all of Geonetwork as part of the test and will take longer to run than
-    a unit test.  However, even though the tests take longer they should still be implemented in such a way to be as efficient as possible.
-    Starting Geonetwork in a way that isolates each integration test from each other integration test is non-trivial.  Because of this
-    there are `abstract` super classes to assist with this.  Many modules have module specific Abstract classes.  For example at the time
-    that this is being written `domain`, `core`, `harvesters` and `services` modules all have module specific super classes that need to
-    be used.  (`harvesting` has 2 superclasses depending on what is to be tested.)
-    The easiest way to learn how to implement an integration test is to search for other integration tests in the same module as the class
-    you want to test.  The following list provides a few tips:
-    * *IMPORTANT*: All Integrations tests *must* end in IntegrationTest.  The build system assumes all tests ending in IntegrationTest is
-        an integration test and runs them in a build phase after unit tests.  All other tests are assumed to be unit tests.
-    * Prefer unit tests over Integration Tests because they are faster.
-    * Search the current module for IntegrationTest to find tests to model your integration test against
-    * This you might want integration tests for are:
-        * Services: If the service already exists and you quick need to write a test to debug/fix its behaviour.
-                    If you are writing a new service it is better to use Mockito to mock the dependencies of the service so the test is
-                    a unit test.
-        * Harvesters
-        * A behaviour that crosses much of the full system
+## Future work
 
-*org.fao.geonet.utils.GeonetHttpRequestFactory*: When making Http requests you should use org.fao.geonet.utils.GeonetHttpRequestFactory instead
-    of directly using HttpClient.  This is because there are mock instances of org.fao.geonet.utils.GeonetHttpRequestFactory that can
-    be used to mock responses when performing tests.
+This plugin would merit from further improvements in the following areas:
+* Integration of the import script in a GeoNetwork DCAT harvester.
+* Forms: The layout of the DCAT-AP editor needs furhter improvement. A number of components still need to be implemented (spatial coverage) or made more generic.

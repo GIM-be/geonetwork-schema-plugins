@@ -36,6 +36,7 @@
                 xmlns:srv="http://www.isotc211.org/2005/srv"
                 xmlns:gml="http://www.opengis.net/gml"
                 xmlns:ogc="http://www.opengis.net/rdf#"
+                xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:iso19139="http://geonetwork-opensource.org/schemas/iso19139"
                 version="2.0"
@@ -165,12 +166,18 @@
         </dcat:accessURL>
         <!-- xpath: gmd:linkage/gmd:URL -->
 
-        <xsl:if test="gmd:name/gco:CharacterString!=''">
+        <xsl:if test="string(gmd:name/*)!=''">
           <dct:title>
-            <xsl:value-of select=" gmd:name/gco:CharacterString"/>
+            <xsl:value-of select="string(gmd:name/*)"/>
           </dct:title>
         </xsl:if>
         <!-- xpath: gmd:name/gco:CharacterString -->
+        
+        <xsl:if test="string(gmd:description/*)!=''">
+          <dct:description>
+            <xsl:value-of select="string(gmd:description/*)"/>
+          </dct:description>
+        </xsl:if>
 
         <!-- "The size of a distribution.":N/A
           <dcat:size></dcat:size>
@@ -256,8 +263,36 @@
         </xsl:if>
         <!-- xpath: gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString -->
       </foaf:Agent>
-    </xsl:for-each-group>
+
+      <vcard:Organization  rdf:about="{$url}/person/{encode-for-uri(iso19139:getContactId(.))}">
+        <xsl:if test="gmd:individualName/gco:CharacterString">
+          <vcard:fn>
+            <xsl:value-of select="gmd:individualName/gco:CharacterString"/>
+          </vcard:fn>
+        </xsl:if>
+        <!-- xpath: gmd:individualName/gco:CharacterString -->
+        <xsl:if
+          test="gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString">
+          <vcard:hasTelephone>
+            <xsl:value-of
+              select="gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString"/>
+          </vcard:hasTelephone>
+        </xsl:if>
+        <!-- xpath: gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString -->
+        <xsl:if
+          test="gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString">
+          <vcard:hasEmail
+            rdf:resource="mailto:{gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString}"/>
+        </xsl:if>
+        <!-- xpath: gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString -->
+      </vcard:Organization>
+      
+    </xsl:for-each-group>        
+    
   </xsl:template>
+  
+
+
 
 
   <!-- Service
@@ -303,9 +338,9 @@
     <!-- xpath: gmd:identificationInfo/*/gmd:citation/*/gmd:title/gco:CharacterString -->
 
 
-    <dct:abstract>
+    <dct:description>
       <xsl:value-of select="gmd:abstract/gco:CharacterString"/>
-    </dct:abstract>
+    </dct:description>
     <!-- xpath: gmd:identificationInfo/*/gmd:abstract/gco:CharacterString -->
 
 
@@ -398,6 +433,7 @@
     <!-- "An entity responsible for making the dataset available" -->
     <xsl:for-each select="gmd:pointOfContact/*/gmd:organisationName/gco:CharacterString[.!='']">
       <dct:publisher rdf:resource="{$url}/organization/{encode-for-uri(.)}"/>
+      <dcat:contactPoint rdf:resource="{$url}/organization/{encode-for-uri(.)}"/>
     </xsl:for-each>
     <!-- xpath: gmd:identificationInfo/*/gmd:pointOfContact -->
 
