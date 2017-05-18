@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
   ~ Copyright (C) 2001-2016 Food and Agriculture Organization of the
   ~ United Nations (FAO-UN), United Nations World Food Programme (WFP)
@@ -22,17 +23,10 @@
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
 
-<gns:schema xmlns:gns="http://geonetwork-opensource.org/schemas/schema-ident" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://geonetwork-opensource.org/schemas/schema-ident http://geonetwork-opensource.org/schemas/schema-ident/schema-ident.xsd">
-	<gns:name>ead-imp</gns:name>
-	<gns:id>ac49c124-e5bd-4a86-b8bc-bd3a2a246dd2</gns:id>
-	<gns:version>1.0</gns:version>
-  <gns:title xml:lang="en">EAD-IMP</gns:title>
-  <gns:description>EAD Information Management Profile</gns:description>
-  <gns:standardUrl>https://overheid.vlaanderen.be/informatiemanagement/informatiebeheersplan</gns:standardUrl>
-	<gns:schemaLocation/>
-	<gns:autodetect xmlns:ead="http://ead3.archivists.org/schema/">
-		<gns:elements type="search">
-			<ead:archdesc/>
-		</gns:elements>
-	</gns:autodetect>
-</gns:schema>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <xsl:template match="/">
+		<thumbnail/>
+	</xsl:template>
+
+</xsl:stylesheet>

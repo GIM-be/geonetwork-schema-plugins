@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ead="http://ead3.archivists.org/schema/" xsi:noNamespaceSchemaLocation="../../../../../../config-editor.xsd">
+	<!-- Define form field types per metadata element. -->
+	<fields>
+		<for name="ead:unittitle" use="textarea"/>
+		<for name="ead:abstract" use="textarea"/>
+	</fields>
+	<!-- Complex fields. -->
+	<fieldsWithFieldset>
+		<name>dcat:Dataset</name>
+	</fieldsWithFieldset>
+	<!-- View configuration -->
+	<views>
+		<view name="default">
+			<tab id="default" default="true" mode="flat">
+				<section>
+					<field name="planTitle" xpath="/ead:archdesc/ead:did/ead:unittitle" or="unittitle" in="/ead:archdesc/ead:did/" del="." removable="false"/>
+					<action type="add" if="count(/ead:archdesc/ead:did/ead:unittitle)=0" name="add-planTitle" or="title" in="/ead:archdesc/ead:did">
+						<template>
+							<snippet>
+								<ead:unittitle/>
+							</snippet>
+						</template>
+					</action>
+					<field name="planAbstract" xpath="/ead:archdesc/ead:did/ead:abstract" or="abstract" in="/ead:archdesc/ead:did/" del="." removable="false"/>
+					<action type="add" if="count(/ead:archdesc/ead:did/ead:abstract)=0" name="add-planTitle" or="title" in="/ead:archdesc/ead:did">
+						<template>
+							<snippet>
+								<ead:abstract/>
+							</snippet>
+						</template>
+					</action>
+				</section>
+			</tab>
+		</view>
+		<view name="xml">
+			<tab id="xml" default="true"/>
+		</view>
+	</views>
+</editor>

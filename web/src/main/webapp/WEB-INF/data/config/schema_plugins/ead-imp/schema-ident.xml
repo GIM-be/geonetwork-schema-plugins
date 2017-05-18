@@ -32,7 +32,7 @@
 	<gns:schemaLocation/>
 	<gns:autodetect xmlns:ead="http://ead3.archivists.org/schema/">
 		<gns:elements type="search">
-			<ead:ead/>
+			<ead:archdesc/>
 		</gns:elements>
 	</gns:autodetect>
 </gns:schema>
