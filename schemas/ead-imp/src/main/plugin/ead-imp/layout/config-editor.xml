@@ -7,14 +7,14 @@
 	</fields>
 	<!-- Complex fields. -->
 	<fieldsWithFieldset>
-		<name>dcat:Dataset</name>
+		<name>ead:ead</name>
 	</fieldsWithFieldset>
 	<!-- View configuration -->
 	<views>
 		<view name="default">
 			<tab id="default" default="true" mode="flat">
 				<section>
-					<field name="planTitle" xpath="/ead:archdesc/ead:did/ead:unittitle" or="unittitle" in="/ead:archdesc/ead:did/" del="." removable="false"/>
+					<field name="planTitle" xpath="/ead:ead/ead:archdesc/ead:did/ead:unittitle" or="unittitle" in="/ead:ead/ead:archdesc/ead:did" del="." removable="false"/>
 					<action type="add" if="count(/ead:archdesc/ead:did/ead:unittitle)=0" name="add-planTitle" or="title" in="/ead:archdesc/ead:did">
 						<template>
 							<snippet>
@@ -22,7 +22,7 @@
 							</snippet>
 						</template>
 					</action>
-					<field name="planAbstract" xpath="/ead:archdesc/ead:did/ead:abstract" or="abstract" in="/ead:archdesc/ead:did/" del="." removable="false"/>
+					<field name="planAbstract" xpath="/ead:ead/ead:archdesc/ead:did/ead:abstract" or="abstract" in="/ead:ead/ead:archdesc/ead:did" del="." removable="false"/>
 					<action type="add" if="count(/ead:archdesc/ead:did/ead:abstract)=0" name="add-planTitle" or="title" in="/ead:archdesc/ead:did">
 						<template>
 							<snippet>

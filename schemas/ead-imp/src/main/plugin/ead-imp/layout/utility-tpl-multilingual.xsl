@@ -23,6 +23,7 @@
   -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 				xmlns:ead="http://ead3.archivists.org/schema/"
 				xmlns:dcat="http://www.w3.org/ns/dcat#" 
 				xmlns:dct="http://purl.org/dc/terms/"
