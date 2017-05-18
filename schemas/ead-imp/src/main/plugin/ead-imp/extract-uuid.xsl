@@ -21,37 +21,17 @@
   ~ Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
+<xsl:stylesheet version="1.0"
+	xmlns:ead="http://ead3.archivists.org/schema/"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:dcat="http://www.w3.org/ns/dcat#">
+	
+    <xsl:template match="/">
+	    <uuid>
+	      <xsl:value-of select="ead:ead/ead:archdesc/ead:did/ead:unitid"/>
+	    </uuid>
+	</xsl:template>
 
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>geonetwork</artifactId>
-    <groupId>org.geonetwork-opensource</groupId>
-    <version>3.2.1-SNAPSHOT</version>
-  </parent>
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>schemas</artifactId>
-  <name>GeoNetwork schema plugins</name>
-  <packaging>pom</packaging>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-all</artifactId>
-    </dependency>
-  </dependencies>
-
-  <modules>
-    <module>schema-core</module>
-    <module>csw-record</module>
-    <module>dublin-core</module>
-    <module>iso19110</module>
-    <module>iso19139</module>
-	<module>dcat-ap</module>
-	<module>ead-imp</module>	
-  </modules>
-  <properties>
-    <rootProjectDir>../..</rootProjectDir>
-  </properties>
-</project>
+</xsl:stylesheet>

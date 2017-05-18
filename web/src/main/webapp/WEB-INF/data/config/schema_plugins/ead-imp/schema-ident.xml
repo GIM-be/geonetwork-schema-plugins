@@ -22,36 +22,17 @@
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
 
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>geonetwork</artifactId>
-    <groupId>org.geonetwork-opensource</groupId>
-    <version>3.2.1-SNAPSHOT</version>
-  </parent>
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>schemas</artifactId>
-  <name>GeoNetwork schema plugins</name>
-  <packaging>pom</packaging>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-all</artifactId>
-    </dependency>
-  </dependencies>
-
-  <modules>
-    <module>schema-core</module>
-    <module>csw-record</module>
-    <module>dublin-core</module>
-    <module>iso19110</module>
-    <module>iso19139</module>
-	<module>dcat-ap</module>
-	<module>ead-imp</module>	
-  </modules>
-  <properties>
-    <rootProjectDir>../..</rootProjectDir>
-  </properties>
-</project>
+<gns:schema xmlns:gns="http://geonetwork-opensource.org/schemas/schema-ident" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://geonetwork-opensource.org/schemas/schema-ident http://geonetwork-opensource.org/schemas/schema-ident/schema-ident.xsd">
+	<gns:name>ead-imp</gns:name>
+	<gns:id>ac49c124-e5bd-4a86-b8bc-bd3a2a246dd2</gns:id>
+	<gns:version>1.0</gns:version>
+  <gns:title xml:lang="en">EAD-IMP</gns:title>
+  <gns:description>EAD Information Management Profile</gns:description>
+  <gns:standardUrl>https://overheid.vlaanderen.be/informatiemanagement/informatiebeheersplan</gns:standardUrl>
+	<gns:schemaLocation/>
+	<gns:autodetect xmlns:ead="http://ead3.archivists.org/schema/">
+		<gns:elements type="search">
+			<ead:ead/>
+		</gns:elements>
+	</gns:autodetect>
+</gns:schema>

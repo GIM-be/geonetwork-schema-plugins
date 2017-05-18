@@ -84,3 +84,5 @@ web/src/main/webapp/doc/en
 web/src/main/webapp/doc/fr
 web/src/main/webapp/WEB-INF/data/data/backup
 schemas/*/doc/*/*.rst
+web/src/main/webapp/data/config/schema_plugins/dcat-ap/**
+schemas/dcat-ap/src/main/plugin/dcat-ap/import/
