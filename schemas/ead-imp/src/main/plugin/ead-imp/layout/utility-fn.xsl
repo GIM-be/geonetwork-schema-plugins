@@ -52,4 +52,12 @@
 	</xsl:choose>
   </xsl:function>
 
+  <xsl:function name="gn-fn-ead-imp:getCodeListType" as="xs:string">
+    <xsl:param name="name" as="xs:string"/>
+
+    <xsl:variable name="configType" select="$editorConfig/editor/fields/for[@name = $name]/@use"/>
+
+    <xsl:value-of select="if ($configType) then $configType else 'select'"/>
+  </xsl:function>
+
 </xsl:stylesheet>

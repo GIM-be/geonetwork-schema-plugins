@@ -8,7 +8,8 @@
 	<xsl:template match="/">
 		<xsl:apply-templates select="ead:ead"/>
 	</xsl:template>
-	<xsl:template match="ead:archdesc">
+	
+	<xsl:template match="/">
 			<!--TODO: uncomment<xsl:call-template name="langId-dcat-ap"/>-->
 		<xsl:variable name="langCode">dut</xsl:variable>
 		<Document locale="{$langCode}">
@@ -18,16 +19,27 @@
 			<!-- For multilingual docs it is good to have a title in the default locale. 
 				In this type of metadata we don't have one but in the general case we do 
 				so we need to add it to all -->
-			<Field name="_defaultTitle" string="{string(ead:did/ead:unittitle)}" store="true" index="true"/>
-			<xsl:for-each select="ead:did/ead:unitid">
+			<xsl:message select="concat('root is ',name(.))"/>
+			<xsl:variable name="_defaultTitle" select="ead:ead/ead:archdesc/ead:did/ead:unittitle"/>
+			<Field name="_defaultTitle" string="{string($_defaultTitle)}" store="true" index="true"/>
+			<xsl:if test="geonet:info/isTemplate != 's'">
+				<Field name="_title" string="{string($_defaultTitle)}" store="true" index="true"/>
+			</xsl:if>
+			<xsl:for-each select="ead:ead/ead:archdesc/ead:did/ead:unitid">
 				<Field name="identifier" string="{string(.)}" store="false" index="true"/>
 				<Field name="fileId" string="{string(.)}" store="false" index="true"/>
 			</xsl:for-each>
 			<Field name="type" string="plan" store="true" index="true"/>			
-			<xsl:for-each select="ead:did/ead:abstract">
+			<xsl:for-each select="ead:ead/ead:archdesc/ead:did/ead:abstract">
 				<Field name="abstract" string="{string(.)}" store="true" index="true"/>
 			</xsl:for-each>
+			
+			<xsl:apply-templates mode="index" select="*"/>
 		</Document>
 	</xsl:template>
+
+  <xsl:template mode="index" match="*|@*">
+    <xsl:apply-templates mode="index" select="*|@*"/>
+  </xsl:template>
 
 </xsl:stylesheet>

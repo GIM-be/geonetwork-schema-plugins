@@ -1,40 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ead="http://ead3.archivists.org/schema/" xsi:noNamespaceSchemaLocation="../../../../../../config-editor.xsd">
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ead="http://ead3.archivists.org/schema/" xmlns:gn="http://www.fao.org/geonetwork"
+	xsi:noNamespaceSchemaLocation="../../../../../../config-editor.xsd">
 	<!-- Define form field types per metadata element. -->
 	<fields>
-		<for name="ead:unittitle" use="textarea"/>
-		<for name="ead:abstract" use="textarea"/>
+		<for name="ead:unittitle" use="textarea" />
+		<for name="ead:abstract" use="textarea" />
 	</fields>
 	<!-- Complex fields. -->
 	<fieldsWithFieldset>
 		<name>ead:ead</name>
+		<name>ead:c</name>
 	</fieldsWithFieldset>
+	<multilingualFields>
+		<exclude>ead:unittitle</exclude>
+	</multilingualFields>
 	<!-- View configuration -->
 	<views>
 		<view name="default">
 			<tab id="default" default="true" mode="flat">
 				<section>
-					<field name="planTitle" xpath="/ead:ead/ead:archdesc/ead:did/ead:unittitle" or="unittitle" in="/ead:ead/ead:archdesc/ead:did" del="." removable="false"/>
-					<action type="add" if="count(/ead:archdesc/ead:did/ead:unittitle)=0" name="add-planTitle" or="title" in="/ead:archdesc/ead:did">
+					<field name="planTitle" xpath="/ead:archdesc/ead:did/ead:unittitle"
+						or="unittitle" in="/ead:archdesc/ead:did" del="." removable="false" />
+					<action type="add" if="count(/ead:archdesc/ead:did/ead:unittitle)=0"
+						name="add-planTitle" or="unittitle" in="/ead:archdesc/ead:did">
 						<template>
 							<snippet>
-								<ead:unittitle/>
+								<ead:unittitle />
 							</snippet>
 						</template>
 					</action>
-					<field name="planAbstract" xpath="/ead:ead/ead:archdesc/ead:did/ead:abstract" or="abstract" in="/ead:ead/ead:archdesc/ead:did" del="." removable="false"/>
-					<action type="add" if="count(/ead:archdesc/ead:did/ead:abstract)=0" name="add-planTitle" or="title" in="/ead:archdesc/ead:did">
+					<field name="planAbstract" xpath="/ead:archdesc/ead:did/ead:abstract"
+						or="abstract" in="/ead:archdesc/ead:did" del="." removable="false" />
+					<action type="add" if="count(/ead:archdesc/ead:did/ead:abstract)=0"
+						name="add-planAbstract" or="abstract" in="/ead:archdesc/ead:did">
 						<template>
 							<snippet>
-								<ead:abstract/>
+								<ead:abstract />
 							</snippet>
 						</template>
 					</action>
 				</section>
+      		</tab>
+      		<tab id="series">
+				<section xpath="/ead:archdesc/ead:dsc/ead:c" or="c" in="/ead:archdesc/ead:dsc" />
+<!--
+				<section xpath="/ead:archdesc/ead:dsc/ead:c">
+					<field name="unittitle" templateModeOnly="true"
+						notDisplayedIfMissing="true" xpath="/ead:archdesc/ead:dsc/ead:c"
+						del="." if="count(/ead:archdesc/ead:dsc) > 0">
+						<template>
+							<values>
+								<key label="unitid" xpath="ead:did/ead:unitid" tooltip="ead:unitid" />
+								<key label="unittitle" xpath="ead:did/ead:unittitle"
+									tooltip="ead:unittitle" />
+								<key label="abstract" xpath="ead:did/ead:abstract" tooltip="ead:abstract" />
+							</values>
+							<snippet>
+								<ead:did audience="external" lang="nl" script="Latn">
+									<ead:unitid audience="external" lang="nl" script="Latn">{{unitid}}
+									</ead:unitid>
+									<ead:unittitle audience="external" lang="nl"
+										script="Latn" localtype="token" label="titel">{{unittitle}}
+									</ead:unittitle>
+									<ead:abstract audience="external" lang="nl"
+										script="Latn" localtype="token" label="omschrijving">{{abstract}}
+									</ead:abstract>
+								</ead:did>
+							</snippet>
+						</template>
+					</field>
+					<action type="add" name="c" or="c" in="/ead:archdesc/ead:dsc">
+						<template>
+							<snippet>
+								<ead:c>
+									<ead:did audience="external" lang="nl" script="Latn">
+										<ead:unitid audience="external" lang="nl" script="Latn">UUID
+											van de reeks</ead:unitid>
+										<ead:unittitle audience="external" lang="nl"
+											script="Latn" localtype="token" label="titel">Titel van een reeks
+										</ead:unittitle>
+										<ead:abstract audience="external" lang="nl"
+											script="Latn" localtype="token" label="omschrijving">Beschrijving
+											van een reeks.
+										</ead:abstract>
+									</ead:did>
+								</ead:c>
+							</snippet>
+						</template>
+					</action>
+				</section>
+-->
 			</tab>
 		</view>
 		<view name="xml">
-			<tab id="xml" default="true"/>
+			<tab id="xml" default="true" />
 		</view>
 	</views>
 </editor>

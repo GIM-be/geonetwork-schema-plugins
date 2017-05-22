@@ -82,6 +82,64 @@
     </xsl:apply-templates>
   </xsl:template>
 
+  <!-- Boxed element
+
+      Details about the last line :
+      * namespace-uri(.) != $gnUri: Only take into account profile's element
+      * and $isFlatMode = false(): In flat mode, don't box any
+      * and gmd:*: Match all elements having gmd child elements
+      * and not(gco:CharacterString): Don't take into account those having gco:CharacterString (eg. multilingual elements)
+  -->
+  <xsl:template mode="mode-ead-imp" priority="200"
+                match="*[name() = $editorConfig/editor/fieldsWithFieldset/name]|
+      ead:archdesc/*|
+      ead:c/*|
+      *[namespace-uri(.) != $gnUri and $isFlatMode = false() and ead:*]">
+    <xsl:param name="schema" select="$schema" required="no"/>
+    <xsl:param name="labels" select="$labels" required="no"/>
+
+    <xsl:variable name="xpath" select="gn-fn-metadata:getXPath(.)"/>
+    <xsl:variable name="isoType" select="''"/>
+
+    <xsl:variable name="attributes">
+      <!-- Create form for all existing attribute (not in gn namespace)
+      and all non existing attributes not already present. -->
+      <xsl:apply-templates mode="render-for-field-for-attribute"
+                           select="
+        @*|
+        gn:attribute[not(@name = parent::node()/@*/name())]">
+        <xsl:with-param name="ref" select="gn:element/@ref"/>
+        <xsl:with-param name="insertRef" select="gn:element/@ref"/>
+      </xsl:apply-templates>
+    </xsl:variable>
+
+    <xsl:variable name="errors">
+      <xsl:if test="$showValidationErrors">
+        <xsl:call-template name="get-errors"/>
+      </xsl:if>
+    </xsl:variable>
+
+    <xsl:call-template name="render-boxed-element">
+      <xsl:with-param name="label"
+                      select="gn-fn-metadata:getLabel($schema, name(), $labels, name(..), $isoType, $xpath)/label"/>
+      <xsl:with-param name="editInfo" select="gn:element"/>
+      <xsl:with-param name="errors" select="$errors"/>
+      <xsl:with-param name="cls" select="local-name()"/>
+      <xsl:with-param name="xpath" select="$xpath"/>
+      <xsl:with-param name="attributesSnippet" select="$attributes"/>
+      <xsl:with-param name="subTreeSnippet">
+        <!-- Process child of those element. Propagate schema
+        and labels to all subchilds (eg. needed like iso19110 elements
+        contains gmd:* child. -->
+        <xsl:apply-templates mode="mode-ead-imp" select="*">
+          <xsl:with-param name="schema" select="$schema"/>
+          <xsl:with-param name="labels" select="$labels"/>
+        </xsl:apply-templates>
+      </xsl:with-param>
+    </xsl:call-template>
+
+  </xsl:template>
+
   <!-- 
     ... but not the one proposing the list of elements to add in DC schema
     
@@ -114,17 +172,7 @@
     </xsl:if>
   </xsl:template>
 
-
-  <!-- Hide from the editor the dct:references pointing to uploaded files -->
-  <xsl:template mode="mode-ead-imp" priority="101"
-                match="*[(name(.) = 'dct:references' or
-                          name(.) = 'dc:relation') and
-                         (starts-with(., 'http') or
-                          contains(. , 'resources.get') or
-                          contains(., 'file.disclaimer'))]" />
-
-
-  <!-- the other elements in DC. -->
+    <!-- the other elements in ead. -->
   <xsl:template mode="mode-ead-imp" priority="100" match="ead:*">
     <xsl:variable name="name" select="name(.)"/>
     <xsl:variable name="ref" select="gn:element/@ref"/>
@@ -221,6 +269,24 @@
         <xsl:apply-templates mode="mode-ead-imp" select="*"/>
       </xsl:with-param>
       <xsl:with-param name="editInfo" select="gn:element"/>
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template mode="mode-ead-imp" match="*[gn:element/gn:text]">
+    <xsl:param name="schema" select="$schema" required="no"/>
+    <xsl:param name="labels" select="$labels" required="no"/>
+    <xsl:param name="codelists" select="$iso19139codelists" required="no"/>
+
+    <xsl:call-template name="render-element">
+      <xsl:with-param name="label"
+                      select="gn-fn-metadata:getLabel($schema, name(), $labels, name(..), '', '')/label"/>
+      <xsl:with-param name="value" select="text()"/>
+      <xsl:with-param name="cls" select="local-name()"/>
+      <xsl:with-param name="type" select="gn-fn-ead-imp:getCodeListType(name())"/>
+      <xsl:with-param name="name" select="gn:element/@ref"/>
+      <xsl:with-param name="editInfo" select="../gn:element"/>
+      <xsl:with-param name="listOfValues"
+                      select="gn-fn-metadata:getCodeListValues($schema, name(), $codelists, .)"/>
     </xsl:call-template>
   </xsl:template>
 

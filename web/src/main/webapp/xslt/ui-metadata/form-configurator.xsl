@@ -41,7 +41,6 @@
     <xsl:param name="base" as="node()"/>
 
     <xsl:variable name="sectionName" select="@name"/>
-	<xsl:message><xsl:value-of select="concat('Processing section ',$sectionName)"/></xsl:message>
 
     <xsl:choose>
       <xsl:when test="$sectionName">
@@ -183,7 +182,6 @@
       profile's namespaces used in XPath expression.
 
       That's why each schema should define its evaluate-<schemaid> template. -->
-	  <xsl:message>Attribute xpath exists</xsl:message>
       <xsl:variable name="nodes">
         <saxon:call-template name="{concat('evaluate-', $schema)}">
           <xsl:with-param name="base" select="$base"/>
@@ -221,17 +219,6 @@
         </xsl:choose>
       </xsl:variable>
 
-      <!--
-      <xsl:message> Field: <xsl:value-of select="@name"/></xsl:message>
-      <xsl:message>Xpath: <xsl:copy-of select="@xpath"/></xsl:message>
-      <xsl:message>TemplateModeOnly: <xsl:value-of select="@templateModeOnly"/></xsl:message>
-      <xsl:message>Display: <xsl:copy-of select="$isDisplayed"/></xsl:message>
-      <xsl:message><xsl:value-of select="count($nodes/*)"/> matching nodes: <xsl:copy-of select="$nodes"/></xsl:message>
-      <xsl:message>Non existing child path: <xsl:value-of select="concat(@in, '/gn:child[@name = ''', @or, ''']')"/></xsl:message>
-      <xsl:message>Non existing child: <xsl:copy-of select="$nonExistingChildParent"/></xsl:message>
-      -->
-
-
       <xsl:variable name="del" select="@del"/>
 
 
@@ -243,7 +230,6 @@
       <xsl:choose>
         <xsl:when test="$isDisplayed and not(@templateModeOnly)">
           <xsl:variable name="configName" select="@name"/>
-		<xsl:message><xsl:value-of select="concat('Field ',$configName,' is displayed and templateModeOnly is false')"/></xsl:message>
 
 
           <!-- Display the matching node using standard editor mode
@@ -258,7 +244,6 @@
 
             <xsl:choose>
               <xsl:when test="count($nodes/*) = 1">
-				<xsl:message><xsl:value-of select="concat('Field ',$configName,' has one child')"/></xsl:message>
                 <xsl:variable name="originalNode"
                               select="gn-fn-metadata:getOriginalNode($metadata, $nodes/node())"/>
 
@@ -281,7 +266,6 @@
                 </saxon:call-template>
               </xsl:when>
               <xsl:otherwise>
-				<xsl:message><xsl:value-of select="concat('Field ',$configName,' has more than one child')"/></xsl:message>
                 <xsl:for-each select="$nodes/*">
                   <xsl:variable name="originalNode"
                                 select="gn-fn-metadata:getOriginalNode($metadata, .)"/>
@@ -348,7 +332,6 @@
             metadocument. This mode will probably take precedence over the others
             if defined in a view.
             -->
-		<xsl:message>Field <xsl:value-of select="@name"/> is displayed and templateModeOnly is true or template is true</xsl:message>
           <xsl:variable name="name" select="@name"/>
           <xsl:variable name="del" select="@del"/>
           <xsl:variable name="template" select="template"/>
@@ -652,11 +635,9 @@
       </xsl:choose>
     </xsl:variable>
 
-    <!--<xsl:message>## Add action</xsl:message>
-    <xsl:message><xsl:copy-of select="."/></xsl:message>
-    <xsl:message>Is displayed: <xsl:copy-of select="$isDisplayed"/> because no if provided or if attribute XPath '<xsl:value-of select="@if"/>' expression found a match.</xsl:message>
-    <xsl:message> = Display action <xsl:value-of select="$nonExistingChildParent/* and $isDisplayed = 'true'"/></xsl:message>
-    -->
+    <xsl:message>Count nonExistingChildParent children = <xsl:value-of select="count($nonExistingChildParent/*)"/></xsl:message>
+    <xsl:message>Add template? <xsl:value-of select="$nonExistingChildParent/* and $isDisplayed = 'true'"/></xsl:message>
+    
     <xsl:if test="$nonExistingChildParent/* and $isDisplayed = 'true'">
       <xsl:variable name="childName" select="@or"/>
 

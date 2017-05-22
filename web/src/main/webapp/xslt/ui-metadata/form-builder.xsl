@@ -118,6 +118,7 @@
       </xsl:choose>
     </xsl:variable>
 
+    <xsl:message select="concat('Rendering field with name ',$name,' (xpath=',$xpath,', type=',$type)"/>
     <!-- The form field identified by the element ref.
             This HTML element should be removed when action remove is called.
         -->
