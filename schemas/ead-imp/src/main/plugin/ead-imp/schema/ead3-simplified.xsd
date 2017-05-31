@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ead="http://ead3.archivists.org/schema/" targetNamespace="http://ead3.archivists.org/schema/">
+	<xs:element name="c" type="ead:T_c"/>
+	<xs:element name="did" type="ead:T_did"/>
+	<xs:element name="dsc" type="ead:T_dsc"/>
+	<xs:element name="ead" type="ead:T_ead"/>
+	<xs:element name="unitid" type="ead:T_unitid"/>
+	<xs:element name="abstract" type="ead:T_abstract"/>
+	<xs:element name="archdesc" type="ead:T_archdesc"/>
+	<xs:element name="unittitle" type="ead:T_unittitle"/>
+	<xs:complexType name="T_c">
+		<xs:sequence>
+			<xs:element ref="ead:did"/>
+		</xs:sequence>
+		<xs:attribute name="level" type="xs:token"/>
+	</xs:complexType>
+	<xs:complexType name="T_did">
+		<xs:sequence>
+			<xs:element ref="ead:unitid"/>
+			<xs:element ref="ead:unittitle"/>
+			<xs:element ref="ead:abstract"/>
+		</xs:sequence>
+		<xs:attribute name="audience" type="xs:token"/>
+		<xs:attribute name="lang" type="xs:token"/>
+		<xs:attribute name="script" type="xs:token"/>
+	</xs:complexType>
+	<xs:complexType name="T_dsc">
+		<xs:sequence>
+			<xs:element ref="ead:c" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="dsctype" type="xs:token"/>
+	</xs:complexType>
+	<xs:complexType name="T_ead">
+		<xs:sequence>
+			<xs:element ref="ead:archdesc"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_unitid">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="audience" type="xs:token"/>
+				<xs:attribute name="lang" type="xs:token"/>
+				<xs:attribute name="script" type="xs:token"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="T_abstract">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="audience" type="xs:token"/>
+				<xs:attribute name="lang" type="xs:token"/>
+				<xs:attribute name="script" type="xs:token"/>
+				<xs:attribute name="localtype" type="xs:token"/>
+				<xs:attribute name="label" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="T_archdesc">
+		<xs:sequence>
+			<xs:element ref="ead:did"/>
+			<xs:element ref="ead:dsc"/>
+		</xs:sequence>
+		<xs:attribute name="audience" type="xs:token"/>
+		<xs:attribute name="lang" type="xs:token"/>
+		<xs:attribute name="script" type="xs:token"/>
+		<xs:attribute name="localtype" type="xs:token"/>
+		<xs:attribute name="relatedencoding" type="xs:token"/>
+		<xs:attribute name="otherlevel" type="xs:token"/>
+		<xs:attribute name="level" type="xs:token"/>
+	</xs:complexType>
+	<xs:complexType name="T_unittitle">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="audience" type="xs:token"/>
+				<xs:attribute name="lang" type="xs:token"/>
+				<xs:attribute name="script" type="xs:token"/>
+				<xs:attribute name="localtype" type="xs:token"/>
+				<xs:attribute name="label" type="xs:string" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>
