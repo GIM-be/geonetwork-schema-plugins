@@ -76,6 +76,7 @@
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
 
+	<xsl:message select="concat('Visiting tree parsing element ',name(.))"/>
     <xsl:apply-templates mode="mode-ead-imp" select="*|@*">
       <xsl:with-param name="schema" select="$schema"/>
       <xsl:with-param name="labels" select="$labels"/>
@@ -90,14 +91,13 @@
       * and gmd:*: Match all elements having gmd child elements
       * and not(gco:CharacterString): Don't take into account those having gco:CharacterString (eg. multilingual elements)
   -->
+
   <xsl:template mode="mode-ead-imp" priority="200"
-                match="*[name() = $editorConfig/editor/fieldsWithFieldset/name]|
-      ead:archdesc/*|
-      ead:c/*|
-      *[namespace-uri(.) != $gnUri and $isFlatMode = false() and ead:*]">
+                match="*[name() = $editorConfig/editor/fieldsWithFieldset/name]">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
 
+	<xsl:message select="concat('Rendering configured boxed element ',name(.))"/>
     <xsl:variable name="xpath" select="gn-fn-metadata:getXPath(.)"/>
     <xsl:variable name="isoType" select="''"/>
 
@@ -148,6 +148,7 @@
   the editor mode is not flat mode. -->
   <xsl:template mode="mode-ead-imp" match="gn:child[contains(@name, 'CHOICE_ELEMENT')]"
     priority="3000">
+	<xsl:message select="concat('Rendering gn:child CHOICE_ELEMENT ',name(.))"/>
     <xsl:if test="$isEditing and 
       not($isFlatMode)">
 
@@ -182,6 +183,8 @@
     <xsl:variable name="added" select="parent::node()/parent::node()/@gn:addedObj"/>
     <xsl:variable name="container" select="parent::node()/parent::node()"/>
 
+    <xsl:message select="concat('Render other element ',name(.))"/>
+    <xsl:copy-of select="gn:element"/>
     <!-- Add view and edit template-->
     <xsl:call-template name="render-element">
       <xsl:with-param name="label" select="$labelConfig/label"/>
@@ -242,6 +245,8 @@
   <!-- Readonly elements -->
   <xsl:template mode="mode-ead-imp" priority="200" match="ead:unitid">
     
+    <xsl:message select="concat('Render specific element ',name(.))"/>
+    <xsl:copy-of select="gn:element"/>
     <xsl:call-template name="render-element">
       <xsl:with-param name="label" select="gn-fn-metadata:getLabel($schema, name(), $labels)/label"/>
       <xsl:with-param name="value" select="."/>
@@ -277,6 +282,7 @@
     <xsl:param name="labels" select="$labels" required="no"/>
     <xsl:param name="codelists" select="$iso19139codelists" required="no"/>
 
+	<xsl:message select="concat('Rendering element containing a gn element',name(.))"/>
     <xsl:call-template name="render-element">
       <xsl:with-param name="label"
                       select="gn-fn-metadata:getLabel($schema, name(), $labels, name(..), '', '')/label"/>
@@ -289,5 +295,4 @@
                       select="gn-fn-metadata:getCodeListValues($schema, name(), $codelists, .)"/>
     </xsl:call-template>
   </xsl:template>
-
 </xsl:stylesheet>

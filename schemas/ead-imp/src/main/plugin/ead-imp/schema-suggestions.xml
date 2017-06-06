@@ -24,9 +24,24 @@
   -->
 
 <fields>
-<!--	
-	<field name="">
-		<suggest name=""/>
+<!--
+	<field name="ead:archdesc">
+		<suggest name="ead:did"/>
+		<suggest name="ead:dsc"/>
 	</field>
--->
+
+	<field name="ead:dsc">
+		<suggest name="ead:c"/>
+	</field>
+
+	<field name="ead:c">
+		<suggest name="ead:did"/>
+	</field>
+	
+	<field name="ead:did">
+		<suggest name="ead:unitid"/>
+		<suggest name="ead:unittitle"/>
+		<suggest name="ead:abstract"/>
+	</field>
+-->	
 </fields>

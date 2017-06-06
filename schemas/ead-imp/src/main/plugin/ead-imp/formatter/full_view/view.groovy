@@ -21,11 +21,4 @@
  * Rome - Italy. email: geonetwork@osgeo.org
  */
 
-package org.fao.geonet.schema.eadimp;
-
-import org.jdom.Namespace;
-
-public class EADIMPNamespaces {
-    public static final Namespace EAD =
-            Namespace.getNamespace("ead", "http://ead3.archivists.org/schema/");
-}
+new ead-imp.Handlers(handlers, f, env).addDefaultHandlers()

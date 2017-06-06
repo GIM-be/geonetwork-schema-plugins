@@ -40,6 +40,6 @@
 
   <system
     systemId="http://www.openarchives.org/OAI/2.0/ead.xsd"
-    uri="schema/ead.xsd"/>
+    uri="schema/ead3-simplified.xsd"/>
 
 </catalog>

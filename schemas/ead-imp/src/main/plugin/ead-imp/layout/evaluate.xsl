@@ -40,7 +40,6 @@
     <xsl:param name="base" as="node()"/>
     <xsl:param name="in"/>
     <xsl:variable name="nodeOrAttribute" select="saxon:evaluate(concat('$p1', $in), $base)"/>
-
     <xsl:choose>
       <xsl:when test="$nodeOrAttribute instance of text()+">
         <xsl:value-of select="$nodeOrAttribute"/>

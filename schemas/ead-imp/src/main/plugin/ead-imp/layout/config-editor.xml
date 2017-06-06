@@ -6,14 +6,26 @@
 	<fields>
 		<for name="ead:unittitle" use="textarea" />
 		<for name="ead:abstract" use="textarea" />
+	    <for name="ead:c" addDirective="data-gn-directory-entry-selector">
+	      <directiveAttributes
+	        data-template-add-action="true"
+	        data-search-action="true"
+	        data-popup-action="true"
+	        data-template-type="c"/>
+	    </for>
 	</fields>
 	<!-- Complex fields. -->
 	<fieldsWithFieldset>
 		<name>ead:ead</name>
+		<name>ead:archdesc</name>
+		<name>ead:dsc</name>
+		<name>ead:did</name>
 		<name>ead:c</name>
 	</fieldsWithFieldset>
 	<multilingualFields>
+		<exclude>ead:unitid</exclude>
 		<exclude>ead:unittitle</exclude>
+		<exclude>ead:abstract</exclude>
 	</multilingualFields>
 	<!-- View configuration -->
 	<views>
@@ -22,24 +34,8 @@
 				<section>
 					<field name="planTitle" xpath="/ead:archdesc/ead:did/ead:unittitle"
 						or="unittitle" in="/ead:archdesc/ead:did" del="." removable="false" />
-					<action type="add" if="count(/ead:archdesc/ead:did/ead:unittitle)=0"
-						name="add-planTitle" or="unittitle" in="/ead:archdesc/ead:did">
-						<template>
-							<snippet>
-								<ead:unittitle />
-							</snippet>
-						</template>
-					</action>
 					<field name="planAbstract" xpath="/ead:archdesc/ead:did/ead:abstract"
 						or="abstract" in="/ead:archdesc/ead:did" del="." removable="false" />
-					<action type="add" if="count(/ead:archdesc/ead:did/ead:abstract)=0"
-						name="add-planAbstract" or="abstract" in="/ead:archdesc/ead:did">
-						<template>
-							<snippet>
-								<ead:abstract />
-							</snippet>
-						</template>
-					</action>
 				</section>
       		</tab>
       		<tab id="series">
@@ -92,6 +88,7 @@
 				</section>
 -->
 			</tab>
+
 		</view>
 		<view name="xml">
 			<tab id="xml" default="true" />

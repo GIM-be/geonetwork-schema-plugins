@@ -49,16 +49,11 @@ public class EADIMPSchemaPlugin
     static {
         allNamespaces = ImmutableSet.<Namespace>builder()
                 .add(EADIMPNamespaces.EAD)
-                .add(EADIMPNamespaces.DC)
-                .add(EADIMPNamespaces.DCT)
-                .add(EADIMPNamespaces.DCAT)
-                .add(EADIMPNamespaces.VCARD)
-                .add(EADIMPNamespaces.FOAF)
                 .build();
 
         allTypenames = ImmutableMap.<String, Namespace>builder()
                 .put("csw:Record", Namespace.getNamespace("csw", "http://www.opengis.net/cat/csw/2.0.2"))
-                .put("dcat", EADIMPNamespaces.DCAT)
+                .put("ead", EADIMPNamespaces.EAD)
                 .build();
     }
 
@@ -79,7 +74,7 @@ public class EADIMPSchemaPlugin
 
     @Override
     public Set<String> getAssociatedParentUUIDs(Element metadata) {
-        ElementFilter elementFilter = new ElementFilter("isPartOf", EADIMPNamespaces.DCT);
+        ElementFilter elementFilter = new ElementFilter("isPartOf", EADIMPNamespaces.EAD);
         return Xml.filterElementValues(
                 metadata,
                 elementFilter,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ead:ead xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ead="http://ead3.archivists.org/schema/" xsi:schemaLocation="http://ead3.archivists.org/schema/ https://www.loc.gov/ead/ead3.xsd">
+<ead:ead xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ead="http://ead3.archivists.org/schema/" xsi:schemaLocation="http://ead3.archivists.org/schema/ http://www.openarchives.org/OAI/2.0/ead.xsd">
 	<ead:archdesc audience="external" lang="nl" script="Latn" localtype="token" relatedencoding="token" otherlevel="token" level="series">
 		<ead:did audience="external" lang="nl" script="Latn">
 			<ead:unitid audience="external" lang="nl" script="Latn">e824a7ce-b1e4-4c22-b8e6-a8a76539b915</ead:unitid>
