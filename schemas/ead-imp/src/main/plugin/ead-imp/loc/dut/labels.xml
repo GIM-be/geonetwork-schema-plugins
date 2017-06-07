@@ -41,6 +41,22 @@
 		<label>Omschrijving</label>
 		<description/>
 	</element>
+	<element name="ead:relations">
+		<label>Relaties</label>
+		<description/>
+	</element>
+	<element name="ead:relation">
+		<label>Relatie</label>
+		<description/>
+	</element>
+	<element name="ead:resourcerelation">
+		<label>Titel relatie</label>
+		<description/>
+	</element>
+	<element name="href">
+		<label>Link</label>
+		<description/>
+	</element>
 	<element name="ead:c">
 		<label>Serie</label>
 		<description/>

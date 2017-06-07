@@ -6,6 +6,7 @@
 	<fields>
 		<for name="ead:unittitle" use="textarea" />
 		<for name="ead:abstract" use="textarea" />
+		<for name="ead:relation" use="textarea" />
 	    <for name="ead:c" addDirective="data-gn-directory-entry-selector">
 	      <directiveAttributes
 	        data-template-add-action="true"
@@ -21,6 +22,7 @@
 		<name>ead:dsc</name>
 		<name>ead:did</name>
 		<name>ead:c</name>
+		<name>ead:relations</name>
 	</fieldsWithFieldset>
 	<multilingualFields>
 		<exclude>ead:unitid</exclude>
@@ -36,10 +38,11 @@
 						or="unittitle" in="/ead:archdesc/ead:did" del="." removable="false" />
 					<field name="planAbstract" xpath="/ead:archdesc/ead:did/ead:abstract"
 						or="abstract" in="/ead:archdesc/ead:did" del="." removable="false" />
+					<field name="relations" xpath="/ead:archdesc/ead:relations" />
 				</section>
       		</tab>
       		<tab id="series">
-				<section xpath="/ead:archdesc/ead:dsc/ead:c" or="c" in="/ead:archdesc/ead:dsc" />
+				<section xpath="/ead:archdesc/ead:dsc/ead:c" or="c" in="/ead:archdesc/ead:dsc"/>
 <!--
 				<section xpath="/ead:archdesc/ead:dsc/ead:c">
 					<field name="unittitle" templateModeOnly="true"

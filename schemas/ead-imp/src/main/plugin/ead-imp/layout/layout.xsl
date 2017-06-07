@@ -173,77 +173,22 @@
     </xsl:if>
   </xsl:template>
 
-    <!-- the other elements in ead. -->
-  <xsl:template mode="mode-ead-imp" priority="100" match="ead:*">
-    <xsl:variable name="name" select="name(.)"/>
-    <xsl:variable name="ref" select="gn:element/@ref"/>
-    <xsl:variable name="labelConfig" select="gn-fn-metadata:getLabel($schema, $name, $labels)"/>
-    <xsl:variable name="helper" select="gn-fn-metadata:getHelper($labelConfig/helper, .)"/>
-
-    <xsl:variable name="added" select="parent::node()/parent::node()/@gn:addedObj"/>
-    <xsl:variable name="container" select="parent::node()/parent::node()"/>
-
-    <xsl:message select="concat('Render other element ',name(.))"/>
-    <xsl:copy-of select="gn:element"/>
-    <!-- Add view and edit template-->
+  <!-- href attribute from relation. -->
+  <xsl:template mode="mode-ead-imp" priority="2002"
+                match="@href">
+    <xsl:message select="'Render href attribute'"/>
     <xsl:call-template name="render-element">
-      <xsl:with-param name="label" select="$labelConfig/label"/>
+      <xsl:with-param name="label" select="'Link'"/>
       <xsl:with-param name="value" select="."/>
-      <xsl:with-param name="cls" select="local-name()"/>
-      <!--<xsl:with-param name="widget"/>
-            <xsl:with-param name="widgetParams"/>-->
-      <xsl:with-param name="xpath" select="gn-fn-metadata:getXPath(.)"/>
-      <!--<xsl:with-param name="attributesSnippet" as="node()"/>-->
-      <xsl:with-param name="type" select="gn-fn-metadata:getFieldType($editorConfig, name(), '')"/>
-      <xsl:with-param name="name" select="if ($isEditing) then gn:element/@ref else ''"/>
-      <xsl:with-param name="editInfo"
-                      select="gn:element"/>
-      <xsl:with-param name="parentEditInfo"
-                      select="if ($added) then $container/gn:element else element()"/>
-      <xsl:with-param name="listOfValues" select="$helper"/>
-      <!-- When adding an element, the element container contains
-      information about cardinality. -->
-      <xsl:with-param name="isFirst"
-                      select="if ($added) then
-                      (($container/gn:element/@down = 'true' and not($container/gn:element/@up)) or
-                      (not($container/gn:element/@down) and not($container/gn:element/@up)))
-                      else
-                      ((gn:element/@down = 'true' and not(gn:element/@up)) or
-                      (not(gn:element/@down) and not(gn:element/@up)))"/>
+      <xsl:with-param name="name" select="../gn:element/@ref"/>
+      <xsl:with-param name="cls" select="local-name(..)"/>
+      <xsl:with-param name="editInfo" select="../gn:element"/>
+      <xsl:with-param name="isDisabled" select="true()"/>
     </xsl:call-template>
-
-    <!-- Add a control to add this type of element
-      if this element is the last element of its kind.
-    -->
-    <xsl:if
-      test="$isEditing and 
-            (
-              not($isFlatMode) or
-              gn-fn-metadata:isFieldFlatModeException($viewConfig, $name)
-            ) and
-            $service != 'md.element.add' and
-            count(following-sibling::node()[name() = $name]) = 0">
-
-      <!-- Create configuration to add action button for this element. -->
-      <xsl:variable name="dcConfig"
-        select="ancestor::node()/gn:child[contains(@name, 'CHOICE_ELEMENT')]"/>
-      <xsl:variable name="newElementConfig">
-        <gn:child>
-          <xsl:copy-of select="$dcConfig/@*"/>
-          <xsl:copy-of select="$dcConfig/gn:choose[@name = $name]"/>
-        </gn:child>
-      </xsl:variable>
-      <xsl:call-template name="render-element-to-add">
-        <xsl:with-param name="childEditInfo" select="$newElementConfig/gn:child"/>
-        <xsl:with-param name="parentEditInfo" select="$dcConfig/parent::node()/gn:element"/>
-        <xsl:with-param name="isFirst" select="false()"/>
-      </xsl:call-template>
-    </xsl:if>
   </xsl:template>
 
-
   <!-- Readonly elements -->
-  <xsl:template mode="mode-ead-imp" priority="200" match="ead:unitid">
+  <xsl:template mode="mode-ead-imp" priority="200" match="ead:unitid|ead:resourcerelation">
     
     <xsl:message select="concat('Render specific element ',name(.))"/>
     <xsl:copy-of select="gn:element"/>
@@ -261,6 +206,24 @@
     
   </xsl:template>
   
+  <!-- Readonly elements -->
+  <xsl:template mode="mode-ead-imp" priority="200" match="ead:unittitle|ead:abstract">
+    
+    <xsl:message select="concat('Render specific element ',name(.))"/>
+    <xsl:copy-of select="gn:element"/>
+    <xsl:call-template name="render-element">
+      <xsl:with-param name="label" select="gn-fn-metadata:getLabel($schema, name(), $labels)/label"/>
+      <xsl:with-param name="value" select="."/>
+      <xsl:with-param name="cls" select="local-name()"/>
+      <xsl:with-param name="xpath" select="gn-fn-metadata:getXPath(.)"/>
+      <xsl:with-param name="type" select="gn-fn-metadata:getFieldType($editorConfig, name(), '')"/>
+      <xsl:with-param name="name" select="gn:element/@ref"/>
+      <xsl:with-param name="editInfo" select="*/gn:element"/>
+      <xsl:with-param name="parentEditInfo" select="gn:element"/>
+      <xsl:with-param name="isDisabled" select="false()"/>
+    </xsl:call-template>
+    
+  </xsl:template>
   
 
 
