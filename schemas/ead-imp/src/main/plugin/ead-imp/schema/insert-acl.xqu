@@ -1,0 +1,9 @@
+xquery version "3.0";
+
+declare namespace ext="http://www.altova.com/xslt-extensions";
+declare namespace mr="http://moreq.info/files/export";
+for $node in  //mr:DisposalSchedule
+where (not(exists( $node/mr:AccessControlList)))
+return ( 
+insert node <mr:AccessControlList IncludeInheritedRoles="true"/> as first into $node
+)

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://ead3.archivists.org/schema/" targetNamespace="http://ead3.archivists.org/schema/" xmlns:dct="http://purl.org/dc/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:mr="http://moreq.info/files/export" elementFormDefault="qualified">
+	<xs:import namespace="http://www.w3.org/2004/02/skos/core#" schemaLocation="skos.xsd"/>
+	<xs:import namespace="http://moreq.info/files/export" schemaLocation="moreq2010.xsd"/>
+	<xs:import namespace="http://purl.org/dc/terms/" schemaLocation="dcterms.xsd"/>
+	<xs:redefine schemaLocation="ead3.xsd">
+		<xs:complexType name="relation">
+			<xs:complexContent>
+				<xs:restriction base="relation">
+					<xs:sequence>
+						<xs:element name="relationentry" type="relationentry" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="objectxmlwrap" type="objectxmlwrap" minOccurs="0" maxOccurs="1">
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="otherrelationtype" use="optional">
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:enumeration value="legalretentionschedule"/>
+								<xs:enumeration value="adminretentionschedule"/>
+								<xs:enumeration value="transparencyclassification"/>
+								<xs:enumeration value="personaldataclassification"/>
+								<xs:enumeration value="reusepotentialclassification"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:restriction>
+			</xs:complexContent>
+		</xs:complexType>
+		<!-- Extending objectxmlwrap.. -->
+		<xs:complexType name="objectxmlwrap">
+			<xs:complexContent>
+				<xs:extension base="objectxmlwrap">
+					<xs:choice minOccurs="0" maxOccurs="1">
+						<!-- Wettelijke bewaartermijn. -->
+						<xs:element ref="mr:DisposalSchedule"/>
+						<xs:element ref="dct:type"/>
+						<xs:element ref="dct:language"/>
+						<xs:element ref="dct:relation"/>
+					</xs:choice>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<!-- Attributes ead:title, ead:titleproper, ead:subtitle, ead:author, ead:sponsor, etc are of complex type "m.mixed.basic". This complex type allows mixed content, which overcomplicates implementation. It was chosen to simplify this be redefining this ComplexType in the XML Schema. -->
+		<xs:complexType name="m.mixed.basic">
+			<xs:simpleContent>
+				<xs:restriction base="m.mixed.basic">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+		<!-- Attributes ead:unittitle, ead:abstract, etc are of complex type "m.mixed.basic.plus.access". This complex type allows mixed content, which overcomplicates implementation. It was chosen to simplify this be redefining this ComplexType in the XML Schema. -->
+		<xs:complexType name="m.mixed.basic.plus.access">
+			<xs:simpleContent>
+				<xs:restriction base="m.mixed.basic.plus.access">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:redefine>
+</xs:schema>

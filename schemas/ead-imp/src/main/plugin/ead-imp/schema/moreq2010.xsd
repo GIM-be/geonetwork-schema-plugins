@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ========================================================================== -->
+<!-- MoReq2010 Export XML Schema - Universal XML Schema                         -->
+<!-- Version 1.0.1 BETA, July 2011                                              -->
+<!-- Copyright (c) DLM Forum Foundation, 2010 & 2011, all rights reserved       -->
+<!-- For more information see http://moreq.info/ and http://www.dlmforum.eu/  -->
+<!-- ========================================================================== -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://moreq.info/files/export" targetNamespace="http://moreq.info/files/export">
+	<!-- this schema includes all other MoReq2010 schemas -->
+	<xs:include schemaLocation="http://moreq.info/files/export/core_services.xsd"/>
+	<xs:include schemaLocation="http://moreq.info/files/export/electronic_components.xsd"/>
+	<xs:include schemaLocation="http://moreq.info/files/export/hierarchical_classification.xsd"/>
+</xs:schema>
