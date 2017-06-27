@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+	<skos:ConceptScheme rdf:about="http://overheid.vlaanderen.be/STRUCTUUR_PROCES/Taakgebied"/>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/Key">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">Value</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/01">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">01. Aanleggen, herinrichten, uitrusten van wegen</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/02">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">02. Exploiteren, inspecteren, onderhouden en herstellen wegen en installaties</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/03">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">03. Verstrekken advies over verkeer</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/04">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">04. Verstrekken advies over wegen</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/05">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">05. Verzorgen externe communicatie</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/06">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">06. Beheren ICT middelen</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/07">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">07. Beheren HRM middelen</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/08">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">08. Beheren vastgoed en facilitair management</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/09">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">09. Aankopen werken, leveringen en diensten</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/10">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">10. Beheren van financiële middelen</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/11">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">11. Beheren van preventie en veiligheid op het werk</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/12">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">12. Beheren van risico's</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/13">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">13. Invoeren kwaliteitssystemen</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/14">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">14. Managen van kennis en informatie</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/15">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">15. Verzekeren bedrijfscontinuiteit </skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/16">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">16. Voorbereiden, uitvoeren en evalueren beleid</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/17">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">17. Opstellen en naleven wet- en regelgeving</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/18">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">18. Samenwerken met externe partners</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taakgebied/19">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taakgebied"/>
+		<skos:prefLabel xml:lang="nl">19. Ondersteunen van het beleid</skos:prefLabel>
+	</skos:Concept>
+</rdf:RDF>

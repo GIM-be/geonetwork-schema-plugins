@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+<skos:ConceptScheme rdf:about="http://overheid.vlaanderen.be/STRUCTUUR_PROCES/Taak"/>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/1">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">01.1 Realiseren van een investeringsproject</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/2">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">02.1 Exploitatie weg, wegaanhorigheden en kunstwerken</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/3">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">02.2 Inspecteren weg en wegaanhorigheden</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/4">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">02.3 Inspecteren kunstwerk</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/5">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">02.4 Realiseren van een onderhouds- of herstelproject</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/6">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">02.5 Winterdienst</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/7">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">03.1 Advies verstrekken over verkeer en mobiliteit</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/8">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">03.2 Advies verstrekken  </skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/9">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">04.1 Uitvoeren studies en proeven</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/10">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">05.1 Verzorgen externe communicatie</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/11">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">06.1 Realiseren ICT plan</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/12">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">07.1 Opvolgen verloning en vergoeding</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/13">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">07.2  Instaan voor logistiek voor het personeel</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/14">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">07.3 Ontwikkelen competenties en vorming personeel</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/15">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">08.1 Beheren vastgoed</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/16">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">08.2 Beheren materialen, materieel en dienstvoertuigen</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/17">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">09.1 Aankopen werken, leveringen en diensten</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/18">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">10.1 Bijhouden van de boekhouding</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/19">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">11.1 Verzorgen coördinatie preventie en veiligheid</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/20">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">12.1 Beheren van calamiteiten</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/21">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">12.2 Beheren van klachten en meldingen</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/22">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">13.1 Onderhouden ISO Kwaliteitsmanagementsysteem</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/23">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">14.1 Borgen en beschikbaar stellen van kennis in het kennismodel</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/24">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">14.2 Informatie beheren</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/25">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">15.1 Verzekeren bedrijfscontinuiteit </skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/26">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">16.1 Bepalen visie, missie en strategische doelstellingen</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/27">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">16.2 Voorbereiden beleid</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/28">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">16.3 Opstellen begroting en fysisch programma</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/29">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">16.4 Opstellen en coördineren fysische programma's onderhoud en investering</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/30">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">16.5 Evalueren en bijsturen van beleid en begroting</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/31">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">16.6 Monitoren en rapporteren</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/32">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">17.1 Opmaken van interne regelgeving (procedures, standaardbestekken en voorschriften)</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/33">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">18.1 Afsluiten van de beheersovereenkomst</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/34">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">18.2 Afsluiten samenwerkingsovereenkomsten met partners - groeperingen - contacten</skos:prefLabel>
+	</skos:Concept>
+	<skos:Concept rdf:about="http://overheid.vlaanderen.be/Taak/35">
+		<skos:inScheme rdf:resource="http://overheid.vlaanderen.be/Taak"/>
+		<skos:prefLabel xml:lang="nl">19.1 Antwoorden op vragen van het beleid</skos:prefLabel>
+	</skos:Concept>
+</rdf:RDF>
